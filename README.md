@@ -17,4 +17,4 @@ To run django:
 1. cd PriceTracker
 2. py manage.py runserver
 
-Open whatever localhost port django is running on
+Open whatever localhost port django is running on (for me localhost:8000)
