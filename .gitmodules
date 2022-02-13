@@ -1,3 +1,0 @@
-[submodule "PriceTracker/vueapp"]
-	path = PriceTracker/vueapp
-	url = https://github.com/riedee/GamePriceTracker.git
