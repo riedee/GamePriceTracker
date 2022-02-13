@@ -113,7 +113,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "4f5830e15da3beca81a1";
+/******/ 	var hotCurrentHash = "d54cc0cb4e3b99382b94";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -987,14 +987,14 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var C_Us
 /***/ }),
 
 /***/ 1:
-/*!*******************************************************************************************************************************!*\
-  !*** multi (webpack)/hot/dev-server.js (webpack)-dev-server/client?http://localhost:8080&sockPath=/sockjs-node ./src/main.js ***!
-  \*******************************************************************************************************************************/
+/*!***********************************************************************************************************************************!*\
+  !*** multi (webpack)/hot/dev-server.js (webpack)-dev-server/client?http://192.168.1.152:8080&sockPath=/sockjs-node ./src/main.js ***!
+  \***********************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! C:\Users\Ella Rieder\Desktop\PriceTracker\PriceTracker\vueapp\node_modules\webpack\hot\dev-server.js */"./node_modules/webpack/hot/dev-server.js");
-__webpack_require__(/*! C:\Users\Ella Rieder\Desktop\PriceTracker\PriceTracker\vueapp\node_modules\webpack-dev-server\client\index.js?http://localhost:8080&sockPath=/sockjs-node */"./node_modules/webpack-dev-server/client/index.js?http://localhost:8080&sockPath=/sockjs-node");
+__webpack_require__(/*! C:\Users\Ella Rieder\Desktop\PriceTracker\PriceTracker\vueapp\node_modules\webpack-dev-server\client\index.js?http://192.168.1.152:8080&sockPath=/sockjs-node */"./node_modules/webpack-dev-server/client/index.js?http://192.168.1.152:8080&sockPath=/sockjs-node");
 module.exports = __webpack_require__(/*! ./src/main.js */"./src/main.js");
 
 
