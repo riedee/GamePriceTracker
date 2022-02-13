@@ -10,7 +10,8 @@ Run django and vue server simulateously
 To run vue:
 1. cd PriceTracker
 2. cd vueapp
-3. npm run serve
+3. (if first time running only, otherwise skip) npm i
+4. npm run serve
 
 To run django:
 1. cd PriceTracker
