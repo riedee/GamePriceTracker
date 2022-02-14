@@ -1,38 +1,21 @@
+@ -0,0 +1,26 @@
 <template>
-  <div>
-    <div v-for="post in posts" v-bind:key="post.id">
-      <h2>{{ post.title }}</h2>
-      <p>{{ post.body }}</p>
-    </div>
-  </div>
+  <img alt="Vue logo" src="./assets/logo.png">
 </template>
 
 <script>
+import GameDataBase from './components/GameDataBase.vue'
+import GameDataGet from './components/GameDataGet.vue'
+import GameDataPost from './components/GameDataPost.vue'
+
 export default {
-  data() {
-    return {
-      posts: [],
-    };
-  },
-
-  methods: {
-    async getData() {
-      try {
-        const response = await this.$http.get(
-          "https://raw.githubusercontent.com/albert-marrero/video-games-data/main/videogamegeek/games/2022-02-09.json"
-        );
-        // JSON responses are automatically parsed.
-        this.posts = response.data;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
-    created() {
-      this.getData();
-    }
-  },
-};
+  name: 'App',
+  components: {
+    GameDataBase,
+    GameDataGet,
+    GameDataPost
+  }
+}
 </script>
 
 <style>
