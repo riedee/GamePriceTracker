@@ -19,7 +19,7 @@ export default {
     async getData() {
       try {
         const response = await this.$http.get(
-          "https://www.google.com/search?q=video+games&rlz=1C1CHBF_enUS864US864&oq=video+games&aqs=chrome.0.0i433i512l2j0i131i433i512j0i433i512j46i512j0i512j0i457i512j0i402l2j0i131i433i512.2867j0j7&sourceid=chrome&ie=UTF-8"
+          "https://raw.githubusercontent.com/albert-marrero/video-games-data/main/videogamegeek/games/2022-02-09.json"
         );
         // JSON responses are automatically parsed.
         this.posts = response.data;
