@@ -1,7 +1,9 @@
 import { createApp } from 'vue'
-import Search from './components/Search.vue'
+import App from './App.vue'
 import axios from 'axios';
+
+const Vue = window.vue;
 
 Vue.prototype.$http = axios;
 
-createApp(Search).mount('#app')
+createApp(App).mount('#app')
