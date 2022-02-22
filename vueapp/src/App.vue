@@ -1,5 +1,7 @@
 <template>
   <div>
+    <input type="text" v-model="game" placeholder="Search game">
+    <button type="submit">Submit</button>
     <div v-for="post in posts" v-bind:key="post.id">
       <h2>{{ post.title }}</h2>
       <p>{{ post.body }}</p>
