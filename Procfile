@@ -1,1 +1,1 @@
-web: gunicorn PriceTracker.wsgi --log-file -
+web: python runserver 0.0.0.0/80
