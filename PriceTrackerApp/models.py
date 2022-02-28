@@ -1,5 +1,5 @@
 from django.db import models
-from djmoney.models.field import MoneyField
+from djmoney.models.fields import MoneyField
 
 # Create your models here.
 class Game(models.Model):
