@@ -21,5 +21,4 @@ from PriceTrackerApp import views as app_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('PriceTrackerApp.urls')),
-    path('', app_views.vue_test),
 ]
