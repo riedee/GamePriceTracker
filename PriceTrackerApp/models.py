@@ -49,5 +49,6 @@ class Game(models.Model):
     vendor = models.ManyToManyField(Vendor)
     price = models.ManyToManyField(VendorPrice)
     url = models.ManyToManyField(VendorURL)
+    console = models.CharField(max_length=32, choices=CONSOLES, default=SW)
     def __str__(self):
         return self.gameTitle
