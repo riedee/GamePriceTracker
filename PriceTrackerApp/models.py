@@ -2,26 +2,25 @@ from django.db import models
 from djmoney.models.fields import MoneyField
 
 # Create your models here.
-
-class User(models.Model):
-    username = models.SlugField(max_length=32)
-    password = models.CharField(max_length=32)
-    email = models.EmailField(max_length = 254)
-
 class Vendor(models.Model):
     vendorName = models.CharField(max_length=255)
-    link = models.URLField(max_length=500)
     rating = models.PositiveSmallIntegerField(default=3)
     freeShipping = models.BooleanField(default=True)
-    price = MoneyField(max_digits=11, decimal_places=2, default_currency='USD')
-    
-    @property
-
-    def getVendorInfo(self):
-        return 'Vendor: {name}, Price: {price}, Link: {url}'.format(name=self.vendorName, price=self.price, url=self.link)
 
     def __str__(self):
         return self.vendorName
+
+class VendorPrice(models.Model):
+    vendor = models.ForeignKey(Vendor)
+    price = MoneyField(max_digits=11, decimal_places=2, default_currency='USD')
+    def __str__(self):
+        return self.price
+
+class VendorURL(models.Model):
+    vendor = models.ForeignKey(Vendor)
+    url = models.URLField(max_length=500)
+    def __str__(self):
+        return self.url
 
 class Game(models.Model):
     ACT = 'ACT'
@@ -47,6 +46,6 @@ class Game(models.Model):
     CONSOLES = ((PS5, 'Playstation 5'), (SW, 'Nintendo Switch'), (XBXX, 'XBOX Series X'), (PC, 'PC'), (MAC, 'Mac'))
     gameTitle = models.CharField(max_length=255)
     genre = models.CharField(max_length=32, choices=GENRES, default=ACT)
-    vendorInfo = models.ManyToManyField(Vendor)
+    vendor = models.ManyToManyField(Vendor)
     def __str__(self):
         return self.gameTitle
