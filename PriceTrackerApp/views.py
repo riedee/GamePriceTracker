@@ -32,3 +32,4 @@ class SearchView(ListView):
        else:
            game = None
        return game
+
