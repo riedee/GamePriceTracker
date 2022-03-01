@@ -21,14 +21,14 @@ def search(request):
 class SearchView(ListView):
     model = Game
     template_name = 'search_results.html'
-    context_object_name = 'all_search_results'
+    context_object_name = 'object_list'
 
     def get_queryset(self):
-       result = super(SearchView, self).get_queryset()
+       game = super(SearchView, self).get_queryset()
        query = self.request.GET.get('search')
        if query:
           postresult = Game.objects.filter(gameTitle__contains=query)
-          result = postresult
+          game = postresult
        else:
-           result = None
-       return result
+           game = None
+       return game
