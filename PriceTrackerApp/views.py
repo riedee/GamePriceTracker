@@ -1,19 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import ListView
+from django.views.generic import TemplateView, ListView
 
 
 #models
 from .models import *
 
-def index(request):
-    return HttpResponse("Welcome to Game Price Tracker!")
-    
-def search(request):
-	#searchdata = Game.objects.filter()
-	context = {
-                        }
-	return render(request, 'PriceTrackerApp/search.html', context)
+class HomeView(TemplateView):
+    template_name = 'home.html'
 
 class SearchView(ListView):
     model = Game
