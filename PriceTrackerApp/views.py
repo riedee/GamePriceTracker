@@ -9,6 +9,15 @@ from .models import *
 class HomeView(TemplateView):
     template_name = 'home.html'
 
+def index(request):
+    return HttpResponse("Welcome to Game Price Tracker!")
+    
+def search(request):
+	#searchdata = Game.objects.filter()
+	context = {
+                        }
+	return render(request, 'PriceTrackerApp/search_results.html', context)
+
 class SearchView(ListView):
     model = Game
     template_name = 'search_results.html'
