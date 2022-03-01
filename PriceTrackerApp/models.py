@@ -11,13 +11,13 @@ class Vendor(models.Model):
         return self.vendorName
 
 class VendorPrice(models.Model):
-    vendor = models.ForeignKey(Vendor)
+    vendor = models.ForeignKey(Vendor,on_delete=models.CASCADE)
     price = MoneyField(max_digits=11, decimal_places=2, default_currency='USD')
     def __str__(self):
         return self.price
 
 class VendorURL(models.Model):
-    vendor = models.ForeignKey(Vendor)
+    vendor = models.ForeignKey(Vendor,on_delete=models.CASCADE)
     url = models.URLField(max_length=500)
     def __str__(self):
         return self.url
