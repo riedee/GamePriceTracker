@@ -2,12 +2,14 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView
 
-
 #models
 from .models import *
 
 class HomeView(TemplateView):
-    template_name = 'home.html'
+	template_name = 'home.html'
+	def search(request):
+		context = {}
+		return render(request, 'PriceTrackerApp/search_results.html', context)
 
 def index(request):
     return HttpResponse("Welcome to Game Price Tracker!")
@@ -25,7 +27,7 @@ class SearchView(ListView):
 
     def get_queryset(self):
        game = super(SearchView, self).get_queryset()
-       query = self.request.GET.get('search')
+       query = self.request.GET.get('game')
        if query:
           postresult = Game.objects.filter(gameTitle__contains=query)
           game = postresult
