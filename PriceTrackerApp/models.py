@@ -13,14 +13,10 @@ class Vendor(models.Model):
     linkToStore = models.URLField(max_length=200)
     rating = models.PositiveSmallIntegerField(default=3)
     freeShipping = models.BooleanField(default=True)
-    def __str__(self):
-        return self.vendorName
-
-class VendorPrice(models.Model):
-    vendorName = models.ForeignKey(Vendor)
     price = MoneyField(max_digits=11, decimal_places=2, default_currency='USD')
     def __str__(self):
-        return self.price
+        return self.vendorName, self.price, self.linkToStore
+
 
 class Game(models.Model):
     ACT = 'ACT'
@@ -46,7 +42,6 @@ class Game(models.Model):
     CONSOLES = ((PS5, 'Playstation 5'), (SW, 'Nintendo Switch'), (XBXX, 'XBOX Series X'), (PC, 'PC'), (MAC, 'Mac'))
     gameTitle = models.CharField(max_length=255)
     genre = models.CharField(max_length=32, choices=GENRES, default=ACT)
-    vendors = models.ManyToManyField(Vendor)
-    prices = models.ManyToManyField(VendorPrice)
+    vendorInfo = models.ManyToManyField(Vendor)
     def __str__(self):
         return self.gameTitle
