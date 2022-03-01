@@ -10,13 +10,18 @@ class User(models.Model):
 
 class Vendor(models.Model):
     vendorName = models.CharField(max_length=255)
-    linkToStore = models.URLField(max_length=200)
+    link = models.URLField(max_length=500)
     rating = models.PositiveSmallIntegerField(default=3)
     freeShipping = models.BooleanField(default=True)
     price = MoneyField(max_digits=11, decimal_places=2, default_currency='USD')
-    def __str__(self):
-        return self.vendorName, self.price, self.linkToStore
+    
+    @property
 
+    def getVendorInfo(self):
+        return 'Vendor: {name}, Price: {price}, Link: {url}'.format(name=self.vendorName, price=self.price, url=self.link)
+
+    def __str__(self):
+        return self.vendorName
 
 class Game(models.Model):
     ACT = 'ACT'
