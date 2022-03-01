@@ -13,7 +13,7 @@ def search(request):
 	#searchdata = Game.objects.filter()
 	context = {
                         }
-	return render(request, 'PriceTrackerApp/search.html', context)
+	return render(request, 'PriceTrackerApp/search_results.html', context)
 
 class SearchView(ListView):
     model = Game
