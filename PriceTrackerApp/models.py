@@ -47,5 +47,7 @@ class Game(models.Model):
     gameTitle = models.CharField(max_length=255)
     genre = models.CharField(max_length=32, choices=GENRES, default=ACT)
     vendor = models.ManyToManyField(Vendor)
+    price = models.ManyToManyField(VendorPrice)
+    url = models.ManyToManyField(VendorURL)
     def __str__(self):
         return self.gameTitle
