@@ -2,7 +2,7 @@
 <ul>
   {% for game in object_list %}
     <li>
-      {{ game.gameTitle }}, Vendor: {{game.vendor}}, Price: {{game.price}}, Link: {{game.url}}
+      <a href="/games/{{ game.id }}">{{ game.gameTitle }}, Vendor: {{game.vendor}}, Price: {{game.price}}, Link: {{game.url}}</a>
     </li>
   {% endfor %}
 </ul>

@@ -17,6 +17,11 @@ def search(request):
                         }
 	return render(request, 'PriceTrackerApp/search_results.html', context)
 
+def GameView(request, id):
+    game = Game.objects.filter(id=id)[0]
+    context = { 'game': game }
+    return render(request, 'PriceTrackerApp/game.html', context)
+
 class SearchResultsView(ListView):
     model = Game
     template_name = 'search_results.html'
