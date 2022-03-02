@@ -50,6 +50,6 @@ class Game(models.Model):
     price = models.ManyToManyField(VendorPrice)
     url = models.ManyToManyField(VendorURL)
     console = models.CharField(max_length=32, choices=CONSOLES, default=SW)
-    gameID = models.IntegerField(max_length=255, default=0)
+    gameID = models.IntegerField(default=0)
     def __str__(self):
         return self.gameTitle
