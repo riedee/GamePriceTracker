@@ -6,7 +6,7 @@ class Vendor(models.Model):
     vendorName = models.CharField(max_length=255)
     rating = models.PositiveSmallIntegerField(default=3)
     freeShipping = models.BooleanField(default=True)
-
+    physicalStore = models.BooleanField(default=False)
     def __str__(self):
         return self.vendorName
 
@@ -51,5 +51,6 @@ class Game(models.Model):
     url = models.ManyToManyField(VendorURL)
     console = models.CharField(max_length=32, choices=CONSOLES, default=SW)
     gameID = models.IntegerField(default=0)
+    format = models.CharField(max_length=10, default='Digital')
     def __str__(self):
         return self.gameTitle
