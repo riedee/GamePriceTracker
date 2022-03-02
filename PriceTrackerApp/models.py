@@ -6,6 +6,8 @@ class Vendor(models.Model):
     vendorName = models.CharField(max_length=255)
     rating = models.PositiveSmallIntegerField(default=3)
     freeShipping = models.BooleanField(default=True)
+    physicalStore = models.BooleanField(default=True)
+    digitalStore = models.BooleanField(default=True)
 
     def __str__(self):
         return self.vendorName
