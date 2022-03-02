@@ -66,8 +66,10 @@ body {
 
 <div class="topnav">
     <a class="active" href="#home">Home</a>
-    <a href="#about">About</a>
-<form action="{% url 'search_results' %}" method="GET">
+    <a href="#games">Games</a>
+    <a href ="#vendors">Vendors</a>
+    <a href ="#profile">Profile</a>
+<form align="right" action="{% url 'search_results' %}" method="GET">
     <input class="Game" type="search" name="search"> 
     <button class="Game" type="submit"> Search </button>
 </form></div>
