@@ -39,6 +39,5 @@ class Game(models.Model):
     url = models.URLField(max_length=500)
     console = models.CharField(max_length=32, choices=CONSOLES, default=SW)
     gameID = models.CharField(max_length=100, default = '')
-    digital = models.BooleanField(default=False)
     def __str__(self):
         return self.gameTitle
