@@ -2,9 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView
 
+import json
+
 #models
 from .models import *
-import json
 
 class HomeView(TemplateView):
 	template_name = 'home.html'
