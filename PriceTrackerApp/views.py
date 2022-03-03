@@ -4,6 +4,7 @@ from django.views.generic import TemplateView, ListView
 
 #models
 from .models import *
+import json
 
 class HomeView(TemplateView):
 	template_name = 'home.html'
@@ -16,6 +17,7 @@ def search(request):
 	context = {
                         }
 	return render(request, 'PriceTrackerApp/search_results.html', context)
+
 
 class SearchResultsView(ListView):
     model = Game
