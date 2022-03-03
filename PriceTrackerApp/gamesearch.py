@@ -1,6 +1,6 @@
 from googlesearch import search
 
-#query should include 'buy' at the end to bring up most accurate results
+#query should include 'buy' at the end to bring up most useful results
 def searchGame(query):
     links = []
     for i in search(query, tld="co.in", num=10, stop=10, pause=3):
