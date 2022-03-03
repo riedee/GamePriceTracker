@@ -26,17 +26,20 @@ def search(request):
 
 def GameView(request, info):
     info = info.split('_')
-    id = int(info[0])
+    id = info[0]
     console = info[1]
-    game = [game for game in Games if game['ID'] == id if game['console'] == console][0]
-    context = { 'game': game }
-    return render(request, 'PriceTrackerApp/game.html', context)
+    game = [game for game in Games if game['ID'] == id if game['console'] == console]
+    if len(game):
+        game = game[0]
+        context = { 'game': game }
+        return render(request, 'PriceTrackerApp/game.html', context)
+    return HttpResponse("Game not found")
 
 def SearchResultsView(request):
     query = request.GET['search']
     foundGames = [game for game in Games if isSubstring(game['gameTitle'], query)]
     for game in foundGames:
-        game['slug'] = str(game['ID']) + '_' + game['console']
+        game['slug'] = game['ID'] + '_' + game['console']
     context = { 'games' : foundGames }
     return render(request, 'search_results.html', context)
 
