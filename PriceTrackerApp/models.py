@@ -38,7 +38,7 @@ class Game(models.Model):
     lowestPrice = MoneyField(max_digits=7, decimal_places=2, default_currency='USD')
     url = models.URLField(max_length=500)
     console = models.CharField(max_length=32, choices=CONSOLES, default=SW)
-    gameID = models.IntegerField(default=0)
-    format = models.CharField(max_length=10, default='Digital')
+    gameID = models.CharField(max_length=100, default = '')
+    digital = models.BooleanField(default=False)
     def __str__(self):
         return self.gameTitle
