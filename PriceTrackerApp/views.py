@@ -22,8 +22,11 @@ def search(request):
                         }
 	return render(request, 'PriceTrackerApp/search_results.html', context)
 
-def GameView(request, id):
-    game = [game for game in Games if game['ID'] == id][0]
+def GameView(request, info):
+    info = info.split('_')
+    id = int(info[0])
+    console = info[1]
+    game = [game for game in Games if game['ID'] == id if game['console'] == console][0]
     context = { 'game': game }
     return render(request, 'PriceTrackerApp/game.html', context)
 

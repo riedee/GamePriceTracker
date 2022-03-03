@@ -3,7 +3,7 @@ from .views import HomeView, SearchResultsView, GameView
 
 urlpatterns = [
         path('search/', SearchResultsView.as_view(), name='search_results'),
-        path('results/<int:id>', GameView, name='game'),
+        path('results/<str:info>', GameView, name='game'),
         path('', HomeView.as_view(), name='home'),
 ]
 
