@@ -33,11 +33,11 @@ class Game(models.Model):
     MAC = 'MAC'
     CONSOLES = ((PS5, 'Playstation 5'), (SW, 'Nintendo Switch'), (XBXX, 'XBOX Series X'), (PC, 'PC'), (MAC, 'Mac'))
     gameTitle = models.CharField(max_length=255)
-    genre = models.CharField(max_length=32, choices=GENRES, default=ACT)
+    #genre = models.CharField(max_length=32, choices=GENRES, default=ACT)
     bestVendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
     lowestPrice = MoneyField(max_digits=7, decimal_places=2, default_currency='USD')
     url = models.URLField(max_length=500)
-    console = models.CharField(max_length=32, choices=CONSOLES, default=SW)
+    platform = models.CharField(max_length=32, choices=CONSOLES, default=SW)
     gameID = models.CharField(max_length=100, default = '')
     def __str__(self):
         return self.gameTitle
