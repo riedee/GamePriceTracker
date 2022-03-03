@@ -1,8 +1,8 @@
 <h1>Search Results</h1>
 <ul>
-  {% for game in object_list %}
-    <li>]
-      <a href="results/{{game.id}}_{{game.console}}">
+  {% for game in games %}
+    <li>
+      <a href="{% url 'game' info=game.slug %}">
         {{ game.gameTitle }}, Vendor: {{game.vendor}}, Price: {{game.price}}, Link: {{game.url}}
       </a>
     </li>

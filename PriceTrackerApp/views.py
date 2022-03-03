@@ -8,7 +8,9 @@ from .models import *
 
 with open('../games.json', 'r') as f:
     Games = json.load(f)
-print([game for game in Games if game['name'] == 'Battleship'])
+
+def isSubstring(value, substring):
+    return substring.lower() in value.lower()
 
 class HomeView(TemplateView):
 	template_name = 'home.html'
@@ -30,18 +32,26 @@ def GameView(request, info):
     context = { 'game': game }
     return render(request, 'PriceTrackerApp/game.html', context)
 
-class SearchResultsView(ListView):
-    model = Game
-    template_name = 'search_results.html'
-    context_object_name = 'object_list'
+def SearchResultsView(request):
+    query = request.GET['search']
+    foundGames = [game for game in Games if isSubstring(game['gameTitle'], query)]
+    for game in foundGames:
+        game['slug'] = str(game['ID']) + '_' + game['console']
+    context = { 'games' : foundGames }
+    return render(request, 'search_results.html', context)
 
-    def get_queryset(self):
-       game = super(SearchResultsView, self).get_queryset()
-       query = self.request.GET.get('game')
-       if query:
-          postresult = Game.objects.filter(gameTitle__contains=query)
-          game = postresult
-       else:
-           game = None
-       return game
 
+# class SearchResultsView(ListView):
+#     model = Game
+#     template_name = 'search_results.html'
+#     context_object_name = 'object_list'
+
+#     def get_queryset(self):
+#        game = super(SearchResultsView, self).get_queryset()
+#        query = self.request.GET.get('game')
+#        if query:
+#           postresult = Game.objects.filter(gameTitle__contains=query)
+#           game = postresult
+#        else:
+#            game = None
+#        return game
