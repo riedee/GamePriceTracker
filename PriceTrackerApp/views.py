@@ -1,9 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView
+import json
 
 #models
 from .models import *
+
+with open('../games.json', 'r') as f:
+    Games = json.load(f)
+print([game for game in Games if game['name'] == 'Battleship'])
 
 class HomeView(TemplateView):
 	template_name = 'home.html'
@@ -16,6 +21,11 @@ def search(request):
 	context = {
                         }
 	return render(request, 'PriceTrackerApp/search_results.html', context)
+
+def GameView(request, id):
+    game = [game for game in Games if game['ID'] == id][0]
+    context = { 'game': game }
+    return render(request, 'PriceTrackerApp/game.html', context)
 
 class SearchResultsView(ListView):
     model = Game
