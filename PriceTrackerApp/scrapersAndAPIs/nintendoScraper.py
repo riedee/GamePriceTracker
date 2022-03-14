@@ -5,8 +5,8 @@ from ..models import *
 def get_title(soup): 
     try:
         # Outer Tag Object
-        title = soup.select("h1.psw-m-b-5 psw-t-title-l psw-t-size-8 psw-l-line-break-word")[0].string.strip()
- 
+        title = soup.select("h1.Headingstyles__StyledH-sc-qpned7-0 HUGKw")[0].string.strip()
+
     except AttributeError:
         title_string = ""   
  
@@ -14,15 +14,15 @@ def get_title(soup):
 
 def get_price(soup):
     try:
-        price = soup.find("span", attrs={'class':'psw-t-title-m', 'data-qa': 'mfeCtaMain#offer0#finalPrice'}).string.strip()
- 
+        price = soup.find("span", attrs={'class':'Pricestyles__MSRP-sc-afjfk5-10 jtSLLy'}).string.strip()
+#class="ScreenReaderOnlystyles__StyledReaderText-sc-jiymtq-0 kXOKSo //inner
     except AttributeError:
         price = ""  
  
     return price
    
 
-urlList = ["https://store.playstation.com/en-us/product/UP1003-CUSA00314_00-WOLFENSTEIN00001"]
+urlList = ["https://www.nintendo.com/store/products/nba-2k22-switch/"]
 
 gameList = []
 
@@ -35,7 +35,7 @@ for i in range(len(urlList)):
     vendorHost = parsed_url.netloc.string.strip()
     title = get_title(soup)
     price = get_price(soup)
-    platform = "PlayStation 5"
+    platform = 'Nintendo Switch'
     gameID = title + platform
     gameDict = {'title': title, 'vendor': vendorHost, 'price': price, 'url': url, 'platform': platform, 'gameID': gameID}
     gameList.append(gameDict)
@@ -48,3 +48,4 @@ with open("allGameData.json", "w") as f:
     gameJson = json.dumps(gameList)
     f.write(gameJson)
     f.close
+
