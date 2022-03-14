@@ -19,5 +19,12 @@ def getGame(url):
     gameUrl = url
     vendor = Vendor(vendorName = 'Steam')
     vendor.save()
-    game = Game(gameTitle = gameTitle, bestVendor = 'Steam', lowestPrice = gamePrice, url = gameUrl, platform = 'PC', gameID = gameID)
-    game.save()
+    gameDict = {'title': gameTitle, 'vendor': vendor, 'price': gamePrice, 'url': gameUrl, 'platform': "PC", 'gameID': gameID}
+    with open("allGameData.json", "w") as games:
+        gameJson = json.dumps(gameDict)
+        games.write(gameJson)
+        games.close()
+    vendor = Vendor(vendorName = vendorHost)
+    vendor.save()
+    #game = Game(gameTitle = gameTitle, bestVendor = 'Steam', lowestPrice = gamePrice, url = gameUrl, platform = 'PC', gameID = gameID)
+    #game.save()
