@@ -1,6 +1,6 @@
 from django.db import models
 from djmoney.models.fields import MoneyField
-from userapp.models import *
+from userapp import *
 
 # Create your models here.
 class Vendor(models.Model):
@@ -43,7 +43,7 @@ class Game(models.Model):
     def __str__(self):
         return self.gameTitle
 
-class UserGame(models.model):
+class UserGame(models.Model):
     userGameID = models.CharField(max_length=100, default = '')
     gameID = models.CharField(max_length=100, default = '')
     userID = models.CharField(max_length=100, default = '')
