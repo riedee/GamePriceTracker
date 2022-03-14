@@ -1,6 +1,6 @@
 import bs4
 from urllib.request import urlopen
-from .models import *
+from ..models import *
 
 def get_title(soup): 
     try:
