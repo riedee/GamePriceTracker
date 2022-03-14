@@ -44,5 +44,6 @@ class Game(models.Model):
         return self.gameTitle
 
 class UserGame(models.model):
+    userGameID = models.CharField(max_length=100, default = '')
     gameID = models.CharField(max_length=100, default = '')
     userID = models.CharField(max_length=100, default = '')
