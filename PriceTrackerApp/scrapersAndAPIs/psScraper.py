@@ -5,7 +5,7 @@ from ..models import *
 def get_title(soup): 
     try:
         # Outer Tag Object
-        title = soup.select("h1.psw-m-b-5 psw-t-title-l psw-t-size-8 psw-l-line-break-word")[0].string.strip()
+        title_string = soup.select("h1.psw-m-b-5 psw-t-title-l psw-t-size-8 psw-l-line-break-word")[0].string.strip()
  
     except AttributeError:
         title_string = ""   
