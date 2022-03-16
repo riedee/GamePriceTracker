@@ -1,8 +1,10 @@
 <h1>Search Results</h1>
 <ul>
-  {% for game in object_list %}
+  {% for game in games %}
     <li>
-      {{ game.gameTitle }}, Vendor: {{game.vendor}}, Price: {{game.price}}, Link: {{game.url}}
+      <a href="{% url 'game' info=game.slug %}">
+        {{ game.gameTitle }}, Vendor: {{game.vendor}}, Price: {{game.price}}, Link: {{game.url}}
+      </a>
     </li>
   {% endfor %}
 </ul>
