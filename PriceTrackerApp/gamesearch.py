@@ -33,7 +33,7 @@ def searchGame(query):
 
     return links
 
-#Given list of links with their associated website name, scrape info and return game objects
+#Given list of links with their associated website name, scrape info using appropriate scraper and return game objects
 def scrapeGame(links):
     gameList = []
     for url, vendor in links:
@@ -55,8 +55,7 @@ def scrapeGame(links):
             price = psScraper.get_price(soup)
             platform = "Playstation 5"
         elif vendor == "steampowered":
-            gameDict = steamAPI.getGame(url)
-            gameList.append(gameDict)
+            steamAPI.getGame(url)
         elif vendor == "xbox":
             title = xboxScraper.get_title(soup)
             price = xboxScraper.get_price(soup)
