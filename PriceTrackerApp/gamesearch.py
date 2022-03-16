@@ -1,7 +1,14 @@
-from googlesearch import search
+import urllib
 import requests
+import bs4
+import json
+from googlesearch import search
 from bs4 import BeautifulSoup
+from urllib.request import urlopen
 
+from scrapersAndAPIs import amznScraper, nintendoScraper, psScraper, steamAPI, xboxScraper
+
+#Returns list of links with their associated vendor name for a game specified
 def searchGame(query):
     #query should include 'buy', 'purchase', etc. at the end to bring up most useful results
     query = query + " buy"
@@ -25,3 +32,48 @@ def searchGame(query):
                     links.append((i, site[1]))
 
     return links
+
+#Given list of links with their associated website name, scrape info and return game objects
+def scrapeGame(links):
+    gameList = []
+    for url, vendor in links:
+        page = urlopen(url)
+        html = page.read().decode("utf-8")
+        soup = bs4.BeautifulSoup(html, "html.parser")
+        parsed_url = urllib.parse.urlparse(url)
+        vendorHost = parsed_url.netloc.string.strip()
+        if vendor == "amazon":
+            title = amznScraper.get_title(soup)
+            price = amznScraper.get_price(soup)
+            platform = amznScraper.get_platform(soup)
+        elif vendor == "nintendo":
+            title = nintendoScraper.get_title(soup)
+            price = nintendoScraper.get_price(soup)
+            platform = "Nintendo Switch"
+        elif vendor == "playstation":
+            title = psScraper.get_title(soup)
+            price = psScraper.get_price(soup)
+            platform = "Playstation 5"
+        elif vendor == "steampowered":
+            gameDict = steamAPI.getGame(url)
+            gameList.append(gameDict)
+        elif vendor == "xbox":
+            title = xboxScraper.get_title(soup)
+            price = xboxScraper.get_price(soup)
+            platform = "Xbox One"
+            
+        if (vendor != "steampowered"):
+            gameID = title + platform
+            gameDict = {'title': title, 'vendor': vendorHost, 'price': price, 'url': url, 'platform': platform, 'gameID': gameID}
+            gameList.append(gameDict)
+
+        vendor.save()
+
+        return gameList
+
+#Given game, add to json
+def addGame(gameDict):
+    with open("allGameData.json", "w") as games:
+        gameJson = json.dumps(gameDict)
+        games.write(gameJson)
+        games.close()
