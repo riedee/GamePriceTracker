@@ -3,8 +3,6 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView
 from PriceTrackerApp import gamesearch
 
-import json
-
 #models
 from .models import *
 
