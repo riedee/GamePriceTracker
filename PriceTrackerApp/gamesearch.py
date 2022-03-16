@@ -2,14 +2,17 @@ from googlesearch import search
 import requests
 from bs4 import BeautifulSoup
 
-#query should include 'buy', 'purchase', etc. at the end to bring up most useful results
 def searchGame(query):
+    #query should include 'buy', 'purchase', etc. at the end to bring up most useful results
+    query = query + " buy"
     links = []
     for i in search(query, tld="co.in", num=15, stop=15, pause=3):
         site = i.split(".")
+        store = i.split("/")
 
         #list of vendors we know how to scrape info from
-        vendors = ["steampowered", "microsoft", "nintendo", "amazon", "playstation"]
+        vendors = ["steampowered", "xbox", "nintendo", "amazon", "playstation"]
+        #store_links = ["app", "games", "products", "dp", "products"] #store[2], store[3]
         for j in vendors:
             if site[1] == j:
                 soup = BeautifulSoup(requests.get(i).text, 'html.parser') 

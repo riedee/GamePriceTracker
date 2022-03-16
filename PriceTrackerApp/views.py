@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView
+from PriceTrackerApp import gamesearch
 
 import json
 
@@ -15,9 +16,11 @@ def index(request):
     
 def search(request):
 	#searchdata = Game.objects.filter()
-	context = {
-                        }
-	return render(request, 'PriceTrackerApp/search_results.html', context)
+    if request.POST:
+        links = gamesearch.searchGame(request.POST['search'])
+        #scrape each link here(?)
+        context = {}
+        return render(request, 'PriceTrackerApp/search_results.html', context)
 
 
 class SearchResultsView(ListView):
