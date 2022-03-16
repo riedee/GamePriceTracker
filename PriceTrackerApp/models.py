@@ -8,6 +8,7 @@ class Vendor(models.Model):
     rating = models.PositiveSmallIntegerField(default=3)
     freeShipping = models.BooleanField(default=True)
     physicalStore = models.BooleanField(default=False)
+    storeFront = models.URLField(max_length=500)
     def __str__(self):
         return self.vendorName
 

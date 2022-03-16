@@ -24,7 +24,7 @@ def getGame(url):
         gameJson = json.dumps(gameDict)
         games.write(gameJson)
         games.close()
-    vendor = Vendor(vendorName = vendorHost)
+    vendor = Vendor(vendorName = vendorHost, storeFront = "https://store.steampowered.com/")
     vendor.save()
     #game = Game(gameTitle = gameTitle, bestVendor = 'Steam', lowestPrice = gamePrice, url = gameUrl, platform = 'PC', gameID = gameID)
     #game.save()
