@@ -6,7 +6,12 @@ from googlesearch import search
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 
-from scrapersAndAPIs import amznScraper, nintendoScraper, psScraper, steamAPI, xboxScraper
+#from scrapersAndAPIs import amznScraper, nintendoScraper, psScraper, steamAPI, xboxScraper
+import scrapersAndAPIs.amznScraper as amznScraper
+import scrapersAndAPIs.nintendoScraper as nintendoScraper
+import scrapersAndAPIs.steamAPI as steamAPI
+import scrapersAndAPIs.xboxScraper as xboxScraper
+import scrapersAndAPIs.psScraper as psScraper
 
 #Returns list of links with their associated vendor name for a game specified
 def searchGame(query):
@@ -18,7 +23,7 @@ def searchGame(query):
         store = i.split("/")
 
         #list of vendors we know how to scrape info from
-        vendors = ["steampowered", "xbox", "nintendo", "amazon", "playstation"]
+        vendors = ["steampowered", "xbox", "nintendo", "playstation"]
         #store_links = ["app", "games", "products", "dp", "products"] #store[2], store[3]
         for j in vendors:
             if site[1] == j:
@@ -41,34 +46,35 @@ def scrapeGame(links):
         html = page.read().decode("utf-8")
         soup = bs4.BeautifulSoup(html, "html.parser")
         parsed_url = urllib.parse.urlparse(url)
-        vendorHost = parsed_url.netloc.string.strip()
+        vendorHost = parsed_url.netloc.strip()
         if vendor == "amazon":
+            headers = {'User-Agent' : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36'}
+            page = requests.get(url, headers=headers)
+            soup  = bs4.BeautifulSoup(page.content, "html.parser")
             title = amznScraper.get_title(soup)
             price = amznScraper.get_price(soup)
-            platform = amznScraper.get_platform(soup)
-        elif vendor == "nintendo":
+        if vendor == "nintendo":
             title = nintendoScraper.get_title(soup)
             price = nintendoScraper.get_price(soup)
-            platform = "Nintendo Switch"
-        elif vendor == "playstation":
-            title = psScraper.get_title(soup)
-            price = psScraper.get_price(soup)
-            platform = "Playstation 5"
-        elif vendor == "steampowered":
-            steamAPI.getGame(url)
-        elif vendor == "xbox":
+            platform = nintendoScraper.get_platform(soup)
+        if vendor == "steampowered":
+            title, price, platform = steamAPI.getGame(url)
+            #price is stored as ints
+            price = int(price) / 100.0
+        if vendor == "xbox":
             title = xboxScraper.get_title(soup)
             price = xboxScraper.get_price(soup)
-            platform = "Xbox One"
-            
-        if (vendor != "steampowered"):
-            gameID = title + platform
-            gameDict = {'title': title, 'vendor': vendorHost, 'price': price, 'url': url, 'platform': platform, 'gameID': gameID}
-            gameList.append(gameDict)
+            platform = xboxScraper.get_platform(soup)
+        if vendor == "playstation":
+            title = psScraper.get_title(soup)
+            price = psScraper.get_price(soup)
+            platform = psScraper.get_platform(soup)
 
-        vendor.save()
+        gameID = ""
+        gameDict = {'title': title, 'vendor': vendorHost, 'price': price, 'url': url, 'platform': platform, 'gameID': gameID}
+        gameList.append(gameDict)
 
-        return gameList
+    return gameList
 
 #Given game, add to json
 def addGame(gameDict):

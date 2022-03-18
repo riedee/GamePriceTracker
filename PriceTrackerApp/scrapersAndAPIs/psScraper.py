@@ -1,11 +1,13 @@
-import bs4
+'''import bs4
+import urllib
+import json
 from urllib.request import urlopen
-from ..models import *
+from ..models import *'''
 
 def get_title(soup): 
     try:
         # Outer Tag Object
-        title_string = soup.select("h1.psw-m-b-5 psw-t-title-l psw-t-size-8 psw-l-line-break-word")[0].string.strip()
+        title_string = soup.find("h1.psw-m-b-5 psw-t-title-l psw-t-size-8 psw-l-line-break-word").string.strip()
  
     except AttributeError:
         title_string = ""   
@@ -20,9 +22,17 @@ def get_price(soup):
         price = ""  
  
     return price
-   
 
-urlList = ["https://store.playstation.com/en-us/product/UP1003-CUSA00314_00-WOLFENSTEIN00001"]
+def get_platform(soup):
+    try:
+        platform = soup.find("dd", attrs={'class':'psw-p-r-6 psw-p-r-0@tablet-s psw-t-bold psw-l-w-1/2 psw-l-w-1/6@tablet-s psw-l-w-1/6@tablet-l psw-l-w-1/8@laptop psw-l-w-1/6@desktop psw-l-w-1/6@max'}).string.strip()
+
+    except AttributeError:
+       platform = ""
+
+    return platform
+
+'''urlList = ["https://store.playstation.com/en-us/product/UP1003-CUSA00314_00-WOLFENSTEIN00001"]
 
 gameList = []
 
@@ -47,4 +57,4 @@ for i in range(len(urlList)):
 with open("allGameData.json", "w") as f:
     gameJson = json.dumps(gameList)
     f.write(gameJson)
-    f.close
+    f.close'''

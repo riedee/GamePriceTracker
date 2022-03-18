@@ -1,11 +1,14 @@
-import bs4
+'''import bs4
+import urllib
+import json
 from urllib.request import urlopen
-from ..models import *
+from ..models import *'''
+
 
 def get_title(soup): 
     try:
         # Outer Tag Object
-        title_string = soup.select("h1.Headingstyles__StyledH-sc-qpned7-0 HUGKw")[0].string.strip()
+        title_string = soup.find("h1", attrs={'class': 'Headingstyles__StyledH-sc-qpned7-0 HUGKw'}).string.strip()
 
     except AttributeError:
         title_string = ""   
@@ -14,15 +17,23 @@ def get_title(soup):
 
 def get_price(soup):
     try:
-        price = soup.find("span", attrs={'class':'Pricestyles__MSRP-sc-afjfk5-10 jtSLLy'}).string.strip()
-#class="ScreenReaderOnlystyles__StyledReaderText-sc-jiymtq-0 kXOKSo //inner
+        price = soup.find("span", attrs={'class': 'ScreenReaderOnlystyles__StyledReaderText-sc-jiymtq-0 kXOKSo'}).string.strip()
+#class="ScreenReaderOnlystyles__StyledReaderText-sc-jiymtq-0 kXOKSo" //inner
     except AttributeError:
         price = ""  
  
     return price
    
+def get_platform(soup):
+    try:
+        platform = soup.find("div", attrs={'class': 'PlatformLabelstyles__StyledPlatform-sc-1cn94zq-0 gRaUjs'}).string.strip()
+    except AttributeError:
+        platform = ""
+    
+    return platform
+   
 
-urlList = ["https://www.nintendo.com/store/products/nba-2k22-switch/"]
+'''urlList = ["https://www.nintendo.com/store/products/nba-2k22-switch/"]
 
 gameList = []
 
@@ -47,5 +58,5 @@ for i in range(len(urlList)):
 with open("allGameData.json", "w") as f:
     gameJson = json.dumps(gameList)
     f.write(gameJson)
-    f.close
+    f.close'''
 
