@@ -14,6 +14,9 @@ def isSubstring(value, substring):
 
 class HomeView(TemplateView):
 	template_name = 'home.html'
+	
+class VendorPageView(TemplateView):
+	template_name = 'vendorpage.html'
 
 def index(request):
     return HttpResponse("Welcome to Game Price Tracker!")
@@ -44,6 +47,7 @@ def SearchResultsView(request):
     return render(request, 'search_results.html', context)
 
 def VendorView(request, id):
+	vendorName = ''
 	return 0
 	
 

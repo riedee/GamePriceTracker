@@ -1,5 +1,6 @@
 '''File to enter many users at once into Django'''
 from userapp.models import *
+from django.contrib.auth.models import User
 import csv
 #make sure file name is users.csv or change line below to match filename
 with open('users.csv','rt') as f:
