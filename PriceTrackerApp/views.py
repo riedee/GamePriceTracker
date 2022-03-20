@@ -3,12 +3,10 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView
 import json
 
-import json
-
 #models
 from .models import *
 
-with open('../games.json', 'r') as f:
+with open('./games.json', 'r') as f:
     Games = json.load(f)
 
 def isSubstring(value, substring):
@@ -46,7 +44,7 @@ def SearchResultsView(request):
     return render(request, 'search_results.html', context)
 
 def VendorView(request, id):
-	
+	return 0
 	
 
 # class SearchResultsView(ListView):
