@@ -21,6 +21,15 @@ class VendorPageView(TemplateView):
 class AmazonView(TemplateView):
 	template_name = 'amazon.html'
 
+class PlayStationView(TemplateView):
+	template_name = 'psvendor.html'
+
+class NintendoView(TemplateView):
+	template_name = 'nintendo.html'
+
+class MicrosoftView(TemplateView):
+	template_name = 'microsoft.html'
+
 def index(request):
     return HttpResponse("Welcome to Game Price Tracker!")
     
