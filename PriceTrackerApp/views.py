@@ -47,7 +47,6 @@ def SearchResultsView(request):
     return render(request, 'search_results.html', context)
 
 def VendorView(request):
-	vendorName = ''
 	return 0
 
 #display personal info of user
