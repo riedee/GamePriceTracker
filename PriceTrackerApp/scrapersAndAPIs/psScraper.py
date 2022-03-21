@@ -49,7 +49,7 @@ for i in range(len(urlList)):
     gameID = title + platform
     gameDict = {'title': title, 'vendor': vendorHost, 'price': price, 'url': url, 'platform': platform, 'gameID': gameID}
     gameList.append(gameDict)
-    vendor = Vendor(vendorName = vendorHost)
+    vendor = Vendor(vendorName = vendorHost, storeFront = 'https://store.playstation.com/en-us')
     vendor.save()
     #game = Game(gameTitle = title, bestVendor = vendor, lowestPrice = price, url = url, platform = platform, gameID = gameID)
     #game.save()

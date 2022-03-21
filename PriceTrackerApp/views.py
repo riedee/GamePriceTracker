@@ -7,7 +7,7 @@ from PriceTrackerApp import gamesearch
 #models
 from .models import *
 
-with open('../games.json', 'r') as f:
+with open('./games.json', 'r') as f:
     Games = json.load(f)
 
 def isSubstring(value, substring):
@@ -15,6 +15,9 @@ def isSubstring(value, substring):
 
 class HomeView(TemplateView):
 	template_name = 'home.html'
+	
+class VendorPageView(TemplateView):
+	template_name = 'vendorpage.html'
 
 def index(request):
     return HttpResponse("Welcome to Game Price Tracker!")
@@ -52,6 +55,10 @@ def SearchResultsView(request):
     context = { 'games' : foundGames }
     return render(request, 'search_results.html', context)
 
+def VendorView(request, id):
+	vendorName = ''
+	return 0
+	
 
 # class SearchResultsView(ListView):
 #     model = Game
