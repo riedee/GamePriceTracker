@@ -23,7 +23,7 @@ def searchGame(query):
         store = i.split("/")
 
         #list of vendors we know how to scrape info from
-        vendors = ["steampowered", "xbox", "nintendo", "playstation"]
+        vendors = ["steampowered", "xbox", "amazon", "nintendo", "playstation"]
         #store_links = ["app", "games", "products", "dp", "products"] #store[2], store[3]
         for j in vendors:
             if site[1] == j:
@@ -42,17 +42,30 @@ def searchGame(query):
 def scrapeGame(links):
     gameList = []
     for url, vendor in links:
-        page = urlopen(url)
-        html = page.read().decode("utf-8")
-        soup = bs4.BeautifulSoup(html, "html.parser")
+        #page = urlopen(url)
+        #html = page.read().decode("utf-8")
+        #soup = bs4.BeautifulSoup(html, "html.parser")
+        headers = headers = { 
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', 
+        'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 
+        'Accept-Language' : 'en-US,en;q=0.5',
+        'Accept-Encoding' : 'gzip', 
+        'DNT' : '1', # Do Not Track Request Header 
+        'Connection' : 'close'
+        }
+        page = requests.get(url, headers=headers)
+        soup  = bs4.BeautifulSoup(page.content, "html.parser")
         parsed_url = urllib.parse.urlparse(url)
         vendorHost = parsed_url.netloc.strip()
         if vendor == "amazon":
-            headers = {'User-Agent' : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36'}
-            page = requests.get(url, headers=headers)
-            soup  = bs4.BeautifulSoup(page.content, "html.parser")
             title = amznScraper.get_title(soup)
             price = amznScraper.get_price(soup)
+            platform = amznScraper.get_platform(soup)
+
+            #remove $ sign, convert to float
+            price = price[1:]
+            if price != "":
+                price = float(price)
         if vendor == "nintendo":
             title = nintendoScraper.get_title(soup)
             price = nintendoScraper.get_price(soup)
@@ -65,10 +78,21 @@ def scrapeGame(links):
             title = xboxScraper.get_title(soup)
             price = xboxScraper.get_price(soup)
             platform = xboxScraper.get_platform(soup)
+
+            #remove $ sign, convert to float
+            price = price[1:]
+            if price != "":
+                price = float(price)
+
         if vendor == "playstation":
             title = psScraper.get_title(soup)
             price = psScraper.get_price(soup)
             platform = psScraper.get_platform(soup)
+
+            #remove $ sign, convert to float
+            price = price[1:]
+            if price != "":
+                price = float(price)
 
         gameID = ""
         gameDict = {'title': title, 'vendor': vendorHost, 'price': price, 'url': url, 'platform': platform, 'gameID': gameID}
