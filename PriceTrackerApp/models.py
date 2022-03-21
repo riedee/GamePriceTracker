@@ -1,6 +1,5 @@
 from django.db import models
 from djmoney.models.fields import MoneyField
-from userapp import *
 
 # Create your models here.
 class Vendor(models.Model):
@@ -8,6 +7,7 @@ class Vendor(models.Model):
     rating = models.PositiveSmallIntegerField(default=3)
     freeShipping = models.BooleanField(default=True)
     physicalStore = models.BooleanField(default=False)
+    storeFront = models.URLField(max_length=500)
     def __str__(self):
         return self.vendorName
 

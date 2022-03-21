@@ -16,6 +16,9 @@ def isSubstring(value, substring):
 
 class HomeView(TemplateView):
 	template_name = 'home.html'
+	
+class VendorPageView(TemplateView):
+	template_name = 'vendorpage.html'
 
 def index(request):
     return HttpResponse("Welcome to Game Price Tracker!")
@@ -50,12 +53,16 @@ def SearchResultsView(request):
     links = gamesearch.searchGame(query)
     gameList = gamesearch.scrapeGame(links)
     print(gameList)
-    foundGames = [game for game in Games if isSubstring(game['gameTitle'], query)]
+    '''foundGames = [game for game in Games if isSubstring(game['gameTitle'], query)]
     for game in foundGames:
-        game['slug'] = game['ID'] + '_' + game['console']
+        game['slug'] = game['ID'] + '_' + game['console']'''
     context = { 'games' : gameList }
     return render(request, 'search_results.html', context)
 
+def VendorView(request, id):
+	vendorName = ''
+	return 0
+	
 
 # class SearchResultsView(ListView):
 #     model = Game
