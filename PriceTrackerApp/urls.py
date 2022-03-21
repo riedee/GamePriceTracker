@@ -13,6 +13,7 @@ urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('#vendors', VendorPageView.as_view(), name='vendorpage'),
     path('<int:user_id>/profile/', ProfileView, name='profile'),
+    path('vendors/psstore/', VendorView, name = 'psstore'),
     #path('userlist', Userlist, name='userlist'),
 
 ]

@@ -46,7 +46,7 @@ def SearchResultsView(request):
     context = { 'games' : foundGames }
     return render(request, 'search_results.html', context)
 
-def VendorView(request, id):
+def VendorView(request):
 	vendorName = ''
 	return 0
 
