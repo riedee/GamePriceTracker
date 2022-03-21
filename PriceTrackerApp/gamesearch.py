@@ -4,14 +4,10 @@ import bs4
 import json
 from googlesearch import search
 from bs4 import BeautifulSoup
-from urllib.request import urlopen
 
 #from scrapersAndAPIs import amznScraper, nintendoScraper, psScraper, steamAPI, xboxScraper
-import scrapersAndAPIs.amznScraper as amznScraper
-import scrapersAndAPIs.nintendoScraper as nintendoScraper
-import scrapersAndAPIs.steamAPI as steamAPI
-import scrapersAndAPIs.xboxScraper as xboxScraper
-import scrapersAndAPIs.psScraper as psScraper
+#import scrapersAndAPIs.amznScraper as amznScraper
+from PriceTrackerApp.scrapersAndAPIs import amznScraper, nintendoScraper, steamAPI, xboxScraper, psScraper
 
 #Returns list of links with their associated vendor name for a game specified
 def searchGame(query):
@@ -66,6 +62,7 @@ def scrapeGame(links):
             price = price[1:]
             if price != "":
                 price = float(price)
+
         if vendor == "nintendo":
             title = nintendoScraper.get_title(soup)
             price = nintendoScraper.get_price(soup)

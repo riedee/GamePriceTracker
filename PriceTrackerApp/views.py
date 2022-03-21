@@ -2,12 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView
 import json
+import os
 from PriceTrackerApp import gamesearch
 
 #models
 from .models import *
 
-with open('../games.json', 'r') as f:
+with open(os.path.dirname(__file__) + '/../games.json', 'r') as f:
     Games = json.load(f)
 
 def isSubstring(value, substring):
@@ -23,10 +24,10 @@ def search(request):
 	#searchdata = Game.objects.filter()
     if request.POST:
 
-        links = gamesearch.searchGame(request.POST['search'])
+        '''links = gamesearch.searchGame(request.POST['search'])
         gameList = gamesearch.scrapeGame(links)
         for game in gameList:
-            gamesearch.addGame(game)
+            gamesearch.addGame(game)'''
                              
         context = {
 
@@ -46,10 +47,13 @@ def GameView(request, info):
 
 def SearchResultsView(request):
     query = request.GET['search']
+    links = gamesearch.searchGame(query)
+    gameList = gamesearch.scrapeGame(links)
+    print(gameList)
     foundGames = [game for game in Games if isSubstring(game['gameTitle'], query)]
     for game in foundGames:
         game['slug'] = game['ID'] + '_' + game['console']
-    context = { 'games' : foundGames }
+    context = { 'games' : gameList }
     return render(request, 'search_results.html', context)
 
 
