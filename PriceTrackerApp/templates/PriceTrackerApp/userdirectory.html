@@ -1,0 +1,35 @@
+<!--author: mark borelli -->
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'api/style.css' %}">
+	<h1></h1>
+<style>
+table,th,td{
+        border: 1px;
+        border-style: solid;
+        border-color: #002D62;
+        }
+
+</style>
+</html>
+{% if data %}
+<h2>User Directory</h2>
+    <table style="width:100%">
+    <tr style="background-color:#002D62;color:white;">
+
+    <th>ID</th>
+        <th>Name</th>
+	<th>Email</th>
+    </tr>
+    {% for record in data %}
+    <tr>
+        <th>{{record.id}}</th>
+	<th><a href="{% url 'profile' record.id%}">{{record.first_name}} {{record.last_name}}</a></th>
+	<th>{{record.email}}</th>
+    </tr>
+    {% endfor %}
+    </table>
+{% else %}
+    <p>There are no users except mark, there will always be mark</p>
+{% endif %}
+{% endblock %}

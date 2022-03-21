@@ -20,6 +20,9 @@ class HomeView(TemplateView):
 class VendorPageView(TemplateView):
 	template_name = 'vendorpage.html'
 
+class AmazonView(TemplateView):
+	template_name = 'amazon.html'
+
 def index(request):
     return HttpResponse("Welcome to Game Price Tracker!")
     
@@ -53,22 +56,19 @@ def SearchResultsView(request):
     context = { 'games' : gameList }
     return render(request, 'search_results.html', context)
 
-def VendorView(request, id):
-	vendorName = ''
+def VendorView(request):
 	return 0
-	
 
-# class SearchResultsView(ListView):
-#     model = Game
-#     template_name = 'search_results.html'
-#     context_object_name = 'object_list'
-
-#     def get_queryset(self):
-#        game = super(SearchResultsView, self).get_queryset()
-#        query = self.request.GET.get('game')
-#        if query:
-#           postresult = Game.objects.filter(gameTitle__contains=query)
-#           game = postresult
-#        else:
-#            game = None
-#        return game
+#display personal info of user
+def ProfileView(request, user_id):
+    #Try to get user ID
+    try:
+        uid = User.objects.get(pk=user_id)
+    except ObjectDoesNotExist:
+        return HttpResponse("The user_id given does not match any user_id in the system")
+    data = Profile(user_id=uid, username = uid.username, email = uid.email, fn = uid.first_name, ln = uid.last_name)
+    context = {'user_id': uid,
+            'data': data,
+            'assigned': uid,
+            }
+    return render(request, "PriceTrackerApp/profile.html", context)

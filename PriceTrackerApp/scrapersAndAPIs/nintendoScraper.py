@@ -9,7 +9,7 @@ def get_title(soup):
     try:
         # Outer Tag Object
         title_string = soup.find("h1", attrs={'class': 'Headingstyles__StyledH-sc-qpned7-0 HUGKw'}).string.strip()
-
+  
     except AttributeError:
         title_string = ""   
  
@@ -18,6 +18,7 @@ def get_title(soup):
 def get_price(soup):
     try:
          price = soup.find("span", attrs={'class':'ScreenReaderOnlystyles__StyledReaderText-sc-jiymtq-0 kXOKSo'}).string.strip()
+  
     except AttributeError:
         price = ""  
  

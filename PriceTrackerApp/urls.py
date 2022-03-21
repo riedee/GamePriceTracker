@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import HomeView, SearchResultsView, GameView, VendorPageView, VendorView
-from django.urls import include, re_path
+from .views import HomeView, SearchResultsView, GameView, VendorPageView, VendorView, ProfileView, AmazonView
+from django.conf.urls import include, url
+from django.urls import re_path as url
 from django.contrib import admin
 admin.autodiscover()
 
@@ -8,9 +9,12 @@ urlpatterns = [
     re_path(r'^admin/', admin.site.urls),
     path('search/', SearchResultsView, name='search_results'),
     path('results/<str:info>', GameView, name='game'),
-    path('temporary', VendorView, name='vendor'),
-        
+ 
     path('', HomeView.as_view(), name='home'),
     path('#vendors', VendorPageView.as_view(), name='vendorpage'),
+    path('<int:user_id>/profile/', ProfileView, name='profile'),
+    path('vendors/amazon/', AmazonView.as_view(), name = 'amazon'),
+    #path('userlist', UserlistView, name='userlist'),
+
 ]
 

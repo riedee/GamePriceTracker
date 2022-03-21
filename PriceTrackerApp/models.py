@@ -9,7 +9,7 @@ class Vendor(models.Model):
     rating = models.PositiveSmallIntegerField(default=3)
     freeShipping = models.BooleanField(default=True)
     physicalStore = models.BooleanField(default=False)
-    storeFront = models.URLField(max_length=500)
+    storeFront = models.URLField(max_length=500, default = '')
     def __str__(self):
         return self.vendorName
 
@@ -37,9 +37,9 @@ class Game(models.Model):
     CONSOLES = ((PS5, 'Playstation 5'), (SW, 'Nintendo Switch'), (XBXX, 'XBOX Series X'), (PC, 'PC'), (MAC, 'Mac'))
     gameTitle = models.CharField(max_length=255)
     #genre = models.CharField(max_length=32, choices=GENRES, default=ACT)
-    bestVendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
-    lowestPrice = MoneyField(max_digits=7, decimal_places=2, default_currency='USD')
-    url = models.URLField(max_length=500)
+    bestVendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, default='')
+    lowestPrice = MoneyField(max_digits=7, decimal_places=2, default_currency='USD', default = '0')
+    url = models.URLField(max_length=500, default = '')
     platform = models.CharField(max_length=32, choices=CONSOLES, default=SW)
     gameID = models.CharField(max_length=100, default = '')
     def __str__(self):
@@ -49,3 +49,14 @@ class UserGame(models.Model):
     userGameID = models.CharField(max_length=100, default = '')
     gameID = models.CharField(max_length=100, default = '')
     userID = models.CharField(max_length=100, default = '')
+    
+#Profile information of user
+class Profile(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE,default=0)
+    username = models.CharField(max_length=40,default='')
+    email = models.CharField(max_length=120,default='')
+    fn = models.CharField(max_length=120,default='')
+    ln = models.CharField(max_length=120,default='')
+    
+    def __str__(self):
+        return str(self.user_id) + ', ' + str(self.username)
