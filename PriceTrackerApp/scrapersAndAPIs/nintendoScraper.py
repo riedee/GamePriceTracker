@@ -17,7 +17,7 @@ def get_title(soup):
 
 def get_price(soup):
     try:
-        price = soup.find_all("span", attrs={'class':'Pricestyles__MSRP-sc-afjfk5-10 jtSLLy'}).text
+         price = soup.find("span", attrs={'class':'ScreenReaderOnlystyles__StyledReaderText-sc-jiymtq-0 kXOKSo'}).string.strip()
     except AttributeError:
         price = ""  
  
@@ -49,7 +49,7 @@ for i in range(len(urlList)):
     gameID = title + platform
     gameDict = {'title': title, 'vendor': vendorHost, 'price': price, 'url': url, 'platform': platform, 'gameID': gameID}
     gameList.append(gameDict)
-    vendor = Vendor(vendorName = vendorHost, storeFront = "https://www.nintendo.com/store")
+    vendor = Vendor(vendorName = vendorHost)
     vendor.save()
     #game = Game(gameTitle = title, bestVendor = vendor, lowestPrice = price, url = url, platform = platform, gameID = gameID)
     #game.save()

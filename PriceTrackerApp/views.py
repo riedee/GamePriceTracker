@@ -24,18 +24,11 @@ def index(request):
     return HttpResponse("Welcome to Game Price Tracker!")
     
 def search(request):
-	#searchdata = Game.objects.filter()
-    if request.POST:
+	#searchdata = Game.objects.filter()                   
+    context = {
 
-        '''links = gamesearch.searchGame(request.POST['search'])
-        gameList = gamesearch.scrapeGame(links)
-        for game in gameList:
-            gamesearch.addGame(game)'''
-                             
-        context = {
-
-                        }
-        return render(request, 'PriceTrackerApp/search_results.html', context)
+                    }
+    return render(request, 'PriceTrackerApp/search_results.html', context)
 
 def GameView(request, info):
     info = info.split('_')

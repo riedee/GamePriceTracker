@@ -3,11 +3,11 @@ import requests
 import bs4
 import json
 import os
+
 from googlesearch import search
 from bs4 import BeautifulSoup
 
-#from scrapersAndAPIs import amznScraper, nintendoScraper, psScraper, steamAPI, xboxScraper
-#import scrapersAndAPIs.amznScraper as amznScraper
+#Import specific vendor scrapers
 from PriceTrackerApp.scrapersAndAPIs import amznScraper, nintendoScraper, steamAPI, xboxScraper, psScraper
 
 #Returns list of links with their associated vendor name for a game specified
@@ -17,11 +17,9 @@ def searchGame(query):
     links = []
     for i in search(query, tld="co.in", num=15, stop=15, pause=3):
         site = i.split(".")
-        store = i.split("/")
 
         #list of vendors we know how to scrape info from
         vendors = ["steampowered", "xbox", "amazon", "nintendo", "playstation"]
-        #store_links = ["app", "games", "products", "dp", "products"] #store[2], store[3]
         for j in vendors:
             if site[1] == j:
                 soup = BeautifulSoup(requests.get(i).text, 'html.parser') 
@@ -35,13 +33,11 @@ def searchGame(query):
 
     return links
 
-#Given list of links with their associated website name, scrape info using appropriate scraper and return game objects
+#Given list of links with their associated website name, scrape info using appropriate scraper and return game dict
 def scrapeGame(links):
     gameList = []
     for url, vendor in links:
-        #page = urlopen(url)
-        #html = page.read().decode("utf-8")
-        #soup = bs4.BeautifulSoup(html, "html.parser")
+        #Simulate user - otherwise sites like amazon will block
         headers = headers = { 
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', 
         'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 
@@ -59,6 +55,7 @@ def scrapeGame(links):
             price = amznScraper.get_price(soup)
             platform = amznScraper.get_platform(soup)
 
+            #Remove scrap from platform
             if platform != "":
                 platform = platform.split(':')[1]
                 platform = platform.split('|')[0]
@@ -72,10 +69,12 @@ def scrapeGame(links):
             title = nintendoScraper.get_title(soup)
             price = nintendoScraper.get_price(soup)
             platform = nintendoScraper.get_platform(soup)
+
         if vendor == "steampowered":
             title, price, platform = steamAPI.getGame(url)
-            #price is stored as ints
+            #Steam stores price as integers, convert to float for comparison
             price = int(price) / 100.0
+
         if vendor == "xbox":
             title = xboxScraper.get_title(soup)
             price = xboxScraper.get_price(soup)
@@ -104,13 +103,7 @@ def scrapeGame(links):
 
 #Given game, add to json
 def addGame(gameDict):
-
-    output = []
     with open(os.path.dirname(__file__) + '/../games.json', 'r+') as games:
-        #json.dump(gameDict, games, indent=4)
-        #games.write(gamesJson)
-        #games.close()
-        #print(gameDict)
         g = json.load(games)
         g.append(gameDict)
         games.seek(0)

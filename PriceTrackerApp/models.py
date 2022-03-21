@@ -1,5 +1,7 @@
 from django.db import models
 from djmoney.models.fields import MoneyField
+from userapp import *
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Vendor(models.Model):
