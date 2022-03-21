@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import HomeView, SearchResultsView, GameView, VendorPageView, VendorView
+from .views import HomeView, SearchResultsView, GameView, VendorPageView, VendorView, ProfileView
 from django.conf.urls import include, url
 from django.contrib import admin
 admin.autodiscover()
@@ -12,5 +12,8 @@ urlpatterns = [
         
     path('', HomeView.as_view(), name='home'),
     path('#vendors', VendorPageView.as_view(), name='vendorpage'),
+    path('<int:user_id>/profile/', ProfileView, name='profile'),
+    #path('userlist', Userlist, name='userlist'),
+
 ]
 
