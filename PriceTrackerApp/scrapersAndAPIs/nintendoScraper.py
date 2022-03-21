@@ -6,7 +6,6 @@ def get_title(soup):
     try:
         # Outer Tag Object
         title_string = soup.select("h1.Headingstyles__StyledH-sc-qpned7-0 HUGKw")[0].string.strip()
-<span class="ScreenReaderOnlystyles__StyledReaderText-sc-jiymtq-0 kXOKSo">Regular Price:</span>
     except AttributeError:
         title_string = ""   
  
