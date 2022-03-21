@@ -18,6 +18,9 @@ class HomeView(TemplateView):
 class VendorPageView(TemplateView):
 	template_name = 'vendorpage.html'
 
+class AmazonView(TemplateView):
+	template_name = 'amazon.html'
+
 def index(request):
     return HttpResponse("Welcome to Game Price Tracker!")
     
