@@ -1,8 +1,8 @@
 import json
-from platform import platform
+import os
 from .models import *
 
-file = open("allGameData.json", "r")
+file = open(os.path.dirname(__file__) + '/../games.json', 'r')
 content = file.read()
 gameList = json.loads(content)
 gameDict = {}

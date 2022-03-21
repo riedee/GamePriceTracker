@@ -22,16 +22,18 @@ def get_title(soup):
 
 def get_price(soup):
     try:
-        price = soup.find("span", attrs={'class':'a-size-base a-color-price'}).string.strip()
- 
+        price = soup.find("span", attrs={'id':'priceblock_ourprice'}).string.strip()
     except AttributeError:
-        price = ""  
+        try:
+            price = soup.find("span", attrs={'class':'a-size-base a-color-price'}).string.strip()
+        except:
+            price = ""
  
     return price
 
 def get_platform(soup):
     try:
-        platform = soup.find("span", attrs={'class':'selection'}).string.strip()
+        platform = soup.find("div", attrs={'id':'platformInformation_feature_div'}).text
  
     except AttributeError:
         platform = "Platform Not Found"

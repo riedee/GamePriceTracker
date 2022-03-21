@@ -52,7 +52,8 @@ def SearchResultsView(request):
     query = request.GET['search']
     links = gamesearch.searchGame(query)
     gameList = gamesearch.scrapeGame(links)
-    print(gameList)
+    for game in gameList:
+        gamesearch.addGame(game)
     '''foundGames = [game for game in Games if isSubstring(game['gameTitle'], query)]
     for game in foundGames:
         game['slug'] = game['ID'] + '_' + game['console']'''

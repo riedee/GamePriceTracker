@@ -2,6 +2,7 @@ import urllib
 import requests
 import bs4
 import json
+import os
 from googlesearch import search
 from bs4 import BeautifulSoup
 
@@ -58,6 +59,10 @@ def scrapeGame(links):
             price = amznScraper.get_price(soup)
             platform = amznScraper.get_platform(soup)
 
+            if platform != "":
+                platform = platform.split(':')[1]
+                platform = platform.split('|')[0]
+
             #remove $ sign, convert to float
             price = price[1:]
             if price != "":
@@ -99,7 +104,14 @@ def scrapeGame(links):
 
 #Given game, add to json
 def addGame(gameDict):
-    with open("allGameData.json", "w") as games:
-        gameJson = json.dumps(gameDict)
-        games.write(gameJson)
-        games.close()
+
+    output = []
+    with open(os.path.dirname(__file__) + '/../games.json', 'r+') as games:
+        #json.dump(gameDict, games, indent=4)
+        #games.write(gamesJson)
+        #games.close()
+        #print(gameDict)
+        g = json.load(games)
+        g.append(gameDict)
+        games.seek(0)
+        json.dump(g, games, indent=4)
