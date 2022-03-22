@@ -27,7 +27,7 @@ def get_price(soup):
 
 def get_platform(soup):
     try:
-        plat = soup.find("div", attrs={'class':'FeaturesList-module__wrapper___uUx0S'}).find_all("div", attrs={'class':'FeaturesList-module__item___19NYe typography-module__xdsTag3___dtX8u'})
+        plat = soup.find("div", attrs={'class':'FeaturesList-module__wrapper___uUx0S'}).find_all("div")
         platform = []
         for p in plat:
             platform.append(p.text)
