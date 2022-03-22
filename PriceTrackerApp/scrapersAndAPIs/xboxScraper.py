@@ -1,6 +1,8 @@
-import bs4
+'''import bs4
+import urllib
+import json
 from urllib.request import urlopen
-from ..models import *
+from ..models import *'''
 
 def get_title(soup): 
     try:
@@ -22,9 +24,20 @@ def get_price(soup):
         price = ""  
  
     return price
-   
 
-urlList = ["https://www.xbox.com/en-US/games/store/nhl-22-xbox-one/9NRDC9PXDQ5N/0010/9R9KBZNPNNHM"]
+def get_platform(soup):
+    try:
+        plat = soup.find("div", attrs={'class':'FeaturesList-module__wrapper___uUx0S'}).find_all("div")
+        platform = []
+        for p in plat:
+            platform.append(p.text)
+   
+    except AttributeError:
+        platform = ""
+
+    return platform
+
+'''urlList = ["https://www.xbox.com/en-US/games/store/nhl-22-xbox-one/9NRDC9PXDQ5N/0010/9R9KBZNPNNHM"]
 
 gameList = []
 
@@ -49,4 +62,4 @@ for i in range(len(urlList)):
 with open("allGameData.json", "w") as f:
     gameJson = json.dumps(gameList)
     f.write(gameJson)
-    f.close
+    f.close'''

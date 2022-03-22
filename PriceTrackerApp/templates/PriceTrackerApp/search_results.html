@@ -2,8 +2,8 @@
 <ul>
   {% for game in games %}
     <li>
-      <a href="{% url 'game' info=game.slug %}">
-        {{ game.gameTitle }}, Vendor: {{game.vendor}}, Price: {{game.price}}, Link: {{game.url}}
+      <a>
+        {{ game.title }}, Vendor: {{game.vendor}}, Price: {{game.price}}, Link: <a href= {{game.url}}>Link</a>, Platform(s): {{game.platform}}
       </a>
     </li>
   {% endfor %}

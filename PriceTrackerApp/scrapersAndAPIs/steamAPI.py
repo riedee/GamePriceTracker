@@ -1,6 +1,6 @@
 import steamspypi
 import json
-from ..models import *
+#from ..models import *
 
 def getGame(url):
     splitUrl = url.split('/')
@@ -9,13 +9,18 @@ def getGame(url):
     data_request['request'] = 'appdetails'
     data_request['appid'] = id
     steamData = steamspypi.download(data_request)
+
     with open("dumped_data.json", "w") as jsonFile:
         json.dump(steamData, jsonFile, indent=4)
+
     f = open("dumped_data.json")
     game = json.load(f)
     gameTitle = game['name']
     gamePrice = game['price']
-    gameID = id
+
+    return (gameTitle, gamePrice, "PC")
+    
+    '''gameID = id
     gameUrl = url
     vendor = Vendor(vendorName = 'Steam')
     vendor.save()
@@ -27,4 +32,4 @@ def getGame(url):
     vendor = Vendor(vendorName = vendorHost, storeFront = "https://store.steampowered.com/")
     vendor.save()
     #game = Game(gameTitle = gameTitle, bestVendor = 'Steam', lowestPrice = gamePrice, url = gameUrl, platform = 'PC', gameID = gameID)
-    #game.save()
+    #game.save()'''

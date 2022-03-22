@@ -1,12 +1,12 @@
 from django.urls import path
 from .views import HomeView, SearchResultsView, GameView, VendorPageView, VendorView, ProfileView, AmazonView, PlayStationView, NintendoView, MicrosoftView, SteamView
-from django.conf.urls import include, url
-from django.urls import re_path as url
+from django.conf.urls import include
+from django.urls import re_path
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    re_path(r'^admin/', admin.site.urls),
     path('search/', SearchResultsView, name='search_results'),
     path('results/<str:info>', GameView, name='game'),
  
