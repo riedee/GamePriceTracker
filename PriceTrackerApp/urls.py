@@ -1,8 +1,7 @@
 from django.urls import path
-from .views import HomeView, SearchResultsView, GameView, VendorPageView, VendorView, ProfileView, AmazonView
-from django.conf.urls import include
-from django.urls import re_path
-from django.contrib import admin
+from .views import HomeView, SearchResultsView, GameView, VendorPageView, VendorView, ProfileView, AmazonView, PlayStationView, NintendoView, MicrosoftView, SteamView
+from django.conf.urls import include, url
+from django.urls import re_path as url
 admin.autodiscover()
 
 urlpatterns = [
@@ -14,6 +13,11 @@ urlpatterns = [
     path('#vendors', VendorPageView.as_view(), name='vendorpage'),
     path('<int:user_id>/profile/', ProfileView, name='profile'),
     path('vendors/amazon/', AmazonView.as_view(), name = 'amazon'),
+    path('vendors/playstation/', PlayStationView.as_view(), name = 'ps'),
+    path('vendors/nintendo/', NintendoView.as_view(), name = 'nintendo'),
+    path('vendors/microsoft/', MicrosoftView.as_view(), name = 'microsoft'),
+    path('vendors/steam/', SteamView.as_view(), name = 'steam'),
+    
     #path('userlist', UserlistView, name='userlist'),
 
 ]
