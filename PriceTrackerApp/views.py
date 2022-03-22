@@ -30,6 +30,9 @@ class NintendoView(TemplateView):
 class MicrosoftView(TemplateView):
 	template_name = 'microsoft.html'
 
+class SteamView(TemplateView):
+	template_name = 'steam.html'
+
 def index(request):
     return HttpResponse("Welcome to Game Price Tracker!")
     
