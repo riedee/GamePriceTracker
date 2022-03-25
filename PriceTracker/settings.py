@@ -133,3 +133,30 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTHENTICATION_BACKENDS = [ #Add
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+]
+
+SOCIALACCOUNT_PROVIDERS = { #Add
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+
+###Use this to determine site id
+#python manage.py shell
+#from django.contrib.sites.models import Site
+#new_site = Site.objects.create(domain='foo.com', name='foo.com')
+#print (new_site.id)
+SITE_ID = 3 #Add
+
+LOGIN_REDIRECT_URL = 'home' #Add
+LOGOUT_REDIRECT_URL = 'home' #Add

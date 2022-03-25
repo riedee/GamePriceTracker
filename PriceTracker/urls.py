@@ -19,8 +19,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from PriceTrackerApp import views as app_views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.views.generic import TemplateView #Add
+from django.contrib.auth.views import LogoutView #Add
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
     path('', include('PriceTrackerApp.urls')),
+    path('', TemplateView.as_view(template_name="home.html"), name='home'), #Add
+    path('accounts/', include('allauth.urls')), #Add
+    path('logout', LogoutView.as_view()), #Add
+    path('accounts/', include('django.contrib.auth.urls')), #Add    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
