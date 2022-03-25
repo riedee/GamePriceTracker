@@ -39,6 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'PriceTrackerApp.apps.PricetrackerappConfig',
     'djmoney',
+    'django.contrib.sites', #Add
+    'allauth', #Add
+    'allauth.account', #Add
+    'allauth.socialaccount', #Add
+    'allauth.socialaccount.providers.google', #Add    
 ]
 
 MIDDLEWARE = [
