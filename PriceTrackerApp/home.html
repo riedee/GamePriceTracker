@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {box-sizing: border-box;}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #e9e9e9;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav b {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: none;
+  text-decoration: none;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #002d62;
+  color: white;
+}
+
+.topnav input[type=text] {
+  float: right;
+  padding: 6px;
+  margin-top: 8px;
+  margin-right: 16px;
+  border: none;
+  font-size: 17px;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav b, .topnav a, .topnav input[type=text] {
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    padding: 14px;
+  }
+  
+  .topnav input[type=text] {
+    border: 1px solid #ccc;  
+  }
+}
+</style>
+</head>
+<body>
+
+<h1>Game Price Tracker</h1>
+
+<div class="topnav">
+  <b href="#logo">
+    <img class="img" src="/Media/img/konamilogo_1.jpg" 
+          style=
+            "object-fit:contain;
+            width:40px;
+            height:auto;
+            margin-top: 5px;
+            margin-right: 5px;
+            margin-left: 5px;"/>
+  </b>
+    <a class="active" href="#home">Home</a>
+    <a href="#games">Games</a>
+    <a href ="#vendors">Vendors</a>
+    <a href ="#profile">Profile</a>
+    <div style="float:right;"><button type="submit" onclick="location.href='login.html'">Log In</button>
+<form align="right" action="{% url 'search_results' %}" method="GET">
+    <input class="Game" type="search" name="search"> 
+    <button class="Game" type="submit"> Search </button>
+</form></div>
+
+</body>
+</html>
