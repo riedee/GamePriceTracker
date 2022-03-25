@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+* {box-sizing: border-box;}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+i {
+	float: left;
+	margin-left: 50px;
+}
+
+.value {
+	margin-left: 592.5px;
+}
+
+#username {
+	height:30px;
+	width: 400px;
+    font-size: 12pt;
+}
+
+#password {
+	height:30px;
+	width: 400px;
+    font-size: 12pt;
+}
+
+.button {
+	margin-top: 20px;
+	margin-left: 600px;
+	width: 25%;
+	padding: 14px;
+	border: 2px solid black;
+	font-size: 17px;
+	line-height: 20px;
+	background-color: #FFF;
+    border-radius: 25px;
+}
+
+.google {
+	padding-right: 50px;
+}
+
+.google:hover {
+	opacity: 0.85;
+	background-color: #ddd;
+}
+
+.fa-google {
+	background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+  	-webkit-background-clip: text;
+  	background-clip: text;
+  	color: transparent;
+  	-webkit-text-fill-color: transparent;
+}
+
+.login {
+	background-color: #002d62;
+	color: white;
+}
+
+.login:hover {
+	opacity: 0.85;
+}
+
+.signup {
+	background-color: #002d62;
+	color: white;
+}
+
+.signup:hover {
+	opacity: 0.85;
+}
+
+
+</style>
+</head>
+
+<body>
+<h1>Game Price Tracker Login</h1>
+<form method="post">
+	<!-- {% csrf_token %} -->
+	<!-- <p> Log in here! </p> -->
+	<p><div class="value"><input type="text" name="username" id="username" placeholder="Username" required></div></p>
+
+	<p><div class="value"><input type="text" name="password" id="password" placeholder="Password" required></div></p>
+
+	<p><button onclick="location.href=''" class="login button">Log in</button></p>
+
+	<p><button onclick="location.href='../../../accounts/google/login/'" class="google button"><i class="fab fa-google fa"></i>Continue with Google</button></p>
+	<p><button onclick="location.href=''" class="signup button">Sign Up</button></p> <!-- onclick="location.href='signup.html'" -->
+	
+</form>
+</body>
+</html>
+
+<!-- No back button protection? -->
