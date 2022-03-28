@@ -13,9 +13,9 @@ from PriceTrackerApp.scrapersAndAPIs import amznScraper, nintendoScraper, steamA
 #Returns list of links with their associated vendor name for a game specified
 def searchGame(query):
     #query should include 'buy', 'purchase', etc. at the end to bring up most useful results
-    query = query + " buy"
+    query = query + " buy"  
     links = []
-    for i in search(query, tld="co.in", num=15, stop=15, pause=3):
+    for i in search(query, tld="co.in", lang="en", num=12, start=0, stop=10, pause=1.5):
         site = i.split(".")
 
         #list of vendors we know how to scrape info from
@@ -56,9 +56,21 @@ def scrapeGame(links):
             platform = amznScraper.get_platform(soup)
 
             #Remove scrap from platform
-            if platform != "":
+            if platform != "Platform Not Found":
                 platform = platform.split(':')[1]
                 platform = platform.split('|')[0]
+                platform = platform.lstrip()
+                platform = platform.rstrip()
+                platform = [platform]
+
+                #Amazon will sometimes include platform name in title - remove
+                p = platform[0].lower()
+                p = ''.join([i for i in p if not i.isdigit()])
+                p = p.strip()
+                p = p.capitalize()
+                title = title.split(p)[0]
+                title = title.rstrip()
+                title = title.lstrip()
 
             #remove $ sign, convert to float
             price = price[1:]
@@ -68,17 +80,27 @@ def scrapeGame(links):
         if vendor == "nintendo":
             title = nintendoScraper.get_title(soup)
             price = nintendoScraper.get_price(soup)
-            platform = nintendoScraper.get_platform(soup)
+            platform = [nintendoScraper.get_platform(soup)]
+
+            #problem with scraping from nintendo
+            if price == "Loading":
+                price = None
 
         if vendor == "steampowered":
             title, price, platform = steamAPI.getGame(url)
             #Steam stores price as integers, convert to float for comparison
-            price = int(price) / 100.0
+            if price:
+                price = int(price) / 100.0
+            else:
+                price = 0.0
 
         if vendor == "xbox":
             title = xboxScraper.get_title(soup)
             price = xboxScraper.get_price(soup)
             platform = xboxScraper.get_platform(soup)
+
+            title = title.rstrip()
+            title = title.lstrip()
 
             #remove $ sign, convert to float
             price = price[1:]
@@ -88,7 +110,7 @@ def scrapeGame(links):
         if vendor == "playstation":
             title = psScraper.get_title(soup)
             price = psScraper.get_price(soup)
-            platform = psScraper.get_platform(soup)
+            platform = [psScraper.get_platform(soup)]
 
             #remove $ sign, convert to float
             price = price[1:]
@@ -100,11 +122,3 @@ def scrapeGame(links):
         gameList.append(gameDict)
 
     return gameList
-
-#Given game, add to json
-def addGame(gameDict):
-    with open(os.path.dirname(__file__) + '/../games.json', 'r+') as games:
-        g = json.load(games)
-        g.append(gameDict)
-        games.seek(0)
-        json.dump(g, games, indent=4)

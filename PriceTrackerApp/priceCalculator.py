@@ -2,26 +2,27 @@ import json
 import os
 from .models import *
 
-file = open(os.path.dirname(__file__) + '/../games.json', 'r')
-content = file.read()
-gameList = json.loads(content)
-gameDict = {}
-for i in range(len(gameList)):
-    currTitle = gameList[i]['title']
-    currVendor = gameList[i]['vendor']
-    currPrice = gameList[i]['price']
-    currUrl = gameList[i]['url']
-    currPlatform = gameList[i]['platform']
-    currGameID = gameList[i]['gameID']
-    if currTitle not in gameDict:
-        gameDict[currTitle] = (currVendor, currPrice, currUrl, currPlatform, currGameID)
-    else:
-        if currPrice < gameDict[currTitle][1]:
-            gameDict[currTitle][0] = currVendor
-            gameDict[currTitle][1] = currPrice
-            gameDict[currTitle][2] = currUrl
+def saveGame(gameList):
+    with open(os.path.dirname(__file__) + '/../games.json') as file:
+        gameDict = json.load(file)
+        
+    for i in range(len(gameList)):
+        currTitle = gameList[i].get('title')
+        currVendor = gameList[i].get('vendor')
+        currPrice = gameList[i].get('price')
+        currUrl = gameList[i].get('url')
+        currPlatform = gameList[i].get('platform')
+        currGameID = gameList[i].get('gameID')
+        if currTitle not in gameDict and currPrice != None:
+            gameDict[currTitle] = gameList[i]
+        else:
+            if currPrice != None and currPrice < gameDict[currTitle].get('price'):
+                gameDict[currTitle] = gameList[i]
+        
+    with open(os.path.dirname(__file__) + '/../games.json', 'w') as file:
+        json.dump(gameDict, file, indent = 4)
 
-for key in gameDict:
-    game = Game(gameTitle = key, bestVendor = gameDict[key][0], lowestPrice = gameDict[key][1], url = gameDict[key][2], platform = gameDict[key][3], gameID = gameDict[key][4])
-    game.save()
+    #for key in gameDict:
+    #    game = Game(gameTitle = key, bestVendor = Vendor(gameDict[key].get('vendor')), lowestPrice = gameDict[key].get('price'), url = gameDict[key].get('url'), platform = gameDict[key].get('platform'), gameID = gameDict[key].get('gameID'))
+    #    game.save()
 

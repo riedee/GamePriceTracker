@@ -18,7 +18,7 @@ def getGame(url):
     gameTitle = game['name']
     gamePrice = game['price']
 
-    return (gameTitle, gamePrice, "PC")
+    return (gameTitle, gamePrice, ["PC"])
     
     '''gameID = id
     gameUrl = url

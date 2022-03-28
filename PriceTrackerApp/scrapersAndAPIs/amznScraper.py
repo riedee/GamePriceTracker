@@ -18,6 +18,8 @@ def get_title(soup):
     except AttributeError:
         title_string = ""   
  
+    title_string = title_string.split(" - ")[0]
+    
     return title_string
 
 def get_price(soup):

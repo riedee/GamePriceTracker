@@ -1,10 +1,132 @@
-[
-    {
-        "name": "Call of Duty",
-        "ID": 1
+{
+    "Red Dead Redemption 2": {
+        "title": "Red Dead Redemption 2",
+        "vendor": "www.amazon.com",
+        "price": 27.98,
+        "url": "https://www.amazon.com/Red-Dead-Redemption-2-PlayStation-4/dp/B01M5DZ525",
+        "platform": [
+            "   PlayStation 4   "
+        ],
+        "gameID": "Red Dead Redemption 2   PlayStation 4   "
     },
-    {
-        "name": "Battleship",
-        "ID": 2
+    "Undertale": {
+        "title": "Undertale",
+        "vendor": "store.steampowered.com",
+        "price": 9.99,
+        "url": "https://store.steampowered.com/app/391540/Undertale/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "UndertalePC"
+    },
+    "Dota 2": {
+        "title": "Dota 2",
+        "vendor": "store.steampowered.com",
+        "price": 0.0,
+        "url": "https://store.steampowered.com/app/570/Dota_2/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "Dota 2PC"
+    },
+    "The Dota 2 Remixes EP": {
+        "title": "The Dota 2 Remixes EP",
+        "vendor": "store.steampowered.com",
+        "price": 0.0,
+        "url": "https://store.steampowered.com/app/652720/The_Dota_2_Remixes_EP/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "The Dota 2 Remixes EPPC"
+    },
+    "Counter-Strike: Global Offensive": {
+        "title": "Counter-Strike: Global Offensive",
+        "vendor": "store.steampowered.com",
+        "price": 0.0,
+        "url": "https://store.steampowered.com/franchise/Dota/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "Counter-Strike: Global OffensivePC"
+    },
+    "Portal 2": {
+        "title": "Portal 2",
+        "vendor": "store.steampowered.com",
+        "price": 1.99,
+        "url": "https://store.steampowered.com/app/620/Portal_2/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": ""
+    },
+    "null": {
+        "title": null,
+        "vendor": "store.steampowered.com",
+        "price": 0.0,
+        "url": "https://store.steampowered.com/bundle/234/Portal_Bundle/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": ""
+    },
+    "Portal: Revolution": {
+        "title": "Portal: Revolution",
+        "vendor": "store.steampowered.com",
+        "price": 0.0,
+        "url": "https://store.steampowered.com/app/601360/Portal_Revolution/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": ""
+    },
+    "The Legend of Zelda: Breath of the Wild": {
+        "title": "The Legend of Zelda: Breath of the Wild",
+        "vendor": "www.amazon.com",
+        "price": 36.0,
+        "url": "https://www.amazon.com/Legend-Zelda-Breath-Wild-Nintendo-Switch/dp/B01MS6MO77",
+        "platform": [
+            "Nintendo Switch"
+        ],
+        "gameID": ""
+    },
+    "Sea of Thieves": {
+        "title": "Sea of Thieves",
+        "vendor": "www.xbox.com",
+        "price": 39.99,
+        "url": "https://www.xbox.com/en-US/games/store/sea-of-thieves/9p2n57mc619k",
+        "platform": [
+            "Xbox One",
+            "Xbox Series X|S",
+            "PC"
+        ],
+        "gameID": ""
+    },
+    "": {
+        "title": "",
+        "vendor": "www.xbox.com",
+        "price": "",
+        "url": "https://www.xbox.com/en-US/games/sea-of-thieves",
+        "platform": "",
+        "gameID": ""
+    },
+    "Phasmophobia": {
+        "title": "Phasmophobia",
+        "vendor": "store.steampowered.com",
+        "price": 13.99,
+        "url": "https://store.steampowered.com/app/739630/Phasmophobia/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": ""
+    },
+    "Pok\u00e9mon Shield": {
+        "title": "Pok\u00e9mon Shield",
+        "vendor": "www.amazon.com",
+        "price": 17.57,
+        "url": "https://www.amazon.com/Pokemon-Shield-Nintendo-Switch/dp/B07P5TL4SH",
+        "platform": [
+            "Nintendo Switch"
+        ],
+        "gameID": ""
     }
-]
+}
