@@ -2,26 +2,44 @@ import json
 import os
 from .models import *
 
-file = open(os.path.dirname(__file__) + '/../games.json', 'r')
-content = file.read()
-gameList = json.loads(content)
-gameDict = {}
-for i in range(len(gameList)):
-    currTitle = gameList[i]['title']
-    currVendor = gameList[i]['vendor']
-    currPrice = gameList[i]['price']
-    currUrl = gameList[i]['url']
-    currPlatform = gameList[i]['platform']
-    currGameID = gameList[i]['gameID']
-    if currTitle not in gameDict:
-        gameDict[currTitle] = (currVendor, currPrice, currUrl, currPlatform, currGameID)
-    else:
-        if currPrice < gameDict[currTitle][1]:
-            gameDict[currTitle][0] = currVendor
-            gameDict[currTitle][1] = currPrice
-            gameDict[currTitle][2] = currUrl
+'''
+This method takes a list of game objects, and compares to currently saved games in the JSON
+(if they exist), and replaces if the price is lower, and/or updates prices
+'''
+def saveGame(gameList):
+    with open(os.path.dirname(__file__) + '/../games.json') as file:
+        gameDict = json.load(file)
+        
+    for i in range(len(gameList)):
+        #get the title, price, and url of the current game in gameList
+        currTitle = gameList[i].get('title')
+        currPrice = gameList[i].get('price')
+        currUrl = gameList[i].get('url')
 
-for key in gameDict:
-    game = Game(gameTitle = key, bestVendor = gameDict[key][0], lowestPrice = gameDict[key][1], url = gameDict[key][2], platform = gameDict[key][3], gameID = gameDict[key][4])
-    game.save()
+        #get all the currently saved games, do a case insensitive comparison
+        #if the current game is not saved, save it
+        games = gameDict.keys()
+        if (all(j.casefold() not in currTitle.casefold() for j in games)):
+            gameDict[currTitle] = gameList[i]
+
+        #else, make sure the currTitle is same as saved title (otherwise key error)
+        else:
+            for j in games:
+                if j.casefold() == currTitle.casefold():
+                    currTitle = j
+            
+            #If the saved url is the same as the current url, update (in case of price changes)
+            if gameDict[currTitle].get('url') == currUrl:
+               gameDict[currTitle] = gameList[i]     
+            #else if the current game price is less than the price of the currently saved game, replace it
+            elif type(currPrice) != str and currPrice < gameDict[currTitle].get('price'):
+                gameDict[currTitle] = gameList[i]
+
+    #save any/all changes  
+    with open(os.path.dirname(__file__) + '/../games.json', 'w') as file:
+        json.dump(gameDict, file, indent = 4)
+
+    #for key in gameDict:
+    #    game = Game(gameTitle = key, bestVendor = Vendor(gameDict[key].get('vendor')), lowestPrice = gameDict[key].get('price'), url = gameDict[key].get('url'), platform = gameDict[key].get('platform'), gameID = gameDict[key].get('gameID'))
+    #    game.save()
 

@@ -4,6 +4,7 @@ from django.views.generic import TemplateView, ListView
 import json
 import os
 from PriceTrackerApp import gamesearch
+from PriceTrackerApp import priceCalculator
 
 #models
 from .models import *
@@ -35,6 +36,9 @@ class MicrosoftView(TemplateView):
 class SteamView(TemplateView):
 	template_name = 'steam.html'
 
+class LoginView(TemplateView):
+    template_name = 'login.html'
+
 def index(request):
     return HttpResponse("Welcome to Game Price Tracker!")
     
@@ -58,14 +62,34 @@ def GameView(request, info):
 
 def SearchResultsView(request):
     query = request.GET['search']
+
+    #query internet for relevant vendor webpages
     links = gamesearch.searchGame(query)
+    #scrape webpages and create game objects
     gameList = gamesearch.scrapeGame(links)
-    for game in gameList:
-        gamesearch.addGame(game)
-    '''foundGames = [game for game in Games if isSubstring(game['gameTitle'], query)]
-    for game in foundGames:
-        game['slug'] = game['ID'] + '_' + game['console']'''
-    context = { 'games' : gameList }
+
+
+    if len(gameList) > 0:
+        #update JSON file of saved games
+        priceCalculator.saveGame(gameList)
+
+        #search JSON for game (take first result from gameList since that's likely to be more accurate result)
+        with open(os.path.dirname(__file__) + '/../games.json') as file:
+            gameDict = json.load(file)
+        
+        title = None
+        for j in gameDict.keys():
+            if j.casefold() == gameList[0].get('title').casefold():
+                title = j
+
+        gameList_sorted = sorted(gameList, key = lambda i:i['price'])
+
+        context = { 'games' : gameList_sorted, 'bestGame' : gameDict[title]}
+
+    #game list is empty - no results found
+    else:
+        context = {}
+
     return render(request, 'search_results.html', context)
 
 def VendorView(request):

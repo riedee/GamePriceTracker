@@ -1,10 +1,165 @@
-[
-    {
-        "name": "Call of Duty",
-        "ID": 1
+{
+    "Red Dead Redemption 2": {
+        "title": "Red Dead Redemption 2",
+        "vendor": "www.amazon.com",
+        "price": 24.99,
+        "url": "https://www.amazon.com/Red-Dead-Redemption-2-PlayStation-4/dp/B01M5DZ525",
+        "platform": [
+            "PlayStation 4"
+        ],
+        "gameID": "reddeadredemption2playstation4"
     },
-    {
-        "name": "Battleship",
-        "ID": 2
+    "Undertale": {
+        "title": "Undertale",
+        "vendor": "store.steampowered.com",
+        "price": 9.99,
+        "url": "https://store.steampowered.com/app/391540/Undertale/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "undertalepc"
+    },
+    "Dota 2": {
+        "title": "Dota 2",
+        "vendor": "store.steampowered.com",
+        "price": 0.0,
+        "url": "https://store.steampowered.com/app/570/Dota_2/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "dota2pc"
+    },
+    "The Dota 2 Remixes EP": {
+        "title": "The Dota 2 Remixes EP",
+        "vendor": "store.steampowered.com",
+        "price": 0.0,
+        "url": "https://store.steampowered.com/app/652720/The_Dota_2_Remixes_EP/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "thedota2remixeseppc"
+    },
+    "Counter-Strike: Global Offensive": {
+        "title": "Counter-Strike: Global Offensive",
+        "vendor": "store.steampowered.com",
+        "price": 0.0,
+        "url": "https://store.steampowered.com/news/app/1245620",
+        "platform": [
+            "PC"
+        ],
+        "gameID": ""
+    },
+    "Portal 2": {
+        "title": "Portal 2",
+        "vendor": "store.steampowered.com",
+        "price": 1.99,
+        "url": "https://store.steampowered.com/app/620/Portal_2/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "portal2pc"
+    },
+    "Portal: Revolution": {
+        "title": "Portal: Revolution",
+        "vendor": "store.steampowered.com",
+        "price": 0.0,
+        "url": "https://store.steampowered.com/app/601360/Portal_Revolution/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "portalrevolutionpc"
+    },
+    "The Legend of Zelda: Breath of the Wild": {
+        "title": "The Legend of Zelda: Breath of the Wild",
+        "vendor": "www.amazon.com",
+        "price": 39.99,
+        "url": "https://www.amazon.com/Legend-Zelda-Breath-Wild-Nintendo-Switch/dp/B01MS6MO77",
+        "platform": [
+            "Nintendo Switch"
+        ],
+        "gameID": "thelegendofzeldabreathofthewildnintendoswitch"
+    },
+    "Sea of Thieves": {
+        "title": "Sea of Thieves",
+        "vendor": "www.xbox.com",
+        "price": 39.99,
+        "url": "https://www.xbox.com/en-US/games/store/sea-of-thieves/9p2n57mc619k",
+        "platform": [
+            "Xbox One",
+            "Xbox Series X|S",
+            "PC"
+        ],
+        "gameID": "seaofthievesxboxone"
+    },
+    "Phasmophobia": {
+        "title": "Phasmophobia",
+        "vendor": "store.steampowered.com",
+        "price": 13.99,
+        "url": "https://store.steampowered.com/app/739630/Phasmophobia/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "phasmophobiapc"
+    },
+    "Pok\u00e9mon Shield": {
+        "title": "Pok\u00e9mon Shield",
+        "vendor": "www.amazon.com",
+        "price": 17.57,
+        "url": "https://www.amazon.com/Pokemon-Shield-Nintendo-Switch/dp/B07P5TL4SH",
+        "platform": [
+            "Nintendo Switch"
+        ],
+        "gameID": "pok\u00e9monshieldnintendoswitch"
+    },
+    "Portal": {
+        "title": "Portal",
+        "vendor": "www.amazon.com",
+        "price": 9.94,
+        "url": "https://www.amazon.com/Portal-PC/dp/B00140P9G0",
+        "platform": [
+            "Windows XP,  Windows 98,  Windows 2000"
+        ],
+        "gameID": ""
+    },
+    "Minecraft": {
+        "title": "Minecraft",
+        "vendor": "www.xbox.com",
+        "price": 19.99,
+        "url": "https://www.xbox.com/en-US/games/store/minecraft/9nblggh537bl",
+        "platform": [
+            "Xbox One",
+            "Xbox Series X|S"
+        ],
+        "gameID": "minecraftxboxone"
+    },
+    "Elden Ring": {
+        "title": "Elden Ring",
+        "vendor": "www.amazon.com",
+        "price": 59.99,
+        "url": "https://www.amazon.com/Elden-Ring-PlayStation-4/dp/B07SPYK271",
+        "platform": [
+            "PlayStation 4"
+        ],
+        "gameID": ""
+    },
+    "DARK SOULS III": {
+        "title": "DARK SOULS III",
+        "vendor": "store.steampowered.com",
+        "price": 59.99,
+        "url": "https://store.steampowered.com/app/374320/DARK_SOULS_III/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": ""
+    },
+    "": {
+        "title": "",
+        "vendor": "store.steampowered.com",
+        "price": 0.0,
+        "url": "https://store.steampowered.com/bundle/234/Portal_Bundle/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "pc"
     }
-]
+}

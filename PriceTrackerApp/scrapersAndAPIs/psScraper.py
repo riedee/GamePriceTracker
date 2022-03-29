@@ -10,7 +10,7 @@ def get_title(soup):
         title_string = soup.find("h1", attrs={'class': 'psw-m-b-5 psw-t-title-l psw-t-size-8 psw-l-line-break-word'}).string.strip()
  
     except AttributeError:
-        title_string = ""   
+        title_string = ""
  
     return title_string
 

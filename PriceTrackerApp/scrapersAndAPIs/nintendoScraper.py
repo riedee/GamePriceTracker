@@ -17,7 +17,7 @@ def get_title(soup):
 
 def get_price(soup):
     try:
-         price = soup.find("span", attrs={'class':'ScreenReaderOnlystyles__StyledReaderText-sc-jiymtq-0 kXOKSo'}).string.strip()
+         price = soup.find("div", attrs={'class':'Pricestyles__PriceWrapper-sc-afjfk5-8 eimTmx'}).string.strip()
   
     except AttributeError:
         price = ""  

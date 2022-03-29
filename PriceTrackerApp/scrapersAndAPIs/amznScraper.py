@@ -14,10 +14,12 @@ def get_title(soup):
  
         # Title as a string value
         title_string = title_value.strip()
+
+        title_string = title_string.split(" - ")[0]
  
     except AttributeError:
         title_string = ""   
- 
+    
     return title_string
 
 def get_price(soup):
