@@ -27,9 +27,31 @@ def searchGame(query):
 
                 #Often empty search results for sites will come up
                 #as well as soundtracks and expansions for the game - remove them
-                banned_keywords = ["search", "recommended", "soundtrack", "expansion", "dlc"]
-                if (all(i not in title for i in banned_keywords)):
-                    links.append((i, site[1]))
+                banned_keywords = ["search", "recommended", "soundtrack", "expansion", "dlc", "bundle"]
+
+                if j != "amazon":
+                    if (all(i not in title for i in banned_keywords)):
+                        links.append((i, site[1]))
+                #if the website is amazon, but sure result is from 'video games' category
+                else:
+                    headers = headers = { 
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', 
+                    'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 
+                    'Accept-Language' : 'en-US,en;q=0.5',
+                    'Accept-Encoding' : 'gzip', 
+                    'DNT' : '1', # Do Not Track Request Header 
+                    'Connection' : 'close'
+                    }
+                    page = requests.get(i, headers=headers)
+                    soup  = bs4.BeautifulSoup(page.content, "html.parser")
+
+                    category = soup.find("a", attrs={'class' : 'a-link-normal a-color-tertiary'}).string.strip()
+
+                    if category == "Video Games":
+                        if (all(i not in title for i in banned_keywords)):
+                            links.append((i, site[1]))
+
+
 
     return links
 
@@ -76,18 +98,26 @@ def scrapeGame(links):
             price = price[1:]
             if price != "":
                 price = float(price)
+            else:
+                price = float('inf')
 
         if vendor == "nintendo":
             title = nintendoScraper.get_title(soup)
             price = nintendoScraper.get_price(soup)
             platform = [nintendoScraper.get_platform(soup)]
 
+            #get rid of TM symbol
+            title = title.replace(u"\u2122", '')
+
             #problem with scraping from nintendo
-            if price == "Loading":
-                price = None
+            if price != "":
+                price = float(price)
+            else:
+                price = float('inf')
 
         if vendor == "steampowered":
             title, price, platform = steamAPI.getGame(url)
+
             #Steam stores price as integers, convert to float for comparison
             if price:
                 price = int(price) / 100.0
@@ -106,6 +136,8 @@ def scrapeGame(links):
             price = price[1:]
             if price != "":
                 price = float(price)
+            else:
+                price = float('inf')
 
         if vendor == "playstation":
             title = psScraper.get_title(soup)
@@ -116,8 +148,18 @@ def scrapeGame(links):
             price = price[1:]
             if price != "":
                 price = float(price)
+            else:
+                price = float('inf')
 
-        gameID = ""
+        if title == None:
+            title = ""
+
+        if len(platform) > 0:
+            gameID = title + platform[0]
+            gameID = gameID.lower().replace(" ", "")
+            gameID = ''.join(filter(str.isalnum, gameID))
+        else:
+            gameID = title
         gameDict = {'title': title, 'vendor': vendorHost, 'price': price, 'url': url, 'platform': platform, 'gameID': gameID}
         gameList.append(gameDict)
 

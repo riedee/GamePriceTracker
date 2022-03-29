@@ -2,23 +2,40 @@ import json
 import os
 from .models import *
 
+'''
+This method takes a list of game objects, and compares to currently saved games in the JSON
+(if they exist), and replaces if the price is lower, and/or updates prices
+'''
 def saveGame(gameList):
     with open(os.path.dirname(__file__) + '/../games.json') as file:
         gameDict = json.load(file)
         
     for i in range(len(gameList)):
+        #get the title, price, and url of the current game in gameList
         currTitle = gameList[i].get('title')
-        currVendor = gameList[i].get('vendor')
         currPrice = gameList[i].get('price')
         currUrl = gameList[i].get('url')
-        currPlatform = gameList[i].get('platform')
-        currGameID = gameList[i].get('gameID')
-        if currTitle not in gameDict and currPrice != None:
+
+        #get all the currently saved games, do a case insensitive comparison
+        #if the current game is not saved, save it
+        games = gameDict.keys()
+        if (all(j.casefold() not in currTitle.casefold() for j in games)):
             gameDict[currTitle] = gameList[i]
+
+        #else, make sure the currTitle is same as saved title (otherwise key error)
         else:
-            if currPrice != None and currPrice < gameDict[currTitle].get('price'):
+            for j in games:
+                if j.casefold() == currTitle.casefold():
+                    currTitle = j
+            
+            #If the saved url is the same as the current url, update (in case of price changes)
+            if gameDict[currTitle].get('url') == currUrl:
+               gameDict[currTitle] = gameList[i]     
+            #else if the current game price is less than the price of the currently saved game, replace it
+            elif type(currPrice) != str and currPrice < gameDict[currTitle].get('price'):
                 gameDict[currTitle] = gameList[i]
-        
+
+    #save any/all changes  
     with open(os.path.dirname(__file__) + '/../games.json', 'w') as file:
         json.dump(gameDict, file, indent = 4)
 
