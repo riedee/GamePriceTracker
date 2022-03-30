@@ -85,18 +85,20 @@ i {
 
 <body>
 <h1>Game Price Tracker Login</h1>
-<form method="post">
-	<!-- {% csrf_token %} -->
+<form method="post" action="{% url 'login' %}">
+	{% csrf_token %}
 	<!-- <p> Log in here! </p> -->
-	<p><div class="value"><input type="text" name="username" id="username" placeholder="Username" required></div></p>
+	<p><div class="value"><input type="text" name="username" id="username" placeholder="Username" required>{{ form.username }}</div></p>
 
-	<p><div class="value"><input type="text" name="password" id="password" placeholder="Password" required></div></p>
-
-	<p><button onclick="location.href=''" class="login button">Log in</button></p>
-
-	<p><button onclick="location.href='../../../accounts/google/login/'" class="google button"><i class="fab fa-google fa"></i>Continue with Google</button></p>
-	<p><button onclick="location.href=''" class="signup button">Sign Up</button></p> <!-- onclick="location.href='signup.html'" -->
+	<p><div class="value"><input type="text" name="password" id="password" placeholder="Password" required>{{ form.password }}</div></p>
+	<input type="submit" class="login button" value="login" />
+	<input type="hidden" name="next" value="{{ next }}" />
+	<p><button onclick="location.href='{% url 'register'%}'" class="signup button">Sign Up</button></p> <!-- onclick="location.href='signup.html'" -->
 	
+</form>
+<form method="post">
+	{% csrf_token %}
+	<p><button onclick="location.href='../../../accounts/google/login/'" class="google button"><i class="fab fa-google fa"></i>Continue with Google</button></p>	
 </form>
 </body>
 </html>
