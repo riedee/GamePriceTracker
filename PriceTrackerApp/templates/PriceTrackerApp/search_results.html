@@ -1,4 +1,5 @@
 <h1>Search Results</h1>
+{% if bestGame %}
 <h3>Best Game</h3>
   <a>
     {{ bestGame.title }}, Vendor: {{bestGame.vendor}}, Price: {{bestGame.price}}, Link: <a href= {{bestGame.url}}>Link</a>, Platform(s): {{bestGame.platform}}
@@ -19,3 +20,6 @@
       </li>
     {% endfor %}
   </ul>
+{% else %}
+<h3> No Results Found </h3>
+{% endif %}
