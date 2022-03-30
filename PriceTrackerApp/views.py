@@ -114,9 +114,9 @@ def ProfileView(request, user_id):
         uid = User.objects.get(pk=user_id)
     except ObjectDoesNotExist:
         return HttpResponse("The user_id given does not match any user_id in the system")
+    data = Profile(user_id=uid, username = uid.username, email = uid.email, fn = uid.first_name, ln = uid.last_name)
     if uid.id != request.user.id:
         return HttpResponse("You are not authenticated as desired user profile")
-    data = Profile(user_id=uid, username = uid.username, email = uid.email, fn = uid.first_name, ln = uid.last_name)
     context = {'user_id': uid,
             'data': data,
             'assigned': uid,
@@ -137,4 +137,8 @@ def RegisterView(request):
         form = RegistrationForm()
     return render(request, 'registration/register.html', {'form': form})
 
-
+def UserDirectoryView(request):
+	data = User.objects.all()
+	context = {'data': data,
+	}
+	return render(request, "PriceTrackerApp/userdirectory.html", context)

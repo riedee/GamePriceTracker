@@ -1,5 +1,5 @@
 from django.urls import include, path
-from .views import HomeView, SearchResultsView, GameView, VendorPageView, ProfileView, RegisterView, AmazonView, PlayStationView, NintendoView, MicrosoftView, SteamView, LoginView, DirectoryView, GameHomeView
+from .views import HomeView, UserDirectoryView, SearchResultsView, GameView, VendorPageView, ProfileView, RegisterView, AmazonView, PlayStationView, NintendoView, MicrosoftView, SteamView, LoginView, DirectoryView, GameHomeView
 from django.conf.urls import include
 from django.urls import re_path
 from django.contrib import admin
@@ -22,8 +22,7 @@ urlpatterns = [
     path('vendors/microsoft/', MicrosoftView.as_view(), name = 'microsoft'),
     path('vendors/steam/', SteamView.as_view(), name = 'steam'),
     path('accounts/', include('django.contrib.auth.urls')),
-    
-    #path('userlist', UserlistView, name='userlist'),
+    path('directory/', UserDirectoryView, name='userdirectory'),
 
 ]
 
