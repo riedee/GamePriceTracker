@@ -152,14 +152,189 @@
         ],
         "gameID": ""
     },
-    "": {
-        "title": "",
+    "Fall Guys: Ultimate Knockout": {
+        "title": "Fall Guys: Ultimate Knockout",
         "vendor": "store.steampowered.com",
-        "price": 0.0,
-        "url": "https://store.steampowered.com/bundle/234/Portal_Bundle/",
+        "price": 19.99,
+        "url": "https://store.steampowered.com/app/1097150/Fall_Guys_Ultimate_Knockout/",
         "platform": [
             "PC"
         ],
-        "gameID": "pc"
+        "gameID": "fallguysultimateknockoutpc"
+    },
+    "Fall Guys: Collectors Pack": {
+        "title": "Fall Guys: Collectors Pack",
+        "vendor": "store.steampowered.com",
+        "price": 10.0,
+        "url": "https://store.steampowered.com/app/1343612/Fall_Guys_Collectors_Pack/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "fallguyscollectorspackpc"
+    },
+    "FIFA 22": {
+        "title": "FIFA 22",
+        "vendor": "www.amazon.com",
+        "price": 20.13,
+        "url": "https://www.amazon.com/FIFA-22-PlayStation-4/dp/B098KVCFM8",
+        "platform": [
+            "PlayStation 4"
+        ],
+        "gameID": "fifa22playstation4"
+    },
+    "Forza Horizon 5": {
+        "title": "Forza Horizon 5",
+        "vendor": "store.steampowered.com",
+        "price": 59.99,
+        "url": "https://store.steampowered.com/app/1551360/Forza_Horizon_5/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "forzahorizon5pc"
+    },
+    "Forza Horizon 5 2019 SUBARU STI S209": {
+        "title": "Forza Horizon 5 2019 SUBARU STI S209",
+        "vendor": "store.steampowered.com",
+        "price": 2.99,
+        "url": "https://store.steampowered.com/app/1764060/Forza_Horizon_5_2019_SUBARU_STI_S209/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "forzahorizon52019subarustis209pc"
+    },
+    "Forza Horizon 5 1979 Lamborghini Espada 400 GT": {
+        "title": "Forza Horizon 5 1979 Lamborghini Espada 400 GT",
+        "vendor": "store.steampowered.com",
+        "price": 2.99,
+        "url": "https://store.steampowered.com/app/1812152/Forza_Horizon_5_1979_Lamborghini_Espada_400_GT/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "forzahorizon51979lamborghiniespada400gtpc"
+    },
+    "Forza Horizon 5 Car Pass": {
+        "title": "Forza Horizon 5 Car Pass",
+        "vendor": "store.steampowered.com",
+        "price": 29.99,
+        "url": "https://store.steampowered.com/app/1648020/Forza_Horizon_5_Car_Pass/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "forzahorizon5carpasspc"
+    },
+    "Resident Evil Village": {
+        "title": "Resident Evil Village",
+        "vendor": "store.playstation.com",
+        "price": 29.99,
+        "url": "https://store.playstation.com/en-us/product/UP0102-PPSA01556_00-VILLAGEFULLGAMEX",
+        "platform": [
+            "PS4, PS5"
+        ],
+        "gameID": "residentevilvillageps4ps5"
+    },
+    "Halo Infinite": {
+        "title": "Halo Infinite",
+        "vendor": "store.steampowered.com",
+        "price": 0.0,
+        "url": "https://store.steampowered.com/app/1240440/Halo_Infinite/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "haloinfinitepc"
+    },
+    "1,000 Halo Credits": {
+        "title": "1,000 Halo Credits",
+        "vendor": "www.xbox.com",
+        "price": 9.99,
+        "url": "https://www.xbox.com/en-US/games/store/1000-halo-credits/9NVMHSH9C861",
+        "platform": [
+            "PC",
+            "Xbox One",
+            "Xbox Series X|S"
+        ],
+        "gameID": "1000halocreditspc"
+    },
+    "2,000 Halo Credits +200 Bonus": {
+        "title": "2,000 Halo Credits +200 Bonus",
+        "vendor": "www.xbox.com",
+        "price": 19.99,
+        "url": "https://www.xbox.com/en-US/games/store/2000-halo-credits-200-bonus/9pcvvjg31sn6",
+        "platform": [
+            "PC",
+            "Xbox One",
+            "Xbox Series X|S"
+        ],
+        "gameID": "2000halocredits200bonuspc"
+    },
+    "Halo Infinite (Campaign)": {
+        "title": "Halo Infinite (Campaign)",
+        "vendor": "store.steampowered.com",
+        "price": 59.99,
+        "url": "https://store.steampowered.com/app/1708091/Halo_Infinite_Campaign/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "haloinfinitecampaignpc"
+    },
+    "Super Mario 3D World + Bowser's Fury": {
+        "title": "Super Mario 3D World + Bowser's Fury",
+        "vendor": "www.amazon.com",
+        "price": 17.32,
+        "url": "https://www.amazon.com/Super-Mario-3D-World-Bowsers-Fury/dp/B08H9M7LDY",
+        "platform": [
+            "Nintendo Switch"
+        ],
+        "gameID": "supermario3dworldbowsersfurynintendoswitch"
+    },
+    "Super Mario 3D World + Bowser\u2019s Fury": {
+        "title": "Super Mario 3D World + Bowser\u2019s Fury",
+        "vendor": "www.amazon.com",
+        "price": 59.99,
+        "url": "https://www.amazon.com/Super-Mario-World-Bowsers-Fury/dp/B08JCZKTQW",
+        "platform": [
+            "Nintendo Switch"
+        ],
+        "gameID": "supermario3dworldbowsersfurynintendoswitch"
+    },
+    "Super Mario 3D World + Bowser's Fury (Nintendo Switch)": {
+        "title": "Super Mario 3D World + Bowser's Fury (Nintendo Switch)",
+        "vendor": "www.amazon.com",
+        "price": 53.44,
+        "url": "https://www.amazon.com/Super-Mario-World-Bowsers-Nintendo-Switch/dp/B08HJXRB1K",
+        "platform": [
+            "Nintendo Switch"
+        ],
+        "gameID": "supermario3dworldbowsersfurynintendoswitchnintendoswitch"
+    },
+    "New Super Mario Bros. U Deluxe (Nintendo Switch)": {
+        "title": "New Super Mario Bros. U Deluxe (Nintendo Switch)",
+        "vendor": "www.amazon.com",
+        "price": 53.95,
+        "url": "https://www.amazon.com/Super-Mario-Bros-Deluxe-Nintendo-Switch/dp/B07HHN42WK",
+        "platform": [
+            "Nintendo Switch"
+        ],
+        "gameID": "newsupermariobrosudeluxenintendoswitchnintendoswitch"
+    },
+    "Battlefield 2042": {
+        "title": "Battlefield 2042",
+        "vendor": "store.steampowered.com",
+        "price": 59.99,
+        "url": "https://store.steampowered.com/app/1517290/Battlefield_2042/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "battlefield2042pc"
+    },
+    "Battlefield 2042 Xbox One": {
+        "title": "Battlefield 2042 Xbox One",
+        "vendor": "www.xbox.com",
+        "price": 59.99,
+        "url": "https://www.xbox.com/en-US/games/store/battlefield-2042-xbox-one/9pd5bfnz4v7k",
+        "platform": [
+            "Xbox One",
+            "Xbox Series X|S"
+        ],
+        "gameID": "battlefield2042xboxonexboxone"
     }
 }

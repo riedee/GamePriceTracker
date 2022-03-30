@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.core.exceptions import ObjectDoesNotExist
 from PriceTrackerApp.forms import RegistrationForm
 import json
 import os
@@ -43,6 +44,12 @@ class SteamView(TemplateView):
 
 class LoginView(TemplateView):
     template_name = 'login.html'
+
+class DirectoryView(TemplateView):
+    template_name = 'userdirectory.html'
+
+class GameHomeView(TemplateView):
+    template_name = 'gamepage.html'
 
 def index(request):
     return HttpResponse("Welcome to Game Price Tracker!")
