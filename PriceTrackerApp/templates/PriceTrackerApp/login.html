@@ -87,7 +87,6 @@ i {
 <h1>Game Price Tracker Login</h1>
 <form method="post" action="{% url 'login' %}">
 	{% csrf_token %}
-	<!-- <p> Log in here! </p> -->
 	<p><div class="value"><input type="text" name="username" id="username" placeholder="Username" required>{{ form.username }}</div></p>
 
 	<p><div class="value"><input type="text" name="password" id="password" placeholder="Password" required>{{ form.password }}</div></p>
@@ -97,7 +96,7 @@ i {
 	
 </form>
 <form method="post">
-	{% csrf_token %}
+	<p><div class="value" style="display: none;"><input type="text" name="password" id="password" placeholder="Password" required></div></p>
 	<p><button onclick="location.href='../../../accounts/google/login/'" class="google button"><i class="fab fa-google fa"></i>Continue with Google</button></p>	
 </form>
 </body>
