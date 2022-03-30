@@ -77,6 +77,9 @@ def scrapeGame(links):
             price = amznScraper.get_price(soup)
             platform = amznScraper.get_platform(soup)
 
+            #get rid of TM symbol
+            title = title.replace(u"\u2122", '')
+
             #Remove scrap from platform
             if platform != "Platform Not Found":
                 platform = platform.split(':')[1]
@@ -96,9 +99,9 @@ def scrapeGame(links):
 
             #remove $ sign, convert to float
             price = price[1:]
-            if price != "":
+            try:
                 price = float(price)
-            else:
+            except:
                 price = float('inf')
 
         if vendor == "nintendo":
@@ -110,13 +113,16 @@ def scrapeGame(links):
             title = title.replace(u"\u2122", '')
 
             #problem with scraping from nintendo
-            if price != "":
+            try:
                 price = float(price)
-            else:
+            except:
                 price = float('inf')
 
         if vendor == "steampowered":
             title, price, platform = steamAPI.getGame(url)
+
+            #get rid of TM symbol
+            title = title.replace(u"\u2122", '')
 
             #Steam stores price as integers, convert to float for comparison
             if price:
@@ -132,11 +138,18 @@ def scrapeGame(links):
             title = title.rstrip()
             title = title.lstrip()
 
+            #get rid of TM symbol
+            title = title.replace(u"\u2122", '')
+
             #remove $ sign, convert to float
             price = price[1:]
-            if price != "":
+            '''if price != "":
                 price = float(price)
             else:
+                price = float('inf')'''
+            try:
+                price = float(price)
+            except:
                 price = float('inf')
 
         if vendor == "playstation":
@@ -144,23 +157,30 @@ def scrapeGame(links):
             price = psScraper.get_price(soup)
             platform = [psScraper.get_platform(soup)]
 
+            #get rid of TM symbol
+            title = title.replace(u"\u2122", '')
+
+            #get rid of console specific
+            title = title.split(' PS')[0]
+
             #remove $ sign, convert to float
             price = price[1:]
-            if price != "":
+            try:
                 price = float(price)
-            else:
+            except:
                 price = float('inf')
 
-        if title == None:
-            title = ""
+        #if title == None:
+        #    title = ""
 
-        if len(platform) > 0:
-            gameID = title + platform[0]
-            gameID = gameID.lower().replace(" ", "")
-            gameID = ''.join(filter(str.isalnum, gameID))
-        else:
-            gameID = title
-        gameDict = {'title': title, 'vendor': vendorHost, 'price': price, 'url': url, 'platform': platform, 'gameID': gameID}
-        gameList.append(gameDict)
+        if title != None and title != "":
+            if len(platform) > 0:
+                gameID = title + platform[0]
+                gameID = gameID.lower().replace(" ", "")
+                gameID = ''.join(filter(str.isalnum, gameID))
+            else:
+                gameID = title
+            gameDict = {'title': title, 'vendor': vendorHost, 'price': price, 'url': url, 'platform': platform, 'gameID': gameID}
+            gameList.append(gameDict)
 
     return gameList
