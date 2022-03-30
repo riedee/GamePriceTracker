@@ -1,6 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.core.exceptions import ObjectDoesNotExist
+from PriceTrackerApp.forms import RegistrationForm
 import json
 import os
 from PriceTrackerApp import gamesearch
@@ -15,8 +19,10 @@ with open(os.path.dirname(__file__) + '/../games.json', 'r') as f:
 def isSubstring(value, substring):
     return substring.lower() in value.lower()
 
-class HomeView(TemplateView):
-	template_name = 'home.html'
+def HomeView(request):
+    print(request.user.username)
+    username = request.user.username if request.user.is_authenticated else ''
+    return render(request, 'home.html', {'username' : username})
 	
 class VendorPageView(TemplateView):
 	template_name = 'vendorpage.html'
@@ -38,6 +44,12 @@ class SteamView(TemplateView):
 
 class LoginView(TemplateView):
     template_name = 'login.html'
+
+class DirectoryView(TemplateView):
+    template_name = 'userdirectory.html'
+
+class GameHomeView(TemplateView):
+    template_name = 'gamepage.html'
 
 def index(request):
     return HttpResponse("Welcome to Game Price Tracker!")
@@ -108,3 +120,19 @@ def ProfileView(request, user_id):
             'assigned': uid,
             }
     return render(request, "PriceTrackerApp/profile.html", context)
+
+def RegisterView(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('home')
+    else:
+        form = RegistrationForm()
+    return render(request, 'registration/register.html', {'form': form})
+
+
