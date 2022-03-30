@@ -74,7 +74,6 @@ def GameView(request, info):
 
 def SearchResultsView(request):
     query = request.GET['search']
-    print('QUERY: ' + query)
 
     #query internet for relevant vendor webpages
     links = gamesearch.searchGame(query)
