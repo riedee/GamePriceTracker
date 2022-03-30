@@ -19,7 +19,7 @@ def saveGame(gameList):
         #get all the currently saved games, do a case insensitive comparison
         #if the current game is not saved, save it
         games = gameDict.keys()
-        if (all(j.casefold() not in currTitle.casefold() for j in games)):
+        if (all(j.casefold() != currTitle.casefold() for j in games)):
             gameDict[currTitle] = gameList[i]
 
         #else, make sure the currTitle is same as saved title (otherwise key error)

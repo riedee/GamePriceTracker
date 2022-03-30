@@ -27,7 +27,7 @@ def searchGame(query):
 
                 #Often empty search results for sites will come up
                 #as well as soundtracks and expansions for the game - remove them
-                banned_keywords = ["search", "recommended", "soundtrack", "expansion", "dlc", "bundle"]
+                banned_keywords = ["search", "recommended", "soundtrack", "expansion", "dlc", "bundle", "collector's"]
 
                 if j != "amazon":
                     if (all(i not in title for i in banned_keywords)):
