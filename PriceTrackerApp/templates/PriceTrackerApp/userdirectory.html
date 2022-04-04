@@ -12,8 +12,7 @@ table,th,td{
 
 </style>
 </html>
-{% if data %}
-{% if user.is_superuser %}
+{% if request.user.is_superuser %}
 <h2>User Directory</h2>
     <table style="width:100%">
     <tr style="background-color:#002D62;color:white;">
@@ -31,7 +30,6 @@ table,th,td{
     {% endfor %}
     </table>
 {% else %}
-    <p>Not logged in</p>
-{% endif %}
+    <p>Not logged in or not a superuser</p>
 {% endif %}
 {% endblock %}

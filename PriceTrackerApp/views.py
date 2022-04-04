@@ -5,6 +5,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ObjectDoesNotExist
 from PriceTrackerApp.forms import RegistrationForm
+from django.contrib.auth.decorators import user_passes_test
 import json
 import os
 from PriceTrackerApp import gamesearch
