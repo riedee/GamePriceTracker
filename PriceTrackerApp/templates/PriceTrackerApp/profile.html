@@ -74,13 +74,21 @@
                                             </div>
                                         </div>
                                         </div>
-                      {% if game %} 
+                      {% if data.saved_game %} 
 					<div class="row">
                                    <div class="col-md-6">
                                       <label>Games</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p></p>
+                                                <p>
+                                                    {% for game in data.saved_game %}
+                                                    <li>
+                                                        <a>
+                                                            {{game}}
+                                                        </a>
+                                                    </li>
+                                                    {% endfor %}
+                                                </p>
                                             </div>
                                         </div>
                              {% else %}

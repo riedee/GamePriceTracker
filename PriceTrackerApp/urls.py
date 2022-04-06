@@ -1,5 +1,5 @@
 from django.urls import include, path
-from .views import HomeView, UserDirectoryView, SearchResultsView, GameView, VendorPageView, ProfileView, RegisterView, AmazonView, PlayStationView, NintendoView, MicrosoftView, SteamView, LoginView, DirectoryView, GameHomeView
+from .views import FavGameView, HomeView, UserDirectoryView, SearchResultsView, GameView, VendorPageView, ProfileView, RegisterView, AmazonView, PlayStationView, NintendoView, MicrosoftView, SteamView, LoginView, DirectoryView, GameHomeView, favGame
 from django.conf.urls import include
 from django.urls import re_path
 from django.contrib import admin
@@ -14,6 +14,7 @@ urlpatterns = [
     path('login', LoginView.as_view(), name='login'),
     path('home', HomeView, name='home'),
     path('vendors', VendorPageView.as_view(), name='vendorpage'),
+    path('favorite', favGame, name="python_file"),
     path('profile', DirectoryView.as_view(), name='directory'),
     path('<int:user_id>/profile/', ProfileView, name='profile'),
     path('vendors/amazon/', AmazonView.as_view(), name = 'amazon'),

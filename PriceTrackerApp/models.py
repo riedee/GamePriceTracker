@@ -2,6 +2,8 @@ from django.db import models
 from djmoney.models.fields import MoneyField
 from userapp import *
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 class Vendor(models.Model):
@@ -52,11 +54,22 @@ class UserGame(models.Model):
     
 #Profile information of user
 class Profile(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE,default=0)
+    user_id = models.OneToOneField(User, on_delete=models.CASCADE)
     username = models.CharField(max_length=40,default='')
     email = models.CharField(max_length=120,default='')
     fn = models.CharField(max_length=120,default='')
     ln = models.CharField(max_length=120,default='')
+    saved_game = models.CharField(max_length=120, default='')
     
     def __str__(self):
-        return str(self.user_id) + ', ' + str(self.username)
+        return self.user_id.username
+
+#NOTE: will only proc when adding new users to the database, i.e. existing users do not have profiles
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user_id=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
