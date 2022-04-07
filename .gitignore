@@ -1,0 +1,6 @@
+.google-cookie
+dumped_data.json
+.env
+venv/
+static/
+var/
