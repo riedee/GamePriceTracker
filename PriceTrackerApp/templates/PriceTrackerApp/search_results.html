@@ -1,16 +1,16 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <h1>Search Results</h1>
 <h3>Filter</h3>
-<div>
-  <form>
-    <label for="PC">PC</label>
-    <input id="PC" name="PC" type="checkbox" onchange="test()" checked>
-  </form>
-</div>
-<div>
-  <label for="Xbox">Xbox</label>
-  <input id="Xbox" name="Xbox" type="checkbox" checked>
-</div>
+
+<label for="PC">PC</label>
+<input id="PC" name="PC" type="checkbox" onchange="filterPC()" checked>
+<label for="Xbox">Xbox</label>
+<input id="Xbox" name="Xbox" type="checkbox" onchange="filterXbox()" checked>
+<label for="Playstation">Playstation</label>
+<input id="Playstation" name="Playstation" type="checkbox" onchange="filterPS()" checked>
+<label for="Nintendo">Nintendo</label>
+<input id="Nintendo" name="Nintendo" type="checkbox" onchange="filterNintendo()" checked>
+
 {% if bestGame %}
 <h3>Best Game</h3>
   <a>
@@ -48,7 +48,16 @@
       }
     });
   }
-  function test() {
+  function filterPC() {
+    console.log("test");
+  }
+  function filterXbox() {
+    console.log("test");
+  }
+  function filterPS() {
+    console.log("test");
+  }
+  function filterNintendo() {
     console.log("test");
   }
 </script>
