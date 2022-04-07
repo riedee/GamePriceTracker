@@ -14,9 +14,6 @@ from PriceTrackerApp import priceCalculator
 #models
 from .models import *
 
-with open(os.path.dirname(__file__) + '/../games.json', 'r') as f:
-    Games = json.load(f)
-
 def isSubstring(value, substring):
     return substring.lower() in value.lower()
 
@@ -55,6 +52,12 @@ class GameHomeView(TemplateView):
 def index(request):
     return HttpResponse("Welcome to Game Price Tracker!")
 
+#Favorite game without reloading search result page
+def FavGameView(request):
+    context = {}
+    return render(request, 'search_results.html', context)
+
+#Process a user favoriting a game
 def favGame(request):
     game_title = request.POST['info']
     user_id = request.POST['user_id']
@@ -77,34 +80,19 @@ def favGame(request):
 
     return HttpResponse("Added game to saved games")
 
-'''def search(request):                  
-    context = {
-
-                    }
-    return render(request, 'PriceTrackerApp/search_results.html', context)'''
-
-def GameView(request, info):
-    '''info = info.split('_')
-    id = info[0]
-    console = info[1]
-    game = [game for game in Games if game['ID'] == id if game['console'] == console]
-    if len(game):
-        game = game[0]
-        context = { 'game': game }
-        return render(request, 'PriceTrackerApp/results/'+info, context)'''
-    
+def GameView(request, info):   
     with open(os.path.dirname(__file__) + '/../games.json') as file:
             gameDict = json.load(file)
 
-    #game = gameDict[info]
-    game = get_object_or_404(Game, gameTitle=info)
-    print(game.gameTitle)
-    context = {'game': game}
+    try:
+        game = get_object_or_404(Game, gameTitle=info)
+        context = {'game': game}
     
-    return render(request,'PriceTrackerApp/game.html', context)
+        return render(request,'PriceTrackerApp/game.html', context)
+    except:
+        return HttpResponse("Game not found")
 
-    #return HttpResponse("Game not found")
-
+#Process a search query
 def SearchResultsView(request):
     query = request.GET['search']
 
@@ -146,10 +134,6 @@ def GameViewAll(request):
     data = Game.objects.all()
     context = {'games': data}
     return render(request, 'gamepage.html', context)
-
-def FavGameView(request):
-    context = {}
-    return render(request, 'search_results.html', context)
 
 def VendorView(request):
 	return 0

@@ -40,6 +40,7 @@ def saveGame(gameList):
         json.dump(gameDict, file, indent = 4)
 
     for key in gameDict:
-        game = Game.objects.create(gameTitle = key, bestVendor = gameDict[key].get('vendor'), lowestPrice = gameDict[key].get('price'), url = gameDict[key].get('url'), platform = gameDict[key].get('platform'), gameID = gameDict[key].get('gameID'))
-        game.save()
+        game = Game(gameTitle = key, bestVendor = gameDict[key].get('vendor'), lowestPrice = gameDict[key].get('price'), url = gameDict[key].get('url'), platform = gameDict[key].get('platform'), gameID = gameDict[key].get('gameID'))
+        Game.objects.update_or_create(gameTitle=game.gameTitle)  
+        #game.save()
 

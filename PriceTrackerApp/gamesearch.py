@@ -46,7 +46,11 @@ def searchGame(query):
                     page = requests.get(i, headers=headers)
                     soup  = bs4.BeautifulSoup(page.content, "html.parser")
 
-                    category = soup.find("a", attrs={'class' : 'a-link-normal a-color-tertiary'}).string.strip()
+                    try:
+                        category = soup.find("a", attrs={'class' : 'a-link-normal a-color-tertiary'}).string.strip()
+                    except AttributeError:
+                        catgory = ""
+
 
                     if category == "Video Games":
                         if (all(i not in title for i in banned_keywords)):
@@ -78,9 +82,6 @@ def scrapeGame(links):
             price = amznScraper.get_price(soup)
             platform = amznScraper.get_platform(soup)
 
-            #get rid of TM symbol
-            title = title.replace(u"\u2122", '')
-
             #Remove scrap from platform
             if platform != "Platform Not Found":
                 platform = platform.split(':')[1]
@@ -110,9 +111,6 @@ def scrapeGame(links):
             price = nintendoScraper.get_price(soup)
             platform = [nintendoScraper.get_platform(soup)]
 
-            #get rid of TM symbol
-            title = title.replace(u"\u2122", '')
-
             #problem with scraping from nintendo
             try:
                 price = float(price)
@@ -121,9 +119,6 @@ def scrapeGame(links):
 
         if vendor == "steampowered":
             title, price, platform = steamAPI.getGame(url)
-
-            #get rid of TM symbol
-            title = title.replace(u"\u2122", '')
 
             #Steam stores price as integers, convert to float for comparison
             if price:
@@ -139,15 +134,8 @@ def scrapeGame(links):
             title = title.rstrip()
             title = title.lstrip()
 
-            #get rid of TM symbol
-            title = title.replace(u"\u2122", '')
-
             #remove $ sign, convert to float
             price = price[1:]
-            '''if price != "":
-                price = float(price)
-            else:
-                price = float('inf')'''
             try:
                 price = float(price)
             except:
@@ -166,8 +154,9 @@ def scrapeGame(links):
                 price = float('inf')
 
         if title != None and title != "":
-            #get rid of TM symbol
-            title = title.replace(u"\u2122", '')
+            #remove unicode
+            title = title.encode("ascii", "ignore")
+            title = title.decode()
 
             #get rid of console specific
             title = title.split(' PS')[0]
