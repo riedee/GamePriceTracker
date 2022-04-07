@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth import login, authenticate
@@ -13,9 +13,6 @@ from PriceTrackerApp import priceCalculator
 
 #models
 from .models import *
-
-with open(os.path.dirname(__file__) + '/../games.json', 'r') as f:
-    Games = json.load(f)
 
 def isSubstring(value, substring):
     return substring.lower() in value.lower()
@@ -54,27 +51,55 @@ class GameHomeView(TemplateView):
 
 def index(request):
     return HttpResponse("Welcome to Game Price Tracker!")
+
+#Favorite game without reloading search result page
+def FavGameView(request):
+    context = {}
+    return render(request, 'search_results.html', context)
+
+#Process a user favoriting a game
+def favGame(request):
+    game_title = request.POST['info']
+    user_id = request.POST['user_id']
+
+    with open(os.path.dirname(__file__) + '/../games.json') as file:
+            gameDict = json.load(file)
+
+    game = gameDict[game_title]
     
-def search(request):
-	#searchdata = Game.objects.filter()                   
-    context = {
+    try:
+        uid = User.objects.get(pk=user_id)
+        profile = uid.profile
+        #game_test = Game(gameTitle=game_title, bestVendor=game.get('vendor'), lowestPrice=game.get('price'), url=game.get('url'), platform=game.get('platform')[0], gameID=game.get('gameID'))
+        game_test = Game.objects.create(gameTitle=game_title, bestVendor=game.get('vendor'), lowestPrice=game.get('price'), url=game.get('url'), platform=game.get('platform')[0], gameID=game.get('gameID'))
+        #print(game_test.gameTitle)
+        profile.saved_game = game_test
+        profile.save()
+    except ObjectDoesNotExist:
+        return HttpResponse("The user_id given does not match any user_id in the system")
 
-                    }
-    return render(request, 'PriceTrackerApp/search_results.html', context)
+    return HttpResponse("Added game to saved games")
 
-def GameView(request, info):
-    info = info.split('_')
-    id = info[0]
-    console = info[1]
-    game = [game for game in Games if game['ID'] == id if game['console'] == console]
-    if len(game):
-        game = game[0]
-        context = { 'game': game }
-        return render(request, 'PriceTrackerApp/game.html', context)
-    return HttpResponse("Game not found")
+def GameView(request, info):   
+    with open(os.path.dirname(__file__) + '/../games.json') as file:
+            gameDict = json.load(file)
 
+    try:
+        game = get_object_or_404(Game, gameTitle=info)
+        context = {'game': game}
+    
+        return render(request,'PriceTrackerApp/game.html', context)
+    except:
+        return HttpResponse("Game not found")
+
+#Process a search query
 def SearchResultsView(request):
     query = request.GET['search']
+
+    #begin by searching for game in JSON
+    #if found, display that to user
+    #give option to show more results
+    #otherwise search internet and show results
 
     #query internet for relevant vendor webpages
     links = gamesearch.searchGame(query)
@@ -105,6 +130,11 @@ def SearchResultsView(request):
 
     return render(request, 'search_results.html', context)
 
+def GameViewAll(request):
+    data = Game.objects.all()
+    context = {'games': data}
+    return render(request, 'gamepage.html', context)
+
 def VendorView(request):
 	return 0
 
@@ -115,7 +145,11 @@ def ProfileView(request, user_id):
         uid = User.objects.get(pk=user_id)
     except ObjectDoesNotExist:
         return HttpResponse("The user_id given does not match any user_id in the system")
-    data = Profile(user_id=uid, username = uid.username, email = uid.email, fn = uid.first_name, ln = uid.last_name)
+    if (uid.profile.saved_game == None):
+        game = None
+    else:
+        game = uid.profile.saved_game
+    data = Profile(user_id=uid, username = uid.username, email = uid.email, fn = uid.first_name, ln = uid.last_name, saved_game=game)
     if uid.id != request.user.id:
         return HttpResponse("You are not authenticated as desired user profile")
     context = {'user_id': uid,

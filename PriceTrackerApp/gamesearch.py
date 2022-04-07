@@ -1,4 +1,5 @@
 import urllib
+import googlesearch
 import requests
 import bs4
 import json
@@ -15,7 +16,7 @@ def searchGame(query):
     #query should include 'buy', 'purchase', etc. at the end to bring up most useful results
     query = query + " buy"  
     links = []
-    for i in search(query, tld="co.in", lang="en", num=12, start=0, stop=10, pause=1.5):
+    for i in search(query, tld="co.in", lang="en", country="na", user_agent=googlesearch.get_random_user_agent(), num=12, start=0, stop=10, pause=0.25):
         site = i.split(".")
 
         #list of vendors we know how to scrape info from
@@ -45,7 +46,11 @@ def searchGame(query):
                     page = requests.get(i, headers=headers)
                     soup  = bs4.BeautifulSoup(page.content, "html.parser")
 
-                    category = soup.find("a", attrs={'class' : 'a-link-normal a-color-tertiary'}).string.strip()
+                    try:
+                        category = soup.find("a", attrs={'class' : 'a-link-normal a-color-tertiary'}).string.strip()
+                    except AttributeError:
+                        catgory = ""
+
 
                     if category == "Video Games":
                         if (all(i not in title for i in banned_keywords)):
@@ -77,9 +82,6 @@ def scrapeGame(links):
             price = amznScraper.get_price(soup)
             platform = amznScraper.get_platform(soup)
 
-            #get rid of TM symbol
-            title = title.replace(u"\u2122", '')
-
             #Remove scrap from platform
             if platform != "Platform Not Found":
                 platform = platform.split(':')[1]
@@ -109,9 +111,6 @@ def scrapeGame(links):
             price = nintendoScraper.get_price(soup)
             platform = [nintendoScraper.get_platform(soup)]
 
-            #get rid of TM symbol
-            title = title.replace(u"\u2122", '')
-
             #problem with scraping from nintendo
             try:
                 price = float(price)
@@ -120,9 +119,6 @@ def scrapeGame(links):
 
         if vendor == "steampowered":
             title, price, platform = steamAPI.getGame(url)
-
-            #get rid of TM symbol
-            title = title.replace(u"\u2122", '')
 
             #Steam stores price as integers, convert to float for comparison
             if price:
@@ -138,15 +134,8 @@ def scrapeGame(links):
             title = title.rstrip()
             title = title.lstrip()
 
-            #get rid of TM symbol
-            title = title.replace(u"\u2122", '')
-
             #remove $ sign, convert to float
             price = price[1:]
-            '''if price != "":
-                price = float(price)
-            else:
-                price = float('inf')'''
             try:
                 price = float(price)
             except:
@@ -157,12 +146,6 @@ def scrapeGame(links):
             price = psScraper.get_price(soup)
             platform = [psScraper.get_platform(soup)]
 
-            #get rid of TM symbol
-            title = title.replace(u"\u2122", '')
-
-            #get rid of console specific
-            title = title.split(' PS')[0]
-
             #remove $ sign, convert to float
             price = price[1:]
             try:
@@ -170,10 +153,14 @@ def scrapeGame(links):
             except:
                 price = float('inf')
 
-        #if title == None:
-        #    title = ""
-
         if title != None and title != "":
+            #remove unicode
+            title = title.encode("ascii", "ignore")
+            title = title.decode()
+
+            #get rid of console specific
+            title = title.split(' PS')[0]
+            
             if len(platform) > 0:
                 gameID = title + platform[0]
                 gameID = gameID.lower().replace(" ", "")

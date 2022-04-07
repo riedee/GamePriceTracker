@@ -1,14 +1,4 @@
 {
-    "Red Dead Redemption 2": {
-        "title": "Red Dead Redemption 2",
-        "vendor": "www.amazon.com",
-        "price": 24.99,
-        "url": "https://www.amazon.com/Red-Dead-Redemption-2-PlayStation-4/dp/B01M5DZ525",
-        "platform": [
-            "PlayStation 4"
-        ],
-        "gameID": "reddeadredemption2playstation4"
-    },
     "Undertale": {
         "title": "Undertale",
         "vendor": "store.steampowered.com",
