@@ -1,6 +1,5 @@
 .google-cookie
 dumped_data.json
-.env
-venv/
-static/
-var/
+PriceTracker/__pycache__
+PriceTrackerApp/__pycache__
+PriceTrackerApp/scrapersAndAPIs/__pycache__
