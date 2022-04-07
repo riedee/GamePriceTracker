@@ -56,16 +56,23 @@ def index(request):
     return HttpResponse("Welcome to Game Price Tracker!")
 
 def favGame(request):
-    game = request.POST['info']
+    game_title = request.POST['info']
     user_id = request.POST['user_id']
+
+    with open(os.path.dirname(__file__) + '/../games.json') as file:
+            gameDict = json.load(file)
+
+    game = gameDict[game_title]
     
     try:
         uid = User.objects.get(pk=user_id)
         profile = uid.profile
-        profile.saved_game = game
+        #game_test = Game(gameTitle=game_title, bestVendor=game.get('vendor'), lowestPrice=game.get('price'), url=game.get('url'), platform=game.get('platform')[0], gameID=game.get('gameID'))
+        game_test = Game.objects.create(gameTitle=game_title, bestVendor=game.get('vendor'), lowestPrice=game.get('price'), url=game.get('url'), platform=game.get('platform')[0], gameID=game.get('gameID'))
+        #print(game_test.gameTitle)
+        profile.saved_game = game_test
         profile.save()
     except ObjectDoesNotExist:
-        print("test")
         return HttpResponse("The user_id given does not match any user_id in the system")
 
     return HttpResponse("Added game to saved games")
@@ -138,10 +145,10 @@ def ProfileView(request, user_id):
         uid = User.objects.get(pk=user_id)
     except ObjectDoesNotExist:
         return HttpResponse("The user_id given does not match any user_id in the system")
-    if (uid.profile.saved_game == ''):
-        game = ''
+    if (uid.profile.saved_game == None):
+        game = None
     else:
-        game = [uid.profile.saved_game]
+        game = uid.profile.saved_game
     data = Profile(user_id=uid, username = uid.username, email = uid.email, fn = uid.first_name, ln = uid.last_name, saved_game=game)
     if uid.id != request.user.id:
         return HttpResponse("You are not authenticated as desired user profile")

@@ -39,10 +39,11 @@ class Game(models.Model):
     CONSOLES = ((PS5, 'Playstation 5'), (SW, 'Nintendo Switch'), (XBXX, 'XBOX Series X'), (PC, 'PC'), (MAC, 'Mac'))
     gameTitle = models.CharField(max_length=255)
     #genre = models.CharField(max_length=32, choices=GENRES, default=ACT)
-    bestVendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, default='')
+    #bestVendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, default='')
+    bestVendor = models.CharField(max_length=100, default='')
     lowestPrice = MoneyField(max_digits=7, decimal_places=2, default_currency='USD', default = '0')
     url = models.URLField(max_length=500, default = '')
-    platform = models.CharField(max_length=32, choices=CONSOLES, default=SW)
+    platform = models.CharField(max_length=32, default=SW)
     gameID = models.CharField(max_length=100, default = '')
     def __str__(self):
         return self.gameTitle
@@ -59,7 +60,8 @@ class Profile(models.Model):
     email = models.CharField(max_length=120,default='')
     fn = models.CharField(max_length=120,default='')
     ln = models.CharField(max_length=120,default='')
-    saved_game = models.CharField(max_length=120, default='')
+    #saved_game = models.CharField(max_length=120, default='')
+    saved_game = models.ForeignKey(Game, db_index=True, on_delete=models.CASCADE, null=True)
     
     def __str__(self):
         return self.user_id.username
