@@ -99,6 +99,14 @@ body {
     <input class="Game" type="search" name="search"> 
     <button class="Game" type="submit"> Search </button>
 </form></div>
+    </div>
 
 </body>
 </html>
+<div>
+  {% for game in games %}
+    <li>
+      <a href="results/{{game.gameTitle}}">{{game.gameTitle}}</a>
+    </li>
+  {% endfor %}
+</div>

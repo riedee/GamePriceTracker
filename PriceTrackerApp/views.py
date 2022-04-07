@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth import login, authenticate
@@ -84,15 +84,26 @@ def favGame(request):
     return render(request, 'PriceTrackerApp/search_results.html', context)'''
 
 def GameView(request, info):
-    info = info.split('_')
+    '''info = info.split('_')
     id = info[0]
     console = info[1]
     game = [game for game in Games if game['ID'] == id if game['console'] == console]
     if len(game):
         game = game[0]
         context = { 'game': game }
-        return render(request, 'PriceTrackerApp/game.html', context)
-    return HttpResponse("Game not found")
+        return render(request, 'PriceTrackerApp/results/'+info, context)'''
+    
+    with open(os.path.dirname(__file__) + '/../games.json') as file:
+            gameDict = json.load(file)
+
+    #game = gameDict[info]
+    game = get_object_or_404(Game, gameTitle=info)
+    print(game.gameTitle)
+    context = {'game': game}
+    
+    return render(request,'PriceTrackerApp/game.html', context)
+
+    #return HttpResponse("Game not found")
 
 def SearchResultsView(request):
     query = request.GET['search']
@@ -130,6 +141,11 @@ def SearchResultsView(request):
         context = {}
 
     return render(request, 'search_results.html', context)
+
+def GameViewAll(request):
+    data = Game.objects.all()
+    context = {'games': data}
+    return render(request, 'gamepage.html', context)
 
 def FavGameView(request):
     context = {}

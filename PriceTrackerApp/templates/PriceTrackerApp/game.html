@@ -1,2 +1,15 @@
-{{ game.gameID }}
-{{ game.gameTitle }}
+<html>
+    <div class="multiline">
+        {{ game.gameTitle }}
+        Current Best Price: {{ game.lowestPrice }}
+        Sold by: {{ game.bestVendor}}
+        <a href= {{ game.url }}>Find Here</a>
+    </div>
+</html>
+
+<style>
+    .multiline
+    {
+    white-space: pre-wrap;
+    }
+</style>
