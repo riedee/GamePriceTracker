@@ -1,6 +1,9 @@
+'''
+The file scrapes information from Steam using an API
+'''
+
 import steamspypi
 import json
-#from ..models import *
 
 def getGame(url):
     splitUrl = url.split('/')
@@ -19,17 +22,3 @@ def getGame(url):
     gamePrice = game['price']
 
     return (gameTitle, gamePrice, ["PC"])
-    
-    '''gameID = id
-    gameUrl = url
-    vendor = Vendor(vendorName = 'Steam')
-    vendor.save()
-    gameDict = {'title': gameTitle, 'vendor': vendor, 'price': gamePrice, 'url': gameUrl, 'platform': "PC", 'gameID': gameID}
-    with open("allGameData.json", "w") as games:
-        gameJson = json.dumps(gameDict)
-        games.write(gameJson)
-        games.close()
-    vendor = Vendor(vendorName = vendorHost, storeFront = "https://store.steampowered.com/")
-    vendor.save()
-    #game = Game(gameTitle = gameTitle, bestVendor = 'Steam', lowestPrice = gamePrice, url = gameUrl, platform = 'PC', gameID = gameID)
-    #game.save()'''

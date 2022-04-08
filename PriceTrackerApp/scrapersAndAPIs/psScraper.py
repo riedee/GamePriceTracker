@@ -1,8 +1,6 @@
-'''import bs4
-import urllib
-import json
-from urllib.request import urlopen
-from ..models import *'''
+'''
+The file scrapes for the PS store by looking at specific elements
+'''
 
 def get_title(soup): 
     try:

@@ -66,12 +66,15 @@ class Profile(models.Model):
     def __str__(self):
         return self.user_id.username
 
-#NOTE: will only proc when adding new users to the database, i.e. existing users do not have profiles
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user_id=instance)
+    #NOTE: will only proc when adding new users to the database, i.e. existing users do not have profiles
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user_id=instance)
 
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        try:
+            instance.profile.save()
+        except:
+            Profile.objects.create(user_id=instance)

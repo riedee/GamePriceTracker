@@ -1,8 +1,6 @@
-'''import bs4
-import urllib
-import json
-from urllib.request import urlopen
-from ..models import *'''
+'''
+This file scrapes information from the Xbos store by looking at specific elements
+'''
 
 def get_title(soup): 
     try:
@@ -39,30 +37,3 @@ def get_platform(soup):
         platform = ""
 
     return platform
-
-'''urlList = ["https://www.xbox.com/en-US/games/store/nhl-22-xbox-one/9NRDC9PXDQ5N/0010/9R9KBZNPNNHM"]
-
-gameList = []
-
-for i in range(len(urlList)):
-    url = urlList[i]
-    page = urlopen(url)
-    html = page.read().decode("utf-8")
-    soup = bs4.BeautifulSoup(html, "html.parser")
-    parsed_url = urllib.parse.urlparse(url)
-    vendorHost = parsed_url.netloc.string.strip()
-    title = get_title(soup)
-    price = get_price(soup)
-    platform = "Xbox One"
-    gameID = title + platform
-    gameDict = {'title': title, 'vendor': vendorHost, 'price': price, 'url': url, 'platform': platform, 'gameID': gameID}
-    gameList.append(gameDict)
-    vendor = Vendor(vendorName = vendorHost, storeFront = "https://www.xbox.com/en-US")
-    vendor.save()
-    #game = Game(gameTitle = title, bestVendor = vendor, lowestPrice = price, url = url, platform = platform, gameID = gameID)
-    #game.save()
-
-with open("allGameData.json", "w") as f:
-    gameJson = json.dumps(gameList)
-    f.write(gameJson)
-    f.close'''

@@ -85,6 +85,7 @@
                                                         <a>
                                                             {{data.saved_game.gameTitle}}
                                                         </a>
+                                                        <a href="" onclick="removeGame('{{ game.title }}', '{{request.user.id}}', this)"><small> Remove</small></a>
                                                     </li>
                                                 </p>
                                             </div>
@@ -107,6 +108,25 @@
                 </div>
             </form>   
         </div>
+
+        <script>
+            function removeGame(title, user_id, e) {
+                $.ajax({
+                    url: "/remove",
+                    type: "POST",
+                    data: {
+                        csrfmiddlewaretoken: "{{ csrf_token }}",
+                        'info': title,
+                        'user_id': user_id
+                    }
+                });
+                sleep(1000);
+                window.location.reload();
+                return false;
+            }
+        </script>
+
+
 <style>
 @font-face {
 font-family: 'EntitledJNL';
