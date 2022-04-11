@@ -7,6 +7,7 @@ This method takes a list of game objects, and compares to currently saved games 
 (if they exist), and replaces if the price is lower, and/or updates prices
 '''
 def saveGame(gameList):
+    #Load saved games from games.json
     with open(os.path.dirname(__file__) + '/../games.json') as file:
         gameDict = json.load(file)
         
@@ -39,8 +40,8 @@ def saveGame(gameList):
     with open(os.path.dirname(__file__) + '/../games.json', 'w') as file:
         json.dump(gameDict, file, indent = 4)
 
+    #Update each game in the JSON
     for key in gameDict:
         game = Game(gameTitle = key, bestVendor = gameDict[key].get('vendor'), lowestPrice = gameDict[key].get('price'), url = gameDict[key].get('url'), platform = gameDict[key].get('platform'), gameID = gameDict[key].get('gameID'))
         Game.objects.update_or_create(gameTitle=game.gameTitle)  
-        #game.save()
 

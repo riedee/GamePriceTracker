@@ -57,6 +57,20 @@ def FavGameView(request):
     context = {}
     return render(request, 'search_results.html', context)
 
+def removeGame(request):
+    game_title = request.POST['info']
+    user_id = request.POST['user_id']
+    
+    try:
+        uid = User.objects.get(pk=user_id)
+        profile = uid.profile
+        profile.saved_game = None
+        profile.save()
+    except ObjectDoesNotExist:
+        return HttpResponse("The user_id given does not match any user_id in the system")
+
+    return HttpResponse("Game removed from saved games")
+
 #Process a user favoriting a game
 def favGame(request):
     game_title = request.POST['info']
@@ -71,10 +85,12 @@ def favGame(request):
         uid = User.objects.get(pk=user_id)
         profile = uid.profile
         #game_test = Game(gameTitle=game_title, bestVendor=game.get('vendor'), lowestPrice=game.get('price'), url=game.get('url'), platform=game.get('platform')[0], gameID=game.get('gameID'))
-        game_test = Game.objects.create(gameTitle=game_title, bestVendor=game.get('vendor'), lowestPrice=game.get('price'), url=game.get('url'), platform=game.get('platform')[0], gameID=game.get('gameID'))
-        #print(game_test.gameTitle)
-        profile.saved_game = game_test
+        game_test = Game(gameTitle=game_title, bestVendor=game.get('vendor'), lowestPrice=game.get('price'), url=game.get('url'), platform=game.get('platform')[0], gameID=game.get('gameID'))
+        obj = Game.objects.get(gameTitle = game_test.gameTitle)
+        profile.saved_game = obj
+        obj.save()
         profile.save()
+
     except ObjectDoesNotExist:
         return HttpResponse("The user_id given does not match any user_id in the system")
 

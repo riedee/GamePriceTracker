@@ -16,7 +16,7 @@
   <a>
     {{ bestGame.title }}, Vendor: {{bestGame.vendor}}, Price: {{bestGame.price}}, Link: <a href= {{bestGame.url}}>Link</a>, Platform(s): {{bestGame.platform}}
     {% if request.user.is_authenticated %}
-    <input value="Favorite" type="button" name="favorite" onclick="addGame('{{ bestGame.title }}', '{{request.user.id}}')"></input>
+    <input value="Favorite" type="button" id="favorite" onclick="addGame('{{ bestGame.title }}', '{{request.user.id}}', this)"></input>
     {% endif %}
   </a>
 <h3>All results</h3>
@@ -26,7 +26,7 @@
         <a>
           {{ game.title }}, Vendor: {{game.vendor}}, Price: {{game.price}}, Link: <a href= {{game.url}}>Link</a>, Platform(s): {{game.platform}}
           {% if request.user.is_authenticated %}
-          <input value="Favorite" type="button" name="favorite" onclick="addGame('{{ game.title }}', '{{request.user.id}}')"></input>
+          <input value="Favorite" type="button" id="favorite1" onclick="addGame('{{ game.title }}', '{{request.user.id}}', this)"></input>
           {% endif %}
         </a>
       </li>
@@ -37,7 +37,7 @@
 {% endif %}
 
 <script>
-  function addGame(title, user_id) {
+  function addGame(title, user_id, e) {
     $.ajax({
       url: "/favorite",
       type: "POST",
@@ -47,6 +47,7 @@
         'user_id': user_id
       }
     });
+    alert("Game added to favorites!")
   }
   function filterPC() {
     console.log("test");
