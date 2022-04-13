@@ -1,3 +1,7 @@
+"""
+A module to update the prices for game(s) stored within the database with the current lowest price
+Inputs: List of games
+"""
 import json
 import os
 from .models import *

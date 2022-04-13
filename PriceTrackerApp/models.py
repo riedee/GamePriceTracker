@@ -1,3 +1,14 @@
+"""
+A module to handle data schemas (models) for all stored structures
+
+Structures:
+Vendor
+Game
+UserGame
+Profile
+"""
+
+
 from django.db import models
 from djmoney.models.fields import MoneyField
 from userapp import *

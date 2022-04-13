@@ -1,3 +1,30 @@
+"""
+A module handling page logic and routing
+
+Views:
+HomeView
+VendorPageView
+AmazonView
+PlayStationView
+NintendoView
+MicrosoftView
+SteamView
+LoginView
+DirectroyView
+GameHomeView
+index
+FavGameView
+removeGame
+favGame
+GameView
+SearchResultsView
+GameViewAll
+ProfleView
+RegisterView
+UserDirectoryView
+"""
+
+
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView

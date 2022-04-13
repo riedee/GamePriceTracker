@@ -1,3 +1,8 @@
+"""
+A module relating links to view objects
+Inputs: view objects
+"""
+
 from django.urls import include, path
 from .views import HomeView, UserDirectoryView, SearchResultsView, GameView, VendorPageView, ProfileView, RegisterView, AmazonView, PlayStationView, NintendoView, MicrosoftView, SteamView, LoginView, DirectoryView, GameHomeView, favGame, GameViewAll, removeGame
 from django.conf.urls import include
