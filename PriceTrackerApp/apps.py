@@ -1,3 +1,8 @@
+"""
+A django app to register the app PriceTrackerApp with the project
+Inputs: AppConfig
+"""
+
 from django.apps import AppConfig
 
 

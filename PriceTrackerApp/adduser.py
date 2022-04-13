@@ -1,3 +1,10 @@
+"""
+A module to populate the django database with many dummy users
+
+Inputs: user list json structure
+"""
+
+
 '''File to enter many users at once into Django'''
 from userapp.models import *
 from django.contrib.auth.models import User

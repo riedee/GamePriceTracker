@@ -1,3 +1,8 @@
+"""
+A module to load the list of approved vendors from a json file
+Inputs: Json dictionary of vendors
+"""
+
 from .models import *
 import json
 

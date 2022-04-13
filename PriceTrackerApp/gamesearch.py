@@ -1,3 +1,9 @@
+"""
+A module to search for a specified game from approved vendors
+Inputs: Search query, website links
+"""
+
+
 import urllib
 import googlesearch
 import requests
