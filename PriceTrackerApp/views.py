@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from PriceTrackerApp.forms import RegistrationForm
 from django.contrib.auth.decorators import user_passes_test
@@ -69,7 +70,8 @@ def removeGame(request):
     except ObjectDoesNotExist:
         return HttpResponse("The user_id given does not match any user_id in the system")
 
-    return HttpResponse("Game removed from saved games")
+    #return HttpResponse("Game removed from saved games")
+    return render(request, 'profile.html', {})
 
 #Process a user favoriting a game
 def favGame(request):
@@ -87,14 +89,19 @@ def favGame(request):
         #game_test = Game(gameTitle=game_title, bestVendor=game.get('vendor'), lowestPrice=game.get('price'), url=game.get('url'), platform=game.get('platform')[0], gameID=game.get('gameID'))
         game_test = Game(gameTitle=game_title, bestVendor=game.get('vendor'), lowestPrice=game.get('price'), url=game.get('url'), platform=game.get('platform')[0], gameID=game.get('gameID'))
         obj = Game.objects.get(gameTitle = game_test.gameTitle)
-        profile.saved_game = obj
-        obj.save()
-        profile.save()
+        if (profile.saved_game != obj):
+            profile.saved_game = obj
+            obj.save()
+            profile.save()
+            return HttpResponse("Added game to saved games")
+        else:
+            profile.saved_game = None
+            obj.save()
+            profile.save()
+            return HttpResponse("Game removed from saved games")
 
     except ObjectDoesNotExist:
         return HttpResponse("The user_id given does not match any user_id in the system")
-
-    return HttpResponse("Added game to saved games")
 
 def GameView(request, info):   
     with open(os.path.dirname(__file__) + '/../games.json') as file:

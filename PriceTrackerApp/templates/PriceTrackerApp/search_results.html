@@ -2,6 +2,7 @@
 <h1>Search Results</h1>
 <h3>Filter</h3>
 
+
 <label for="PC">PC</label>
 <input id="PC" name="PC" type="checkbox" onchange="filterPC()" checked>
 <label for="Xbox">Xbox</label>
@@ -37,28 +38,70 @@
 {% endif %}
 
 <script>
+  var games = {{ games|safe }}
+
   function addGame(title, user_id, e) {
     $.ajax({
       url: "/favorite",
       type: "POST",
+      success: function(response) {
+        alert(response);
+      },
       data: {
         csrfmiddlewaretoken: "{{ csrf_token }}",
         'info': title,
         'user_id': user_id
       }
     });
-    alert("Game added to favorites!")
   }
+
   function filterPC() {
-    console.log("test");
+    console.log(games);
+    $.ajax({
+      url: "/filter",
+      type: "POST",
+      data: {
+        csrfmiddlewaretoken: "{{ csrf_token }}",
+        'games_list': games,
+        'filter': "PC"
+      }
+    });
   }
-  function filterXbox() {
-    console.log("test");
+
+  function filterXbox(game_list) {
+    console.log(games);
+    $.ajax({
+      url: "/filter",
+      type: "POST",
+      data: {
+        csrfmiddlewaretoken: "{{ csrf_token }}",
+        'games_list': games,
+        'filter': "Xbox"
+      }
+    });
   }
-  function filterPS() {
-    console.log("test");
+  function filterPS(game_list) {
+    console.log(games);
+    $.ajax({
+      url: "/filter",
+      type: "POST",
+      data: {
+        csrfmiddlewaretoken: "{{ csrf_token }}",
+        'games_list': games,
+        'filter': "PS"
+      }
+    });
   }
-  function filterNintendo() {
-    console.log("test");
+  function filterNintendo(game_list) {
+    console.log(games);
+    $.ajax({
+      url: "/filter",
+      type: "POST",
+      data: {
+        csrfmiddlewaretoken: "{{ csrf_token }}",
+        'games_list': games,
+        'filter': "Nintendo"
+      }
+    });
   }
 </script>

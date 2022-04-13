@@ -165,7 +165,7 @@
     "FIFA 22": {
         "title": "FIFA 22",
         "vendor": "www.amazon.com",
-        "price": 20.13,
+        "price": 29.99,
         "url": "https://www.amazon.com/FIFA-22-PlayStation-4/dp/B098KVCFM8",
         "platform": [
             "PlayStation 4"
@@ -326,5 +326,66 @@
             "Xbox Series X|S"
         ],
         "gameID": "battlefield2042xboxonexboxone"
+    },
+    "The Legend of Zelda: Ocarina of Time": {
+        "title": "The Legend of Zelda: Ocarina of Time",
+        "vendor": "www.amazon.com",
+        "price": 30.99,
+        "url": "https://www.amazon.com/Legend-Zelda-Ocarina-Time-nintendo-64/dp/B00000DMB3",
+        "platform": [
+            "Nintendo 64"
+        ],
+        "gameID": "thelegendofzeldaocarinaoftimenintendo64"
+    },
+    "The Legend of Zelda: Breath of the Wild - Nintendo Switch": {
+        "title": "The Legend of Zelda: Breath of the Wild - Nintendo Switch",
+        "vendor": "www.amazon.com",
+        "price": 39.99,
+        "url": "https://www.amazon.com/Legend-Zelda-Breath-Wild-Nintendo-Switch/dp/B01MS6MO77",
+        "platform": [
+            "Nintendo Switch"
+        ],
+        "gameID": "thelegendofzeldabreathofthewildnintendoswitchnintendoswitch"
+    },
+    "The Legend of Zelda: Twilight Princess": {
+        "title": "The Legend of Zelda: Twilight Princess",
+        "vendor": "www.amazon.com",
+        "price": 10.98,
+        "url": "https://www.amazon.com/Legend-Zelda-Twilight-Princess-Nintendo-Wii/dp/B000FQBPCQ",
+        "platform": [
+            "Nintendo Wii"
+        ],
+        "gameID": "thelegendofzeldatwilightprincessnintendowii"
+    },
+    "The Legend of Zelda: Twilight Princess (Nintendo Selects)": {
+        "title": "The Legend of Zelda: Twilight Princess (Nintendo Selects)",
+        "vendor": "www.amazon.com",
+        "price": 68.0,
+        "url": "https://www.amazon.com/Legend-Zelda-Twilight-Princess-Nintendo-Wii/dp/B004WLRQMI",
+        "platform": [
+            "Nintendo Wii"
+        ],
+        "gameID": "thelegendofzeldatwilightprincessnintendoselectsnintendowii"
+    },
+    "Red Dead Redemption 2": {
+        "title": "Red Dead Redemption 2",
+        "vendor": "www.xbox.com",
+        "price": 23.99,
+        "url": "https://www.xbox.com/en-us/games/store/red-dead-redemption-2/9n2zdn7nwqkv",
+        "platform": [
+            "Xbox One",
+            "Xbox Series X|S"
+        ],
+        "gameID": "reddeadredemption2xboxone"
+    },
+    "FIFA 22 - PlayStation 4": {
+        "title": "FIFA 22 - PlayStation 4",
+        "vendor": "www.amazon.com",
+        "price": 23.99,
+        "url": "https://www.amazon.com/FIFA-22-PlayStation-4/dp/B098KVCFM8",
+        "platform": [
+            "PlayStation 4"
+        ],
+        "gameID": "fifa22playstation4playstation4"
     }
 }
