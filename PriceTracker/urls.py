@@ -25,8 +25,11 @@ from django.contrib.auth.views import LogoutView #Add
 urlpatterns = [
     #path('admin/', admin.site.urls),
     path('', include('PriceTrackerApp.urls')),
-    path('', TemplateView.as_view(template_name="home.html"), name='home'), #Add
-    path('accounts/', include('allauth.urls')), #Add
-    path('logout', LogoutView.as_view()), #Add
-    path('accounts/', include('django.contrib.auth.urls')), #Add    
+    #This line might not do anything
+    path('', TemplateView.as_view(template_name="home.html"), name='home'), 
+    path('accounts/', include('allauth.urls')), 
+    path('logout', LogoutView.as_view(), name='logout'), 
+    #If trying to logout while on search page
+    path('search/logout', LogoutView.as_view(), name='search_logout'), 
+    path('accounts/', include('django.contrib.auth.urls')), 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
