@@ -1,6 +1,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 {% block content %}
 {% load static %}
 {% if data %}
@@ -11,10 +12,25 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="" alt="User Photo"/>
+                            <img id="profimg" src="#" alt="User Photo"/>
                             <div class="file btn btn-lg btn-primary">
                                 Change Photo
-                                <input type="file" name="file"/>
+                                <input type="file" name="file" onchange="changePhoto(this);" />
+                                <!-- Script to display uploaded image -->
+                                <script>
+                                    function changePhoto(input) {
+                                        //if (input.files && input.files[0]) {
+                                            var rfile = new FileReader();
+                                            rfile.onload = function (img) {
+                                                $('#profimg')
+                                                    .attr('src', img.target.result)
+                                                    .width(150)
+                                                    .height(200)
+                                            };
+                                            rfile.readAsDataURL(input.files[0]);
+                                        //}
+                                    }
+                                </script>
                             </div>
                             
                         </div>
@@ -25,9 +41,9 @@
                                         {{data.fn}} {{data.ln}}
                                     </h5>
                                     <h6>
-								{% if user.is_superuser %}
-								<p>Superuser</p>
-								{% endif %}                  
+                                {% if user.is_superuser %}
+                                <p>Superuser</p>
+                                {% endif %}                  
                                     </h6>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
@@ -42,8 +58,8 @@
                         <div class="profile-work">
                             <p>LINKS</p>
                                 <a class="active" href="/home">Home</a><br/>
-								<a href="/games">Games</a><br/>
-								<a href ="/vendors">Vendors</a><br/>
+                                <a href="/games">Games</a><br/>
+                                <a href ="/vendors">Vendors</a><br/>
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -75,7 +91,7 @@
                                         </div>
                                         </div>
                       {% if data.saved_game %} 
-					<div class="row">
+                    <div class="row">
                                    <div class="col-md-6">
                                       <label>Games</label>
                                             </div>
@@ -99,7 +115,7 @@
                                                 <p>No saved games</p>
                                             </div>
                                         </div>
-							{% endif %} 
+                            {% endif %} 
                             </div>
                             </div> 
                             </div>
@@ -168,6 +184,7 @@ body{
     opacity: 0;
     right: 0;
     top: 0;
+    cursor: pointer;
 }
 .profile-head h5{
     color: #002d62;
