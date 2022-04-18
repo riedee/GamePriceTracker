@@ -17,6 +17,8 @@ urlpatterns = [
     path('results/<str:info>', GameView, name='game'),
     path('games', GameViewAll, name='gamehome'),
     path('login', LoginView.as_view(), name='login'),
+    #If trying to login while on search page; need better way to handle this
+    path('search/login', LoginView.as_view(), name='search_login'), 
     path('home', HomeView, name='home'),
     path('vendors', VendorPageView.as_view(), name='vendorpage'),
     path('favorite', favGame, name="python_file"),
