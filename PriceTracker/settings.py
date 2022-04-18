@@ -139,6 +139,8 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+#AUTHENTICATION_BACKENDS, SOCIALACCOUNT_PROVIDERS, and
+#SITE_ID are used to enable Google login
 AUTHENTICATION_BACKENDS = [ #Add
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend'
@@ -156,12 +158,13 @@ SOCIALACCOUNT_PROVIDERS = { #Add
     }
 }
 
-###Use this to determine site id
+###Use the below comments to determine site id
 #python manage.py shell
 #from django.contrib.sites.models import Site
 #new_site = Site.objects.create(domain='foo.com', name='foo.com')
 #print (new_site.id)
 SITE_ID = 3 #Add
 
+#Redirects to the homepage upon login/logout
 LOGIN_REDIRECT_URL = 'home' #Add
 LOGOUT_REDIRECT_URL = 'home' #Add
