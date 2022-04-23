@@ -14,7 +14,7 @@ def saveGame(gameList):
     (if they exist), and replaces if the price is lower, and/or updates prices
     '''
     #Load saved games from games.json
-    with open(os.path.dirname(__file__) + '/../games.json', encoding="uft-8") as file:
+    with open(os.path.dirname(__file__) + '/../games.json') as file:
         gameDict = json.load(file)
         
     for i in range(len(gameList)):
@@ -43,7 +43,7 @@ def saveGame(gameList):
                 gameDict[currTitle] = gameList[i]
 
     #save any/all changes  
-    with open(os.path.dirname(__file__) + '/../games.json', 'w', encoding="uft-8") as file:
+    with open(os.path.dirname(__file__) + '/../games.json', 'w') as file:
         json.dump(gameDict, file, indent = 4)
 
     #Update each game in the JSON

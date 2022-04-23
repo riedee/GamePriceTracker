@@ -107,7 +107,7 @@ def favGame(request):
     game_title = request.POST['info']
     user_id = request.POST['user_id']
 
-    with open(os.path.dirname(__file__) + '/../games.json', encoding="uft-8") as file:
+    with open(os.path.dirname(__file__) + '/../games.json') as file:
         gameDict = json.load(file)
 
     game = gameDict[game_title]
@@ -197,7 +197,7 @@ def SearchResultsView(request):
         priceCalculator.saveGame(gameList)
 
         #search JSON for game (take first result from gameList since that's likely to be more accurate result)
-        with open(os.path.dirname(__file__) + '/../games.json', encoding="uft-8") as file:
+        with open(os.path.dirname(__file__) + '/../games.json') as file:
             gameDict = json.load(file)
         
         title = None
