@@ -73,7 +73,7 @@ class Profile(models.Model):
     ln = models.CharField(max_length=120,default='')
     #saved_game = models.CharField(max_length=120, default='')
     saved_game = models.ForeignKey(Game, db_index=True, on_delete=models.CASCADE, null=True)
-    
+   
     def __str__(self):
         return self.user_id.username
 

@@ -8,9 +8,6 @@ import urllib
 import googlesearch
 import requests
 import bs4
-import json
-import os
-
 from googlesearch import search
 from bs4 import BeautifulSoup
 
@@ -55,7 +52,7 @@ def searchGame(query):
                     try:
                         category = soup.find("a", attrs={'class' : 'a-link-normal a-color-tertiary'}).string.strip()
                     except AttributeError:
-                        catgory = ""
+                        category = ""
 
 
                     if category == "Video Games":
@@ -109,7 +106,7 @@ def scrapeGame(links):
             price = price[1:]
             try:
                 price = float(price)
-            except:
+            except ValueError:
                 price = float('inf')
 
         if vendor == "nintendo":
@@ -120,7 +117,7 @@ def scrapeGame(links):
             #problem with scraping from nintendo
             try:
                 price = float(price)
-            except:
+            except ValueError:
                 price = float('inf')
 
         if vendor == "steampowered":
@@ -144,7 +141,7 @@ def scrapeGame(links):
             price = price[1:]
             try:
                 price = float(price)
-            except:
+            except ValueError:
                 price = float('inf')
 
         if vendor == "playstation":
@@ -156,7 +153,7 @@ def scrapeGame(links):
             price = price[1:]
             try:
                 price = float(price)
-            except:
+            except ValueError:
                 price = float('inf')
 
         if title != None and title != "":
