@@ -22,7 +22,7 @@
   </a>
 <h3>All results</h3>
   <ul>
-    {% for game in games %}
+    {% for game in games_restrict %}
       <li>
         <a>
           {{ game.title }}, Vendor: {{game.vendor}}, Price: {{game.price}}, Link: <a href= {{game.url}}>Link</a>, Platform(s): {{game.platform}}
@@ -38,10 +38,12 @@
 {% endif %}
 
 <script>
-  var games = {{ games|safe }}
+  var games = "{{ games_restrict|safe }}";
+  var games_all = "{{ games_all|safe }}";
+  var consoles = "{{ consoles|safe }}";
 
   function addGame(title, user_id, e) {
-    $.ajax({
+    $.post({
       url: "/favorite",
       type: "POST",
       success: function(response) {
@@ -56,14 +58,19 @@
   }
 
   function filterPC() {
-    console.log(games);
     $.ajax({
-      url: "/filter",
+      url: "/search/filter",
       type: "POST",
+      success: function(response) {
+        window.location.href = "/search/filter"
+      },
       data: {
         csrfmiddlewaretoken: "{{ csrf_token }}",
-        'games_list': games,
-        'filter': "PC"
+        'games_restrict': games,
+        'games_all': games_all,
+        'consoles': consoles,
+        'filter': "PC",
+        'checked': document.getElementById('PC').checked
       }
     });
   }
@@ -71,7 +78,7 @@
   function filterXbox(game_list) {
     console.log(games);
     $.ajax({
-      url: "/filter",
+      url: "/search/filter",
       type: "POST",
       data: {
         csrfmiddlewaretoken: "{{ csrf_token }}",
