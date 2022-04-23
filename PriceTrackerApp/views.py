@@ -24,69 +24,72 @@ RegisterView
 UserDirectoryView
 """
 
+import json
+import os
+import ast
 
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from PriceTrackerApp.forms import RegistrationForm
-from django.contrib.auth.decorators import user_passes_test
-import json
-import os
 from PriceTrackerApp import gamesearch
 from PriceTrackerApp import priceCalculator
 
 #models
-from .models import *
+from .models import Game, User, Profile
 
-def isSubstring(value, substring):
-    return substring.lower() in value.lower()
-
-def HomeView(request):
-    print(request.user.username)
-    username = request.user.username if request.user.is_authenticated else ''
-    return render(request, 'home.html', {'username' : username})
-	
 class VendorPageView(TemplateView):
-	template_name = 'vendorpage.html'
+    """Displays the list of vendors"""
+    template_name = 'vendorpage.html'
 
 class AmazonView(TemplateView):
-	template_name = 'amazon.html'
+    """Displays the Amazon vendor page"""
+    template_name = 'amazon.html'
 
 class PlayStationView(TemplateView):
-	template_name = 'psvendor.html'
+    """Displays the PS vendor page"""
+    template_name = 'psvendor.html'
 
 class NintendoView(TemplateView):
-	template_name = 'nintendo.html'
+    """Displays the Nintendo vendor page"""
+    template_name = 'nintendo.html'
 
 class MicrosoftView(TemplateView):
-	template_name = 'microsoft.html'
+    """Displays the MS vendor page"""
+    template_name = 'microsoft.html'
 
 class SteamView(TemplateView):
-	template_name = 'steam.html'
+    """Displays the Steam vendor page"""
+    template_name = 'steam.html'
 
 class LoginView(TemplateView):
+    """Displays the login page"""
     template_name = 'login.html'
 
 class DirectoryView(TemplateView):
+    """Displays the user directory"""
     template_name = 'userdirectory.html'
 
 class GameHomeView(TemplateView):
+    """Displays the list of games"""
     template_name = 'gamepage.html'
 
-def index(request):
-    return HttpResponse("Welcome to Game Price Tracker!")
+def HomeView(request):
+    """Displays the homepage"""
+    print(request.user.username)
+    username = request.user.username if request.user.is_authenticated else ''
+    return render(request, 'home.html', {'username' : username})
 
-#Favorite game without reloading search result page
 def FavGameView(request):
+    """Favorite game without reloading search result page"""
     context = {}
     return render(request, 'search_results.html', context)
 
 def removeGame(request):
-    game_title = request.POST['info']
+    """Remove game from favorites"""
+    #game_title = request.POST['info']
     user_id = request.POST['user_id']
     
     try:
@@ -97,23 +100,21 @@ def removeGame(request):
     except ObjectDoesNotExist:
         return HttpResponse("The user_id given does not match any user_id in the system")
 
-    #return HttpResponse("Game removed from saved games")
     return render(request, 'profile.html', {})
 
-#Process a user favoriting a game
 def favGame(request):
+    """Process a user favoriting a game"""
     game_title = request.POST['info']
     user_id = request.POST['user_id']
 
-    with open(os.path.dirname(__file__) + '/../games.json') as file:
-            gameDict = json.load(file)
+    with open(os.path.dirname(__file__) + '/../games.json', encoding="uft-8") as file:
+        gameDict = json.load(file)
 
     game = gameDict[game_title]
-    
+   
     try:
         uid = User.objects.get(pk=user_id)
         profile = uid.profile
-        #game_test = Game(gameTitle=game_title, bestVendor=game.get('vendor'), lowestPrice=game.get('price'), url=game.get('url'), platform=game.get('platform')[0], gameID=game.get('gameID'))
         game_test = Game(gameTitle=game_title, bestVendor=game.get('vendor'), lowestPrice=game.get('price'), url=game.get('url'), platform=game.get('platform')[0], gameID=game.get('gameID'))
         obj = Game.objects.get(gameTitle = game_test.gameTitle)
         if (profile.saved_game != obj):
@@ -130,20 +131,54 @@ def favGame(request):
     except ObjectDoesNotExist:
         return HttpResponse("The user_id given does not match any user_id in the system")
 
-def GameView(request, info):   
-    with open(os.path.dirname(__file__) + '/../games.json') as file:
-            gameDict = json.load(file)
-
+def GameView(request, info):
+    """Display all games"""
     try:
         game = get_object_or_404(Game, gameTitle=info)
         context = {'game': game}
     
         return render(request,'PriceTrackerApp/game.html', context)
-    except:
+    except LookupError:
         return HttpResponse("Game not found")
 
-#Process a search query
+def FilterView(request):
+    """Process game filtering"""
+    games = request.POST.get('games_restrict', False)
+    games_all = request.POST.get('games_all', False)
+    consoles = request.POST.get('consoles', False)
+    filter_game = request.POST.get('filter', False)
+    checked = request.POST.get('checked', False)
+
+    #games = json.dumps(games)
+    #games_all = json.dumps(games_all)
+    games = ast.literal_eval(games)
+    games_all = ast.literal_eval(games_all)
+    consoles = consoles.strip('][').replace("'", "").split(', ')
+
+    if checked == 'false':
+        checked = 0
+    else:
+        checked = 1
+    
+    if not checked:
+        consoles.remove(filter_game)
+    else:
+        if filter_game not in consoles:
+            consoles.append(filter_game)
+
+    new_game_list = []
+    for g in games_all:
+        for c in g['platform']:
+            if c in consoles:
+                new_game_list.append(g)
+                break
+
+    context = {'games_all': games_all, 'bestGame': '', 'games_restrict': new_game_list, 'consoles': consoles}
+    return render(request, 'search_results.html', context)
+
+
 def SearchResultsView(request):
+    """Process a search query"""
     query = request.GET['search']
 
     #begin by searching for game in JSON
@@ -162,7 +197,7 @@ def SearchResultsView(request):
         priceCalculator.saveGame(gameList)
 
         #search JSON for game (take first result from gameList since that's likely to be more accurate result)
-        with open(os.path.dirname(__file__) + '/../games.json') as file:
+        with open(os.path.dirname(__file__) + '/../games.json', encoding="uft-8") as file:
             gameDict = json.load(file)
         
         title = None
@@ -172,7 +207,7 @@ def SearchResultsView(request):
 
         gameList_sorted = sorted(gameList, key = lambda i:i['price'])
 
-        context = { 'games' : gameList_sorted, 'bestGame' : gameDict[title]}
+        context = { 'games_all' : gameList_sorted, 'bestGame' : gameDict[title], 'games_restrict': gameList_sorted, 'consoles': ["PC", "Xbox", "Nintendo", "PS"]}
 
     #game list is empty - no results found
     else:
@@ -181,15 +216,13 @@ def SearchResultsView(request):
     return render(request, 'search_results.html', context)
 
 def GameViewAll(request):
+    """View all games"""
     data = Game.objects.all()
     context = {'games': data}
     return render(request, 'gamepage.html', context)
 
-def VendorView(request):
-	return 0
-
-#display personal info of user
 def ProfileView(request, user_id):
+    """Display personal info of user"""
     #Try to get user ID
     try:
         uid = User.objects.get(pk=user_id)
@@ -209,6 +242,7 @@ def ProfileView(request, user_id):
     return render(request, "PriceTrackerApp/profile.html", context)
 
 def RegisterView(request):
+    """Display registration form"""
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
@@ -223,7 +257,8 @@ def RegisterView(request):
     return render(request, 'registration/register.html', {'form': form})
 
 def UserDirectoryView(request):
-	data = User.objects.all()
-	context = {'data': data,
+    """Displays all users"""
+    data = User.objects.all()
+    context = {'data': data,
 	}
-	return render(request, "PriceTrackerApp/userdirectory.html", context)
+    return render(request, "PriceTrackerApp/userdirectory.html", context)

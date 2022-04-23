@@ -4,10 +4,11 @@ Inputs: view objects
 """
 
 from django.urls import include, path
-from .views import HomeView, UserDirectoryView, SearchResultsView, GameView, VendorPageView, ProfileView, RegisterView, AmazonView, PlayStationView, NintendoView, MicrosoftView, SteamView, LoginView, DirectoryView, GameHomeView, favGame, GameViewAll, removeGame
-from django.conf.urls import include
 from django.urls import re_path
 from django.contrib import admin
+
+from .views import *
+
 admin.autodiscover()
 
 urlpatterns = [
@@ -20,6 +21,7 @@ urlpatterns = [
     path('home', HomeView, name='home'),
     path('vendors', VendorPageView.as_view(), name='vendorpage'),
     path('favorite', favGame, name="python_file"),
+    path('search/filter', FilterView, name="filter"),
     path('remove', removeGame, name ='removeGame'),
     path('profile', DirectoryView.as_view(), name='directory'),
     path('<int:user_id>/profile/', ProfileView, name='profile'),
@@ -32,4 +34,3 @@ urlpatterns = [
     path('directory/', UserDirectoryView, name='userdirectory'),
 
 ]
-

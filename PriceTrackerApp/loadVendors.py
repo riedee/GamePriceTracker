@@ -3,8 +3,9 @@ A module to load the list of approved vendors from a json file
 Inputs: Json dictionary of vendors
 """
 
-from .models import *
 import json
+
+from .models import Vendor
 
 amazon = Vendor(vendorName = "Amazon", storeFront = "https://www.amazon.com")
 amazon.save()
@@ -22,7 +23,7 @@ steam = Vendor(vendorName = "Steam", storeFront = "https://store.steampowered.co
 steam.save()
 steamDict = {'vendorName': 'Steam', 'storeFront': "https://store.steampowered.com"}
 
-with open('vendors.json', 'w') as jsonFile:
+with open('vendors.json', 'w', encoding="utf-8") as jsonFile:
     json.dump(amznDict, jsonFile)
     json.dump(psDict, jsonFile)
     json.dump(nintendoDict, jsonFile)

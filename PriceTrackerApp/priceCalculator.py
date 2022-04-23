@@ -2,17 +2,19 @@
 A module to update the prices for game(s) stored within the database with the current lowest price
 Inputs: List of games
 """
+
 import json
 import os
+
 from .models import *
 
-'''
-This method takes a list of game objects, and compares to currently saved games in the JSON
-(if they exist), and replaces if the price is lower, and/or updates prices
-'''
 def saveGame(gameList):
+    '''
+    This method takes a list of game objects, and compares to currently saved games in the JSON
+    (if they exist), and replaces if the price is lower, and/or updates prices
+    '''
     #Load saved games from games.json
-    with open(os.path.dirname(__file__) + '/../games.json') as file:
+    with open(os.path.dirname(__file__) + '/../games.json', encoding="uft-8") as file:
         gameDict = json.load(file)
         
     for i in range(len(gameList)):
@@ -35,17 +37,16 @@ def saveGame(gameList):
             
             #If the saved url is the same as the current url, update (in case of price changes)
             if gameDict[currTitle].get('url') == currUrl:
-               gameDict[currTitle] = gameList[i]     
+                gameDict[currTitle] = gameList[i]     
             #else if the current game price is less than the price of the currently saved game, replace it
             elif type(currPrice) != str and currPrice < gameDict[currTitle].get('price'):
                 gameDict[currTitle] = gameList[i]
 
     #save any/all changes  
-    with open(os.path.dirname(__file__) + '/../games.json', 'w') as file:
+    with open(os.path.dirname(__file__) + '/../games.json', 'w', encoding="uft-8") as file:
         json.dump(gameDict, file, indent = 4)
 
     #Update each game in the JSON
     for key in gameDict:
         game = Game(gameTitle = key, bestVendor = gameDict[key].get('vendor'), lowestPrice = gameDict[key].get('price'), url = gameDict[key].get('url'), platform = gameDict[key].get('platform'), gameID = gameDict[key].get('gameID'))
-        Game.objects.update_or_create(gameTitle=game.gameTitle)  
-
+        Game.objects.update_or_create(gameTitle=game.gameTitle)
