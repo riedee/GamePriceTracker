@@ -43,7 +43,7 @@ body {
   text-decoration: none;
 }
 
-.topnav a.hover {
+.topnav a:hover {
   background-color: #39ff14;
   color: #000000;
 }
@@ -62,20 +62,27 @@ body {
   font-size: 17px;
 }
 
-.emp-profile{
+.topgames {
+  overflow: hidden;
+  background-color: #e9e9e9;
+  height: auto;
+  opacity: 100%;
+}
+
+.main-container{
     padding: 3%;
     margin-top: 3%;
     margin-bottom: 3%;
-    height: 480px;
+    height: auto;
     border-radius: 0.5rem;
-    background: rgb(187, 187, 187);
+    background: #e9e9e9;
     opacity: 80%;
 }
 
 .center {
   text-align: center;
   font-size: 30px;
-  color: #8818f1;
+  color: #000000;
   font-weight: bold;
   margin: auto;
   width: 50%;
@@ -174,8 +181,39 @@ button[type="submit"] {
     <input type="search" name="search"  id="search" placeholder="Search game..."> 
     <button type="submit" id="search-btn"> Search </button>
 </form></div>
-<div class="container emp-profile">
+<div class="container main-container">
   <div class="center">Top Games</div>
+  <div class="topgames">
+    <img class="img" src="/Media/img/game-placeholder.jpg" 
+      style=
+        "object-fit: contain;
+        width: 200px;
+        height: 200px;
+        margin-left: 110px;
+        margin-top: 50px;">
+    <img class="img" src="/Media/img/game-placeholder.jpg" 
+    style=
+      "object-fit: contain;
+      width: 200px;
+      height: 200px;
+      margin-left: 110px;
+      margin-top: 50px;">
+    <img class="img" src="/Media/img/game-placeholder.jpg" 
+    style=
+      "object-fit: contain;
+      width: 200px;
+      height: 200px;
+      margin-left: 110px;
+      margin-top: 50px;">
+  </div>
+  <div class="topgames">
+    <a style=
+      "margin-left: 175px;">Game #1</a>
+    <a style=
+      "margin-left: 250px;">Game #2</a>
+    <a style=
+      "margin-left: 240px;">Game #3</a>
+  </div>
 </div>
 </body>
 </html>
