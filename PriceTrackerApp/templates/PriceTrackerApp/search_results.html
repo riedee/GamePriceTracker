@@ -1,47 +1,234 @@
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<h1>Search Results</h1>
-<h3>Filter</h3>
+{% load static %}
 
+<!DOCTYPE html>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<label for="PC">PC</label>
-<input id="PC" name="PC" type="checkbox" onchange="filterPC()" checked>
-<label for="Xbox">Xbox</label>
-<input id="Xbox" name="Xbox" type="checkbox" onchange="filterXbox()" checked>
-<label for="Playstation">Playstation</label>
-<input id="Playstation" name="Playstation" type="checkbox" onchange="filterPS()" checked>
-<label for="Nintendo">Nintendo</label>
-<input id="Nintendo" name="Nintendo" type="checkbox" onchange="filterNintendo()" checked>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {box-sizing: border-box;}
 
-{% if bestGame %}
-<h3>Best Game</h3>
-  <a>
-    {{ bestGame.title }}, Vendor: {{bestGame.vendor}}, Price: {{bestGame.price}}, Link: <a href= {{bestGame.url}}>Link</a>, Platform(s): {{bestGame.platform}}
+body {
+  margin: 0;
+  font-family: "Lucida Console", monospace;
+  background: -webkit-linear-gradient(left, #002d62, #CC0033);
+  background-size: cover;
+  height: 100%;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #e9e9e9;
+  height: 50px;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #000000;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav b {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: none;
+  text-decoration: none;
+}
+
+.topnav a:hover {
+  background-color: #39ff14;
+  color: #000000;
+}
+
+.topnav a.active {
+  background-color: #000000;
+  color: #39ff14;
+}
+
+.topnav input[type=text] {
+  float: right;
+  padding: 6px;
+  margin-top: 8px;
+  margin-right: 16px;
+  border: none;
+  font-size: 17px;
+}
+
+.topgames {
+  overflow: hidden;
+  background-color: #e9e9e9;
+  height: auto;
+  opacity: 100%;
+}
+
+.main-container{
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    height: auto;
+    border-radius: 0.5rem;
+    background: #e9e9e9;
+    opacity: 80%;
+}
+
+.center {
+  text-align: center;
+  font-size: 30px;
+  color: #000000;
+  font-weight: bold;
+  margin: auto;
+  width: 50%;
+}
+
+#search {
+    padding: 5px;
+    font-size: 17px;
+    border: 2px solid grey;
+    border-radius: 9px;
+    margin-top: 5px;
+    margin-right: 3px;
+}
+
+#search-btn {
+  	padding: 5px;
+    font-size: 12px;
+    border: 2px solid grey;
+    border-radius: 9px;
+    margin-top: 4px;
+    margin-right: 20px;
+}
+
+#search-btn:hover {
+  background-color: gray;
+}
+
+#logoutin {
+    padding: 5px;
+    font-size: 12px;
+    border: 2px solid grey;
+    border-radius: 9px;
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
+#logoutin:hover {
+  background-color: gray;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav b, .topnav a, .topnav input[type=text] {
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    padding: 14px;
+  }
+  
+  .topnav input[type=text] {
+    border: 1px solid #000000; 
+  }
+}
+
+button[type="submit"] {
+  text-indent: -999px;
+  overflow: hidden;
+  width: 40px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: inherit;
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat center;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+</style>
+</head>
+
+<body>
+<div class="topnav">
+  <b href="#logo">
+    <img class="img" src="/Media/img/konamilogo_1.jpg" 
+          style=
+            "object-fit:contain;
+            width:50px;
+            height:50px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-left: 0px;"/>
+  </b>
+    <a href="/home">Home</a>
+    <a href="/games">Games</a>
+    <a href="/vendors">Vendors</a>
     {% if request.user.is_authenticated %}
-    <input value="Favorite" type="button" id="favorite" onclick="addGame('{{ bestGame.title }}', '{{request.user.id}}', this)"></input>
+    <a href="/{{ request.user.id }}/profile/">Profile</a>
     {% endif %}
-  </a>
-<h3>All results</h3>
-  <ul>
-    {% for game in games %}
-      <li>
-        <a>
-          {{ game.title }}, Vendor: {{game.vendor}}, Price: {{game.price}}, Link: <a href= {{game.url}}>Link</a>, Platform(s): {{game.platform}}
-          {% if request.user.is_authenticated %}
-          <input value="Favorite" type="button" id="favorite1" onclick="addGame('{{ game.title }}', '{{request.user.id}}', this)"></input>
-          {% endif %}
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
-{% else %}
-<h3> No Results Found </h3>
-{% endif %}
+    {% if request.user.is_authenticated %}
+    <div style="float:right;"><button id="logoutin" style="cursor:pointer;" onclick="location.href='logout'">Logout</button></div>
+    {% else %}
+    <div style="float:right;"><button id="logoutin" style="cursor:pointer;" onclick="location.href='login'">Log In</button></div>
+    {% endif %}
+<form align="right" action="{% url 'search_results' %}" method="GET">
+    <input type="search" name="search"  id="search" placeholder="Search game..."> 
+    <button type="submit" id="search-btn"> Search </button>
+</form></div>
+<div class="container main-container">
+  <div class="center">Search Results</div>
+  <h3>Filter</h3>
+  <label for="PC">PC</label>
+  <input id="PC" name="PC" type="checkbox" onchange="filterPC()" checked>
+  <label for="Xbox">Xbox</label>
+  <input id="Xbox" name="Xbox" type="checkbox" onchange="filterXbox()" checked>
+  <label for="Playstation">Playstation</label>
+  <input id="Playstation" name="Playstation" type="checkbox" onchange="filterPS()" checked>
+  <label for="Nintendo">Nintendo</label>
+  <input id="Nintendo" name="Nintendo" type="checkbox" onchange="filterNintendo()" checked>
+
+  {% if bestGame %}
+  <h3>Best Game</h3>
+    <a>
+      {{ bestGame.title }}, Vendor: {{bestGame.vendor}}, Price: {{bestGame.price}}, Link: <a href= {{bestGame.url}}>Link</a>, Platform(s): {{bestGame.platform}}
+      {% if request.user.is_authenticated %}
+      <input value="Favorite" type="button" id="favorite" onclick="addGame('{{ bestGame.title }}', '{{request.user.id}}', this)"></input>
+      {% endif %}
+    </a>
+  <h3>All results</h3>
+    <ul>
+      {% for game in games_restrict %}
+        <li>
+          <a>
+            {{ game.title }}, Vendor: {{game.vendor}}, Price: {{game.price}}, Link: <a href= {{game.url}}>Link</a>, Platform(s): {{game.platform}}
+            {% if request.user.is_authenticated %}
+            <input value="Favorite" type="button" id="favorite1" onclick="addGame('{{ game.title }}', '{{request.user.id}}', this)"></input>
+            {% endif %}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+  <h3> No Results Found </h3>
+  {% endif %}
+</div>
+</body>
+</html>
 
 <script>
-  var games = {{ games|safe }}
+  var games = "{{ games_restrict|safe }}";
+  var games_all = "{{ games_all|safe }}";
+  var consoles = "{{ consoles|safe }}";
 
   function addGame(title, user_id, e) {
-    $.ajax({
+    $.post({
       url: "/favorite",
       type: "POST",
       success: function(response) {
@@ -56,14 +243,19 @@
   }
 
   function filterPC() {
-    console.log(games);
     $.ajax({
-      url: "/filter",
+      url: "/search/filter",
       type: "POST",
+      success: function(response) {
+        window.location.href = "/search/filter"
+      },
       data: {
         csrfmiddlewaretoken: "{{ csrf_token }}",
-        'games_list': games,
-        'filter': "PC"
+        'games_restrict': games,
+        'games_all': games_all,
+        'consoles': consoles,
+        'filter': "PC",
+        'checked': document.getElementById('PC').checked
       }
     });
   }
@@ -71,7 +263,7 @@
   function filterXbox(game_list) {
     console.log(games);
     $.ajax({
-      url: "/filter",
+      url: "/search/filter",
       type: "POST",
       data: {
         csrfmiddlewaretoken: "{{ csrf_token }}",

@@ -27,6 +27,7 @@ UserDirectoryView
 import json
 import os
 import ast
+import operator
 
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
@@ -218,6 +219,7 @@ def SearchResultsView(request):
 def GameViewAll(request):
     """View all games"""
     data = Game.objects.all()
+    data = sorted(data, key=operator.attrgetter('gameTitle'))
     context = {'games': data}
     return render(request, 'gamepage.html', context)
 

@@ -37,7 +37,7 @@
         "platform": [
             "PC"
         ],
-        "gameID": ""
+        "gameID": "counterstrikeglobaloffensivepc"
     },
     "Portal 2": {
         "title": "Portal 2",
@@ -387,5 +387,35 @@
             "PlayStation 4"
         ],
         "gameID": "fifa22playstation4playstation4"
+    },
+    "OUTRIDERS": {
+        "title": "OUTRIDERS",
+        "vendor": "store.steampowered.com",
+        "price": 59.99,
+        "url": "https://store.steampowered.com/app/680420/OUTRIDERS/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "outriderspc"
+    },
+    "Elden Ring - PlayStation 5": {
+        "title": "Elden Ring - PlayStation 5",
+        "vendor": "www.amazon.com",
+        "price": 58.99,
+        "url": "https://www.amazon.com/Elden-Ring-PlayStation-5/dp/B09743F8P6",
+        "platform": [
+            "PlayStation 5"
+        ],
+        "gameID": "eldenringplaystation5playstation5"
+    },
+    "Elden Ring - PlayStation 4": {
+        "title": "Elden Ring - PlayStation 4",
+        "vendor": "www.amazon.com",
+        "price": 58.89,
+        "url": "https://www.amazon.com/Elden-Ring-PlayStation-4/dp/B07SPYK271",
+        "platform": [
+            "PlayStation 4"
+        ],
+        "gameID": "eldenringplaystation4playstation4"
     }
 }
