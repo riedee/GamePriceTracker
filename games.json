@@ -417,5 +417,87 @@
             "PlayStation 4"
         ],
         "gameID": "eldenringplaystation4playstation4"
+    },
+    "Wolfenstein: The New Order": {
+        "title": "Wolfenstein: The New Order",
+        "vendor": "store.steampowered.com",
+        "price": 19.99,
+        "url": "https://store.steampowered.com/app/201810/Wolfenstein_The_New_Order/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "wolfensteintheneworderpc"
+    },
+    "Wolfenstein II: The New Colossus": {
+        "title": "Wolfenstein II: The New Colossus",
+        "vendor": "store.steampowered.com",
+        "price": 39.99,
+        "url": "https://store.steampowered.com/app/612880/Wolfenstein_II_The_New_Colossus/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "wolfensteiniithenewcolossuspc"
+    },
+    "NBA 2K22": {
+        "title": "NBA 2K22",
+        "vendor": "store.steampowered.com",
+        "price": 0.0,
+        "url": "https://store.steampowered.com/app/1644960/NBA_2K22/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "nba2k22pc"
+    },
+    "NBA 2K22 - 200,000 VC": {
+        "title": "NBA 2K22 - 200,000 VC",
+        "vendor": "www.xbox.com",
+        "price": 49.99,
+        "url": "https://www.xbox.com/en-US/games/store/nba-2k22-200000-vc/9pdnqrln0fgl",
+        "platform": [
+            "Xbox One",
+            "Xbox Series X|S"
+        ],
+        "gameID": "nba2k22200000vcxboxone"
+    },
+    "NBA 2K22 - 75,000 VC": {
+        "title": "NBA 2K22 - 75,000 VC",
+        "vendor": "www.xbox.com",
+        "price": 19.99,
+        "url": "https://www.xbox.com/en-US/games/store/nba-2k22-75000-vc/9MZ5XPKS748N",
+        "platform": [
+            "Xbox One",
+            "Xbox Series X|S"
+        ],
+        "gameID": "nba2k2275000vcxboxone"
+    },
+    "Wolfenstein: The Old Blood": {
+        "title": "Wolfenstein: The Old Blood",
+        "vendor": "store.steampowered.com",
+        "price": 19.99,
+        "url": "https://store.steampowered.com/app/350080/Wolfenstein_The_Old_Blood/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "wolfensteintheoldbloodpc"
+    },
+    "Wolfenstein: The Old Blood - PlayStation 4": {
+        "title": "Wolfenstein: The Old Blood - PlayStation 4",
+        "vendor": "www.amazon.com",
+        "price": 14.18,
+        "url": "https://www.amazon.com/Wolfenstein-Old-Blood-PlayStation-4/dp/B00Z0DOA9O",
+        "platform": [
+            "PlayStation 4"
+        ],
+        "gameID": "wolfensteintheoldbloodplaystation4playstation4"
+    },
+    "Wolfenstein: The Old Blood (PS4)": {
+        "title": "Wolfenstein: The Old Blood (PS4)",
+        "vendor": "www.amazon.com",
+        "price": 27.99,
+        "url": "https://www.amazon.com/Wolfenstein-Old-Blood-PS4/dp/B00XCDR8H0",
+        "platform": [
+            "PlayStation 4"
+        ],
+        "gameID": "wolfensteintheoldbloodps4playstation4"
     }
 }
