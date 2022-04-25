@@ -370,7 +370,7 @@
     "Red Dead Redemption 2": {
         "title": "Red Dead Redemption 2",
         "vendor": "www.xbox.com",
-        "price": 23.99,
+        "price": 59.99,
         "url": "https://www.xbox.com/en-us/games/store/red-dead-redemption-2/9n2zdn7nwqkv",
         "platform": [
             "Xbox One",
@@ -411,7 +411,7 @@
     "Elden Ring - PlayStation 4": {
         "title": "Elden Ring - PlayStation 4",
         "vendor": "www.amazon.com",
-        "price": 58.89,
+        "price": 58.52,
         "url": "https://www.amazon.com/Elden-Ring-PlayStation-4/dp/B07SPYK271",
         "platform": [
             "PlayStation 4"
@@ -499,5 +499,128 @@
             "PlayStation 4"
         ],
         "gameID": "wolfensteintheoldbloodps4playstation4"
+    },
+    "Horizon Forbidden West Launch Edition - PlayStation 5 - PlayStation 5": {
+        "title": "Horizon Forbidden West Launch Edition - PlayStation 5 - PlayStation 5",
+        "vendor": "www.amazon.com",
+        "price": 69.99,
+        "url": "https://www.amazon.com/Horizon-Forbidden-West-Launch-PlayStation-5/dp/B09FBL24D5",
+        "platform": [
+            "PlayStation 5"
+        ],
+        "gameID": "horizonforbiddenwestlauncheditionplaystation5playstation5playstation5"
+    },
+    "Horizon Forbidden West Launch Edition - PlayStation 4": {
+        "title": "Horizon Forbidden West Launch Edition - PlayStation 4",
+        "vendor": "www.amazon.com",
+        "price": 59.0,
+        "url": "https://www.amazon.com/Horizon-Forbidden-West-Launch-PlayStation-4/dp/B09FBM22S1",
+        "platform": [
+            "PlayStation 4"
+        ],
+        "gameID": "horizonforbiddenwestlauncheditionplaystation4playstation4"
+    },
+    "Horizon Zero Dawn Complete Edition Hits - PlayStation 4": {
+        "title": "Horizon Zero Dawn Complete Edition Hits - PlayStation 4",
+        "vendor": "www.amazon.com",
+        "price": 24.49,
+        "url": "https://www.amazon.com/Horizon-Zero-Dawn-Complete-Hits-PlayStation/dp/B07STWQ38X",
+        "platform": [
+            "PlayStation 4"
+        ],
+        "gameID": "horizonzerodawncompleteeditionhitsplaystation4playstation4"
+    },
+    "Horizon Forbidden West Special Edition - PlayStation 4": {
+        "title": "Horizon Forbidden West Special Edition - PlayStation 4",
+        "vendor": "www.amazon.com",
+        "price": 99.0,
+        "url": "https://www.amazon.com/Horizon-Forbidden-West-Special-PlayStation-4/dp/B09FBJ8YGZ",
+        "platform": [
+            "PlayStation 4"
+        ],
+        "gameID": "horizonforbiddenwestspecialeditionplaystation4playstation4"
+    },
+    "Sifu": {
+        "title": "Sifu",
+        "vendor": "store.playstation.com",
+        "price": 39.99,
+        "url": "https://store.playstation.com/en-us/concept/10001973",
+        "platform": [
+            "PS4, PS5"
+        ],
+        "gameID": "sifups4ps5"
+    },
+    "TUNIC": {
+        "title": "TUNIC",
+        "vendor": "www.xbox.com",
+        "price": 29.99,
+        "url": "https://www.xbox.com/en-US/games/store/tunic/9nlrt31z4rwm",
+        "platform": [
+            "Xbox One",
+            "Xbox Series X|S",
+            "PC"
+        ],
+        "gameID": "tunicxboxone"
+    },
+    "Garden Story": {
+        "title": "Garden Story",
+        "vendor": "store.steampowered.com",
+        "price": 19.99,
+        "url": "https://store.steampowered.com/app/1062140/Garden_Story/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "gardenstorypc"
+    },
+    "Ocean's Heart": {
+        "title": "Ocean's Heart",
+        "vendor": "store.steampowered.com",
+        "price": 14.99,
+        "url": "https://store.steampowered.com/app/1393750/Oceans_Heart/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "oceansheartpc"
+    },
+    "Roblox Gift Card - 2000 Robux [Includes Exclusive Virtual Item] [Online Game Code]": {
+        "title": "Roblox Gift Card - 2000 Robux [Includes Exclusive Virtual Item] [Online Game Code]",
+        "vendor": "www.amazon.com",
+        "price": 25.0,
+        "url": "https://www.amazon.com/Robux-Roblox-Online-Game-Code/dp/B07RX6FBFR",
+        "platform": [
+            "Online Game Code"
+        ],
+        "gameID": "robloxgiftcard2000robuxincludesexclusivevirtualitemonlinegamecodeonlinegamecode"
+    },
+    "Overwatch Origins Edition": {
+        "title": "Overwatch Origins Edition",
+        "vendor": "www.xbox.com",
+        "price": Infinity,
+        "url": "https://www.xbox.com/en-US/games/store/overwatch-origins-edition/C1C4DZJPBC2V",
+        "platform": [
+            "Xbox One",
+            "Xbox Series X|S"
+        ],
+        "gameID": "overwatchoriginseditionxboxone"
+    },
+    "Overwatch - Anniversary Remix: Vol. 1": {
+        "title": "Overwatch - Anniversary Remix: Vol. 1",
+        "vendor": "store.playstation.com",
+        "price": 19.79,
+        "url": "https://store.playstation.com/en-us/product/UP0002-CUSA01842_00-OWLEGENDARY00000",
+        "platform": [
+            "PS4"
+        ],
+        "gameID": "overwatchanniversaryremixvol1ps4"
+    },
+    "World of Warcraft - PC/Mac": {
+        "title": "World of Warcraft - PC/Mac",
+        "vendor": "www.amazon.com",
+        "price": 20.0,
+        "url": "https://www.amazon.com/World-Warcraft-PC-Mac/dp/B00FRESQYG",
+        "platform": [
+            "Mac OS 9 and below,  Windows Vista,  Linux,  Mac OS X,  Windows XP,  Mac OS X Intel,  Windows 98,  Windows 2000,  Windows 95,  Windows Me"
+        ],
+        "gameID": "worldofwarcraftpcmacmacos9andbelowwindowsvistalinuxmacosxwindowsxpmacosxintelwindows98windows2000windows95windowsme"
     }
 }

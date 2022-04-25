@@ -172,8 +172,9 @@ button[type="submit"] {
     <div style="float:right;"><button id="logoutin" style="cursor:pointer;" onclick="location.href='login'">Log In</button></div>
     {% endif %}
 <form align="right" action="{% url 'search_results' %}" method="GET">
-    <input type="search" name="search"  id="search" placeholder="Search game..."> 
-    <button type="submit" id="search-btn"> Search </button>
+  <img id="loading" src="/Media/img/loading-buffering.gif" style="width:45px;height:45px; visibility: hidden;"/>
+  <input type="search" onsubmit="myalert()" name="search"  id="search" placeholder="Search game..."> 
+  <button type="submit" onclick="myalert()" id="search-btn"> Search </button>
 </form></div>
 <div class="container main-container">
   <div class="center">Game List</div>
@@ -185,3 +186,10 @@ button[type="submit"] {
 </div>
 </body>
 </html>
+
+<script>
+  function myalert() {
+      var x = document.getElementById("loading")
+      x.style.visibility = 'visible';
+  }
+</script>

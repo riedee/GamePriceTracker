@@ -89,6 +89,15 @@ body {
   width: 50%;
 }
 
+.filter {
+  text-align: center;
+  font-size: 20px;
+  color: #000000;
+  font-weight: bold;
+  margin: auto;
+  width: 50%;
+}
+
 #search {
     padding: 5px;
     font-size: 17px;
@@ -179,38 +188,36 @@ button[type="submit"] {
     <div style="float:right;"><button id="logoutin" style="cursor:pointer;" onclick="location.href='login'">Log In</button></div>
     {% endif %}
 <form align="right" action="{% url 'search_results' %}" method="GET">
-    <input type="search" name="search"  id="search" placeholder="Search game..."> 
-    <button type="submit" id="search-btn"> Search </button>
+  <img id="loading" src="/Media/img/loading-buffering.gif" style="width:45px;height:45px; visibility: hidden;"/>
+  <input type="search" onsubmit="myalert()" name="search"  id="search" placeholder="Search game..."> 
+  <button type="submit" onclick="myalert()" id="search-btn"> Search </button>
 </form></div>
 <div class="container main-container">
   <div class="center">Search Results</div>
-  <h3>Filter</h3>
-  <label for="PC">PC</label>
-  <input id="PC" name="PC" type="checkbox" onchange="filterPC()" checked>
-  <label for="Xbox">Xbox</label>
-  <input id="Xbox" name="Xbox" type="checkbox" onchange="filterXbox()" checked>
-  <label for="Playstation">Playstation</label>
-  <input id="Playstation" name="Playstation" type="checkbox" onchange="filterPS()" checked>
-  <label for="Nintendo">Nintendo</label>
-  <input id="Nintendo" name="Nintendo" type="checkbox" onchange="filterNintendo()" checked>
+    <label style="text-align: center;" for="PC">PC</label>
+    <input style="text-align: center;" id="PC" name="PC" type="checkbox" checked>
+    <label style="text-align: center;" for="Xbox">Xbox</label>
+    <input style="text-align: center;" id="Xbox" name="Xbox" type="checkbox" checked>
+    <label style="text-align: center;" for="Playstation">Playstation</label>
+    <input style="text-align: center;" id="Playstation" name="Playstation" type="checkbox" checked>
+    <label style="text-align: center;" for="Nintendo">Nintendo</label>
+    <input style="text-align: center;" id="Nintendo" name="Nintendo" type="checkbox" checked>
 
   {% if bestGame %}
   <h3>Best Game</h3>
     <a>
-      {{ bestGame.title }}, Vendor: {{bestGame.vendor}}, Price: {{bestGame.price}}, Link: <a href= {{bestGame.url}}>Link</a>, Platform(s): {{bestGame.platform}}
-      {% if request.user.is_authenticated %}
-      <input value="Favorite" type="button" id="favorite" onclick="addGame('{{ bestGame.title }}', '{{request.user.id}}', this)"></input>
-      {% endif %}
+      <div><a style="font-weight: bold; font-size: 20px;">{{ bestGame.title }} {% if request.user.is_authenticated %}
+        <input value="Favorite" type="button" id="favorite" onclick="addGame('{{ bestGame.title }}', '{{request.user.id}}', this)"></input>
+        {% endif %}</a style="font-size: 10px"></div><a><div>  Vendor: {{bestGame.vendor}}</div><div>  Price: {{bestGame.price}}</div><div><a href= {{bestGame.url}}>  Find here</a></div><div style="margin-right: 20px; margin-bottom: 20px;">Platform(s): {% for p in bestGame.platform %} {{p}}, {% endfor %}</a></div>
     </a>
   <h3>All results</h3>
     <ul>
       {% for game in games_restrict %}
         <li>
           <a>
-            {{ game.title }}, Vendor: {{game.vendor}}, Price: {{game.price}}, Link: <a href= {{game.url}}>Link</a>, Platform(s): {{game.platform}}
-            {% if request.user.is_authenticated %}
-            <input value="Favorite" type="button" id="favorite1" onclick="addGame('{{ game.title }}', '{{request.user.id}}', this)"></input>
-            {% endif %}
+            <div><a style="font-weight: bold; font-size: 20px;">{{ game.title }} {% if request.user.is_authenticated %}
+              <input value="Favorite" type="button" id="favorite1" onclick="addGame('{{ game.title }}', '{{request.user.id}}', this)"></input>
+              {% endif %}</a style="font-size: 10px"></div><a><div>  Vendor: {{game.vendor}}</div><div>  Price: {{game.price}}</div><div><a href= {{bestGame.url}}>  Find here</a></div><div style="margin-right: 20px; margin-bottom: 20px;">Platform(s): {% for p in game.platform %} {{p}}, {% endfor %}</a></div>
           </a>
         </li>
       {% endfor %}
@@ -295,5 +302,10 @@ button[type="submit"] {
         'filter': "Nintendo"
       }
     });
+  }
+
+  function myalert() {
+      var x = document.getElementById("loading")
+      x.style.visibility = 'visible';
   }
 </script>
