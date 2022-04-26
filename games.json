@@ -622,5 +622,25 @@
             "Mac OS 9 and below,  Windows Vista,  Linux,  Mac OS X,  Windows XP,  Mac OS X Intel,  Windows 98,  Windows 2000,  Windows 95,  Windows Me"
         ],
         "gameID": "worldofwarcraftpcmacmacos9andbelowwindowsvistalinuxmacosxwindowsxpmacosxintelwindows98windows2000windows95windowsme"
+    },
+    "Mario Kart 8 Deluxe - Nintendo Switch": {
+        "title": "Mario Kart 8 Deluxe - Nintendo Switch",
+        "vendor": "www.amazon.com",
+        "price": 13.22,
+        "url": "https://www.amazon.com/Mario-Kart-8-Deluxe-Nintendo-Switch/dp/B01N1037CV",
+        "platform": [
+            "Nintendo Switch"
+        ],
+        "gameID": "mariokart8deluxenintendoswitchnintendoswitch"
+    },
+    "Outer Wilds": {
+        "title": "Outer Wilds",
+        "vendor": "store.steampowered.com",
+        "price": 24.99,
+        "url": "https://store.steampowered.com/app/753640/Outer_Wilds/",
+        "platform": [
+            "PC"
+        ],
+        "gameID": "outerwildspc"
     }
 }
