@@ -12,14 +12,17 @@ from googlesearch import search
 from bs4 import BeautifulSoup
 
 #Import specific vendor scrapers
-from PriceTrackerApp.scrapersAndAPIs import amznScraper, nintendoScraper, steamAPI, xboxScraper, psScraper
+from PriceTrackerApp.scrapersAndAPIs import \
+        amznScraper, nintendoScraper, steamAPI, xboxScraper, psScraper
 
-#Returns list of links with their associated vendor name for a game specified
 def searchGame(query):
+    """Returns list of links with their associated vendor name for a game specified"""
+
     #query should include 'buy', 'purchase', etc. at the end to bring up most useful results
     query = query + " buy"  
     links = []
     for i in search(query, tld="co.in", lang="en", country="na", user_agent=googlesearch.get_random_user_agent(), num=12, start=0, stop=10, pause=0.25):
+
         site = i.split(".")
 
         #list of vendors we know how to scrape info from
@@ -31,19 +34,20 @@ def searchGame(query):
 
                 #Often empty search results for sites will come up
                 #as well as soundtracks and expansions for the game - remove them
-                banned_keywords = ["search", "recommended", "soundtrack", "expansion", "dlc", "bundle", "collector's"]
+                banned_keywords = ["search", "recommended", "soundtrack",
+                        "expansion", "dlc", "bundle", "collector's"]
 
                 if j != "amazon":
-                    if (all(i not in title for i in banned_keywords)):
+                    if all(i not in title for i in banned_keywords):
                         links.append((i, site[1]))
                 #if the website is amazon, but sure result is from 'video games' category
                 else:
-                    headers = headers = { 
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', 
-                    'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 
+                    headers = headers = {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36',
+                    'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
                     'Accept-Language' : 'en-US,en;q=0.5',
-                    'Accept-Encoding' : 'gzip', 
-                    'DNT' : '1', # Do Not Track Request Header 
+                    'Accept-Encoding' : 'gzip',
+                    'DNT' : '1', # Do Not Track Request Header
                     'Connection' : 'close'
                     }
                     page = requests.get(i, headers=headers)
@@ -56,24 +60,24 @@ def searchGame(query):
 
 
                     if category == "Video Games":
-                        if (all(i not in title for i in banned_keywords)):
+                        if all(i not in title for i in banned_keywords):
                             links.append((i, site[1]))
 
 
 
     return links
 
-#Given list of links with their associated website name, scrape info using appropriate scraper and return game dict
 def scrapeGame(links):
+    """Given list of links with their associated website name, scrape info using appropriate scraper and return game dict"""
     gameList = []
     for url, vendor in links:
         #Simulate user - otherwise sites like amazon will block
-        headers = headers = { 
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', 
-        'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 
+        headers = headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36',
+        'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         'Accept-Language' : 'en-US,en;q=0.5',
-        'Accept-Encoding' : 'gzip', 
-        'DNT' : '1', # Do Not Track Request Header 
+        'Accept-Encoding' : 'gzip',
+        'DNT' : '1', # Do Not Track Request Header
         'Connection' : 'close'
         }
         page = requests.get(url, headers=headers)
@@ -156,14 +160,14 @@ def scrapeGame(links):
             except ValueError:
                 price = float('inf')
 
-        if title != None and title != "":
+        if title is not None and title != "":
             #remove unicode
             title = title.encode("ascii", "ignore")
             title = title.decode()
 
             #get rid of console specific
             title = title.split(' PS')[0]
-            
+           
             if len(platform) > 0:
                 gameID = title + platform[0]
                 gameID = gameID.lower().replace(" ", "")

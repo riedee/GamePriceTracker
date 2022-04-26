@@ -6,7 +6,6 @@ Inputs: view objects
 from django.urls import include, path
 from django.urls import re_path
 from django.contrib import admin
-
 from .views import *
 
 admin.autodiscover()

@@ -108,7 +108,7 @@ def favGame(request):
     game_title = request.POST['info']
     user_id = request.POST['user_id']
 
-    with open(os.path.dirname(__file__) + '/../games.json') as file:
+    with open(os.path.dirname(__file__) + '/../games.json', encoding='utf-8') as file:
         gameDict = json.load(file)
 
     game = gameDict[game_title]
@@ -198,7 +198,7 @@ def SearchResultsView(request):
         priceCalculator.saveGame(gameList)
 
         #search JSON for game (take first result from gameList since that's likely to be more accurate result)
-        with open(os.path.dirname(__file__) + '/../games.json') as file:
+        with open(os.path.dirname(__file__) + '/../games.json', encoding='utf-8') as file:
             gameDict = json.load(file)
         
         title = None
@@ -230,7 +230,7 @@ def ProfileView(request, user_id):
         uid = User.objects.get(pk=user_id)
     except ObjectDoesNotExist:
         return HttpResponse("The user_id given does not match any user_id in the system")
-    if (uid.profile.saved_game == None):
+    if uid.profile.saved_game is None:
         game = None
     else:
         game = uid.profile.saved_game

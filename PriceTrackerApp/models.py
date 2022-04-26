@@ -16,17 +16,17 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-# Create your models here.
 class Vendor(models.Model):
+    """Vendor class"""
     vendorName = models.CharField(max_length=255)
     rating = models.PositiveSmallIntegerField(default=3)
     freeShipping = models.BooleanField(default=True)
     physicalStore = models.BooleanField(default=False)
     storeFront = models.URLField(max_length=500, default = '')
-    def __str__(self):
-        return self.vendorName
+
 
 class Game(models.Model):
+    """Game class"""
     ACT = 'ACT'
     ADV = 'ADV'
     ACT_ADV = 'ACT_ADV'
@@ -56,14 +56,8 @@ class Game(models.Model):
     url = models.URLField(max_length=500, default = '')
     platform = models.CharField(max_length=32, default=SW)
     gameID = models.CharField(max_length=100, default = '')
-    def __str__(self):
-        return self.gameTitle
 
-class UserGame(models.Model):
-    userGameID = models.CharField(max_length=100, default = '')
-    gameID = models.CharField(max_length=100, default = '')
-    userID = models.CharField(max_length=100, default = '')
-    
+
 #Profile information of user
 class Profile(models.Model):
     user_id = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -73,9 +67,6 @@ class Profile(models.Model):
     ln = models.CharField(max_length=120,default='')
     #saved_game = models.CharField(max_length=120, default='')
     saved_game = models.ForeignKey(Game, db_index=True, on_delete=models.CASCADE, null=True)
-   
-    def __str__(self):
-        return self.user_id.username
 
     #NOTE: will only proc when adding new users to the database, i.e. existing users do not have profiles
     @receiver(post_save, sender=User)
@@ -87,5 +78,6 @@ class Profile(models.Model):
     def save_user_profile(sender, instance, **kwargs):
         try:
             instance.profile.save()
-        except:
+        except KeyError:
             Profile.objects.create(user_id=instance)
+            
