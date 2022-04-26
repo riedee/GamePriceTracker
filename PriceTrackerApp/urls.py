@@ -31,5 +31,4 @@ urlpatterns = [
     path('vendors/steam/', SteamView.as_view(), name = 'steam'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('directory/', UserDirectoryView, name='userdirectory'),
-
 ]
