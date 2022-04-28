@@ -217,7 +217,7 @@ button[type="submit"] {
           <a>
             <div><a style="font-weight: bold; font-size: 20px;">{{ game.title }} {% if request.user.is_authenticated %}
               <input value="Favorite" type="button" id="favorite1" onclick="addGame('{{ game.title }}', '{{request.user.id}}', this)"></input>
-              {% endif %}</a style="font-size: 10px"></div><a><div>  Vendor: {{game.vendor}}</div><div>  Price: {{game.price}}</div><div><a href= {{bestGame.url}}>  Find here</a></div><div style="margin-right: 20px; margin-bottom: 20px;">Platform(s): {% for p in game.platform %} {{p}}, {% endfor %}</a></div>
+              {% endif %}</a style="font-size: 10px"></div><a><div>  Vendor: {{game.vendor}}</div><div>  Price: {{game.price}}</div><div><a href= {{game.url}}>  Find here</a></div><div style="margin-right: 20px; margin-bottom: 20px;">Platform(s): {% for p in game.platform %} {{p}}, {% endfor %}</a></div>
           </a>
         </li>
       {% endfor %}

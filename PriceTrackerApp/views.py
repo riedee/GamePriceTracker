@@ -133,7 +133,7 @@ def favGame(request):
         return HttpResponse("The user_id given does not match any user_id in the system")
 
 def GameView(request, info):
-    """Display all games"""
+    """Display a game"""
     try:
         game = get_object_or_404(Game, gameTitle=info)
         context = {'game': game}

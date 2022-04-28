@@ -21,7 +21,7 @@ def searchGame(query):
     #query should include 'buy', 'purchase', etc. at the end to bring up most useful results
     query = query + " buy"  
     links = []
-    for i in search(query, tld="co.in", lang="en", country="na", user_agent=googlesearch.get_random_user_agent(), num=12, start=0, stop=10, pause=0.25):
+    for i in search(query, tld="co.in", lang="en", country="na", user_agent=googlesearch.get_random_user_agent(), num=12, start=0, stop=10, pause=2):
 
         site = i.split(".")
 
